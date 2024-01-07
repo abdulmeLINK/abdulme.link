@@ -1,15 +1,18 @@
 FROM php:8.2.14-fpm
 
+# Copy composer.lock and composer.json
+COPY composer.lock composer.json /var/www/
+# Set working directory
+WORKDIR /var/www
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
+    libonig-dev \
+    libxml2-dev \
     locales \
     zip \
-    jpegoptim optipng pngquant gifsicle \
-    vim \
     unzip \
     git \
     curl
@@ -18,18 +21,32 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install extensions
-RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
-RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
-RUN docker-php-ext-install gd
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-WORKDIR /var/www
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN rm -rf /var/www/html
+RUN cd /usr/local/etc/php/conf.d/ && \
+    echo 'memory_limit = 512M' >> /usr/local/etc/php/conf.d/docker-php-ram-limit.ini
 
+# Add user for laravel application
+RUN groupadd -g 1000 www
+RUN useradd -u 1000 -ms /bin/bash -g www www
+
+# Copy existing application directory contents
 COPY . /var/www
 
-RUN chown -R www-data:www-data /var/www
+# Copy existing application directory permissions
+COPY --chown=www:www . /var/www
 
-EXPOSE 9000
+RUN mkdir -p /var/www/vendor
+RUN chown -R www:www /var/www/vendor
 
+# Change current user to www
+USER www
+
+RUN cd /var/www && composer install
+
+# Expose port 80 and start php-fpm server
+EXPOSE 80
 CMD ["php-fpm"]
