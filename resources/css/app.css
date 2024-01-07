@@ -1,0 +1,113 @@
+:root {
+    --color-bg: #121212;
+    --color-fg: #f5f5f5;
+    --color-nav: #121212;
+    --color-nav-item: #f5f5f5;
+    --color-nav-item-hover: #f96d00;
+    --color-btn: #f96d00;
+}
+
+[data-theme="light"] {
+    --color-bg: #f5f5f5;
+    --color-fg: #121212;
+    --color-nav: #f5f5f5;
+    --color-nav-item: #121212;
+    --color-nav-item-hover: #ff833a;
+    --color-btn: #ff833a;
+}
+
+.roadmap {
+    position: relative;
+    height:  10rem; /* Adjust as needed */
+}
+
+.roadmap-point {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.roadmap-point[data-anim="show"] {
+    opacity: 1;
+}
+.roadmap-point {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.roadmap-point:nth-child(1) {
+    top: 0;
+}
+
+.roadmap-point:nth-child(2) {
+    top: 30%; /* Adjust as needed */
+}
+
+.roadmap-point:nth-child(3) {
+    top: 60%; /* Adjust as needed */
+}
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+}
+
+.navbar {
+    background-color: var(--color-nav);
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+    color: var(--color-nav-item);
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+    color: var(--color-nav-item-hover);
+}
+
+.masthead {
+    height: 100vh;
+    min-height: 500px;
+    background: url('https://unblast.com/wp-content/uploads/2021/01/Space-Background-Image-7.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 20px;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fff;
+    margin: 0 auto;
+}
+
+.profile-image img {
+    width: 100%;
+    height: auto;
+}
+
+section {
+    padding: 60px 0;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+}
+
+.btn {
+    background-color: var(--color-btn);
+    color: var(--color-bg);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+
