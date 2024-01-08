@@ -42,11 +42,18 @@ COPY --chown=www:www . /var/www
 RUN mkdir -p /var/www/vendor
 RUN chown -R www:www /var/www/vendor
 
+# Create cache directory, change ownership and permissions
+RUN mkdir -p /var/www/bootstrap/cache && \
+    chown -R www:www /var/www/bootstrap/cache && \
+    chmod -R 755 /var/www/bootstrap/cache
+
 # Change current user to www
 USER www
 
 RUN cd /var/www && composer install
 
 # Expose port 80 and start php-fpm server
+
+
 EXPOSE 80
 CMD ["php-fpm"]
