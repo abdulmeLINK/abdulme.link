@@ -39,10 +39,7 @@ COPY . /var/www
 # Copy existing application directory permissions
 COPY --chown=www:www . /var/www
 
-RUN mkdir -p /var/www/vendor
-RUN chown -R www:www /var/www/vendor
-
-# Create cache directory, change ownership and permissions
+# Create cache directory, laravel.log file, change ownership and permissions
 RUN mkdir -p /var/www/bootstrap/cache && \
     touch /var/www/storage/logs/laravel.log && \
     chown -R www:www /var/www/bootstrap/cache /var/www/storage/logs/laravel.log && \
@@ -54,7 +51,5 @@ USER www
 RUN cd /var/www && composer install
 
 # Expose port 80 and start php-fpm server
-
-
 EXPOSE 80
 CMD ["php-fpm"]
