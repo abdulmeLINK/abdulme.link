@@ -31,6 +31,24 @@
         .portfolio-link:hover {
             background-color: #0056b3;
         }
+
+        [data-theme="dark"] .portfolio-item {
+            background-color: #333;
+            color: #fff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+
+
+        [data-theme="dark"] .portfolio-link {
+            background-color: #f96d00;
+            border-color: #f96d00;
+        }
+
+        [data-theme="dark"] .portfolio-link:hover {
+            background-color: #fff;
+            color: #f96d00;
+        }
     </style>
     <div class="container">
         <div class="portfolio-item">
