@@ -44,8 +44,9 @@ RUN chown -R www:www /var/www/vendor
 
 # Create cache directory, change ownership and permissions
 RUN mkdir -p /var/www/bootstrap/cache && \
-    chown -R www:www /var/www/bootstrap/cache && \
-    chmod -R 755 /var/www/bootstrap/cache
+    touch /var/www/storage/logs/laravel.log && \
+    chown -R www:www /var/www/bootstrap/cache /var/www/storage/logs/laravel.log && \
+    chmod -R 755 /var/www/bootstrap/cache /var/www/storage/logs/laravel.log
 
 # Change current user to www
 USER www
