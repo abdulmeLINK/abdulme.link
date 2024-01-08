@@ -1,13 +1,19 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-
+const host= 'abdulme.link';
+const port = 5174;
 export default defineConfig({
     plugins: [  
         laravel({
             server: {
                 https:true,
-                host: 'abdulme.link',
-               port: 5174
+                host,
+                port,
+                   proxy: {
+                '^(?!(\/\@vite|\/resources|\/node_modules))': {
+                    target: `https://${host}:${port}`,
+                }
+            },
 
             },
             input: [ 'resources/js/app.js'],
