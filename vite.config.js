@@ -9,7 +9,6 @@ export default defineConfig({
                 origin: `https://${host}:${port}`
             },
 
-            
             input: [ 'resources/js/app.js'],
             refresh: true,
         }),
