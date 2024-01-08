@@ -13,7 +13,7 @@ export default defineConfig({
                 '^(?!(\/\@vite|\/resources|\/node_modules))': {
                     target: `https://${host}:${port}`,
                 },
-                hmr: {protocol: 'https', host },
+                hmr: {protocol: 'https', host:host },
             },
 
             },
