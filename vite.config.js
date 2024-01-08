@@ -6,17 +6,10 @@ export default defineConfig({
     plugins: [  
         laravel({
             server: {
-                https:true,
-                host,
-                port,
-                   proxy: {
-                '^(?!(\/\@vite|\/resources|\/node_modules))': {
-                    target: `https://${host}:${port}`,
-                },
-                hmr: {protocol: 'https', host:host },
+                origin: `https://${host}:${port}`
             },
 
-            },
+            
             input: [ 'resources/js/app.js'],
             refresh: true,
         }),
