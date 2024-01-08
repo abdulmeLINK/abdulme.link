@@ -45,6 +45,10 @@ RUN mkdir -p /var/www/bootstrap/cache && \
     chown -R www:www /var/www/bootstrap/cache /var/www/storage/logs/laravel.log && \
     chmod -R 755 /var/www/bootstrap/cache /var/www/storage/logs/laravel.log
 
+# Change permissions for storage and cache directories
+RUN chmod -R ugo+rw /var/www/storage && \
+    chmod -R ugo+rw /var/www/bootstrap/cache
+
 # Change current user to www
 USER www
 
