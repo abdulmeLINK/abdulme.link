@@ -39,15 +39,15 @@
                         <a class="nav-link" href="/contact">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/yourusername" target="_blank"><i
+                        <a class="nav-link" href="https://github.com/abdulmeLINK" target="_blank"><i
                                 class="fab fa-github"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://huggingface.co/yourusername" target="_blank">🤗</a>
+                        <a class="nav-link" href="https://huggingface.co/abdulmeLINK" target="_blank">🤗</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://www.linkedin.com/in/yourusername" target="_blank"><i
-                                class="fab fa-linkedin"></i></a>
+                        <a class="nav-link" href="https://www.linkedin.com/in/abdulmelik-saylan-889096228"
+                            target="_blank"><i class="fab fa-linkedin"></i></a>
                     </li>
                 </ul>
             </div>
