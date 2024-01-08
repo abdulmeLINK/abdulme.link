@@ -12,7 +12,8 @@ export default defineConfig({
                    proxy: {
                 '^(?!(\/\@vite|\/resources|\/node_modules))': {
                     target: `https://${host}:${port}`,
-                }
+                },
+                hmr: {protocol: 'https', host },
             },
 
             },
