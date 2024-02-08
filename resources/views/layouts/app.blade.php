@@ -114,48 +114,5 @@
         © 2024 Abdulmelik Saylan
     </div>
 </footer>
-<script>
-    const themeSwitch = document.getElementById('themeSwitch');
-    const themeLabel = document.querySelector('label[for="themeSwitch"]');
-    const navbar = document.querySelector('.navbar');
-    const footer = document.querySelector('footer');
-    const themeTexts = document.querySelectorAll('.theme-text');
-    const currentTheme = localStorage.getItem('theme');
-
-    function switchTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        navbar.classList.remove('navbar-light', 'navbar-dark', 'bg-light', 'bg-dark');
-        navbar.classList.add(theme === 'light' ? 'navbar-light' : 'navbar-dark');
-        navbar.classList.add(theme === 'light' ? 'bg-light' : 'bg-dark');
-        footer.classList.remove('bg-light', 'bg-dark');
-        footer.classList.add(theme === 'light' ? 'bg-light' : 'bg-dark');
-        themeTexts.forEach(el => {
-            el.classList.remove('text-light', 'text-dark');
-            el.classList.add(theme === 'light' ? 'text-dark' : 'text-light');
-        });
-    }
-
-    if (currentTheme) {
-        switchTheme(currentTheme);
-        if (currentTheme === 'light') {
-            themeSwitch.checked = true;
-            themeLabel.textContent = 'Light Mode';
-        }
-    }
-
-    themeSwitch.addEventListener('change', function(event) {
-        let theme = 'dark';
-        let mode = 'Dark Mode';
-
-        if (event.target.checked) {
-            theme = 'light';
-            mode = 'Light Mode';
-        }
-
-        themeLabel.textContent = mode;
-        switchTheme(theme);
-        localStorage.setItem('theme', theme);
-    });
-</script>
 
 </html>

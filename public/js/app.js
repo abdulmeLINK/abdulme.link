@@ -2962,6 +2962,10 @@ function withinMaxClamp(min, value, max) {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   initializeTheme: () => (/* binding */ initializeTheme),
+/* harmony export */   switchTheme: () => (/* binding */ switchTheme)
+/* harmony export */ });
 /* harmony import */ var bootstrap_dist_css_bootstrap_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.css */ "./node_modules/bootstrap/dist/css/bootstrap.css");
 /* harmony import */ var _css_app_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../css/app.css */ "./resources/css/app.css");
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
@@ -2975,6 +2979,59 @@ window.addEventListener("scroll", function () {
       point.setAttribute("data-anim", "show");
     } else {
       point.setAttribute("data-anim", "hide");
+    }
+  });
+});
+var themeSwitch = document.getElementById("themeSwitch");
+var themeLabel = document.querySelector('label[for="themeSwitch"]');
+var navbar = document.querySelector(".navbar");
+var footer = document.querySelector("footer");
+var themeTexts = document.querySelectorAll(".theme-text");
+var currentTheme = localStorage.getItem("theme");
+function switchTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  navbar.classList.remove("navbar-light", "navbar-dark", "bg-light", "bg-dark");
+  navbar.classList.add(theme === "light" ? "navbar-light" : "navbar-dark");
+  navbar.classList.add(theme === "light" ? "bg-light" : "bg-dark");
+  footer.classList.remove("bg-light", "bg-dark");
+  footer.classList.add(theme === "light" ? "bg-light" : "bg-dark");
+  themeTexts.forEach(function (el) {
+    el.classList.remove("text-light", "text-dark");
+    el.classList.add(theme === "light" ? "text-dark" : "text-light");
+  });
+}
+function initializeTheme() {
+  if (currentTheme) {
+    switchTheme(currentTheme);
+    if (currentTheme === "light") {
+      themeSwitch.checked = true;
+      themeLabel.textContent = "Light Mode";
+    }
+  } else {
+    var currentHour = new Date().getHours();
+    if (currentHour >= 6 && currentHour < 18) {
+      switchTheme("light");
+      themeSwitch.checked = true;
+      themeLabel.textContent = "Light Mode";
+    } else {
+      switchTheme("dark");
+      themeSwitch.checked = false;
+      themeLabel.textContent = "Dark Mode";
+    }
+  }
+}
+//after dom loaded
+document.addEventListener("DOMContentLoaded", function () {
+  initializeTheme();
+  themeSwitch.addEventListener("change", function () {
+    if (themeSwitch.checked) {
+      switchTheme("light");
+      themeLabel.textContent = "Light Mode";
+      localStorage.setItem("theme", "light");
+    } else {
+      switchTheme("dark");
+      themeLabel.textContent = "Dark Mode";
+      localStorage.setItem("theme", "dark");
     }
   });
 });

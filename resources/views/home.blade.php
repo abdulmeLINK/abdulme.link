@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Home')
 @section('content')
 <div class="stylish-element-above">
     <!-- Add content for the stylish element above the terminal here -->
@@ -63,6 +63,8 @@ body::before {
     .mac-window {
         cursor: url('images/cursor.png'), auto;
         width: 50vw;
+        display: flex;
+        flex-direction: column;
         margin: 25vh auto;
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
@@ -116,15 +118,21 @@ body::before {
         cursor: url('images/cursor.png'), auto;
     }
     #terminal {
-        cursor: url('images/cursor.png'), auto;
+        
         padding: 10px;
+        height: 100%;
+        width: 100%;
         box-sizing: border-box;
-        overflow: hidden;
+        
+        flex-grow: 1;
+    overflow: auto;
     }
 
     #xterm-container {
-        cursor: url('images/cursor.png'), auto;
+       
         height: 100%;
+        width: 100%;
+        box-sizing: border-box;
         overflow-y: hidden;
         overflow-x: hidden;
     }
@@ -132,6 +140,8 @@ body::before {
         cursor: url('images/cursor.png'), auto;
         overflow-y: hidden !important;
         overflow-x: hidden !important;
+        width: 100% !important;
+        height: 100% !important;
     }
     
 
@@ -155,7 +165,6 @@ body::before {
     /* Add more custom styling as needed */
 </style>
 <script>
-    
     // Array of day and night screenshots
     const dayScreenshots = [
         '/images/10-11-6k.jpg',
@@ -196,109 +205,137 @@ body::before {
         return screenshots[index];
     }
 
-// Function to get the current theme
-function getCurrentTheme() {
-    // Replace this with your actual logic for getting the current theme
-    return localStorage.getItem('theme') || 'light';
-}
-
-// Set the background image of the body to a random screenshot based on the current theme
-const cTheme = getCurrentTheme();
-const screenshots = cTheme === 'light' ? dayScreenshots : nightScreenshots;
-document.body.style.backgroundImage = `url(${selectRandomScreenshot(screenshots)})`;
-
-// Change the window bar color based on the current theme
-const titleBar = document.querySelector('.mac-window-titlebar');
-const closeButton = document.querySelector('.mac-window-button-close');
-const minimizeButton = document.querySelector('.mac-window-button-minimize');
-const maximizeButton = document.querySelector('.mac-window-button-maximize');
-
-if (cTheme === 'light') {
-    titleBar.style.backgroundColor = '#ddd';
-    closeButton.style.backgroundColor = '#ff5f57';
-    minimizeButton.style.backgroundColor = '#ffbd2e';
-    maximizeButton.style.backgroundColor = '#27c93f';
-} else {
-    titleBar.style.backgroundColor = '#333';
-    closeButton.style.backgroundColor = '#ff5f57';
-    minimizeButton.style.backgroundColor = '#ffbd2e';
-    maximizeButton.style.backgroundColor = '#27c93f';
-}
-// Function to preload an image
-function preloadImage(url) {
-    return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => resolve(url);
-        img.onerror = reject;
-        img.src = url;
-    });
-}
-
-// Function to change the background image
-async function changeBackground() {
-    const cTheme = getCurrentTheme();
-    const screenshots = cTheme === 'light' ? dayScreenshots : nightScreenshots;
-    const screenshot = selectRandomScreenshot(screenshots);
-    try {
-        const url = await preloadImage(screenshot);
-        document.body.style.setProperty('--background-image', `url(${url})`);
-    } catch (error) {
-        console.error(`Failed to preload image: ${screenshot}`, error);
+    // Function to get the current theme
+    function getCurrentTheme() {
+        return localStorage.getItem('theme') || 'light';
     }
-}
 
-// Change the background image immediately and then every minute
-changeBackground();
-setInterval(changeBackground, 10 * 1000);
+    // Function to preload an image
+    function preloadImage(url) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(url);
+            img.onerror = reject;
+            img.src = url;
+        });
+    }
 
+    // Function to change the background image
+    async function changeBackground(cTheme = getCurrentTheme()) {
+        const screenshots = cTheme === 'light' ? dayScreenshots : nightScreenshots;
+        const screenshot = selectRandomScreenshot(screenshots);
+        try {
+            const url = await preloadImage(screenshot);
+            document.body.style.setProperty('--background-image', `url(${url})`);
+        } catch (error) {
+            console.error(`Failed to preload image: ${screenshot}`, error);
+        }
+    }
 
+    // Change the window bar color based on the current theme
+    function switchTerminalTheme(cTheme) {
+        // log cTheme
+        
+        const titleBar = document.querySelector('.mac-window-titlebar');
+        const closeButton = document.querySelector('.mac-window-button-close');
+        const minimizeButton = document.querySelector('.mac-window-button-minimize');
+        const maximizeButton = document.querySelector('.mac-window-button-maximize');
+
+        if (cTheme === 'light') {
+            titleBar.style.backgroundColor = '#ddd';
+            closeButton.style.backgroundColor = '#ff5f57';
+            minimizeButton.style.backgroundColor = '#ffbd2e';
+            maximizeButton.style.backgroundColor = '#27c93f';
+        } else {
+            titleBar.style.backgroundColor = '#333';
+            closeButton.style.backgroundColor = '#ff5f57';
+            minimizeButton.style.backgroundColor = '#ffbd2e';
+            maximizeButton.style.backgroundColor = '#27c93f';
+        }
+    }
+
+    // Event listener when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function () {
+        const swtch = document.getElementById("themeSwitch");
+        switchTerminalTheme(getCurrentTheme());
+        swtch.addEventListener("change", function (event) {
+            const newTheme = swtch.checked ? 'light' : 'dark';
+            changeBackground(newTheme);
+            switchTerminalTheme(newTheme);
+        });
+    });
+
+    // Change the background image immediately and then every minute
+    changeBackground();
+    setInterval(changeBackground, 60 * 1000);
 </script>
+
 <script type="module" src="{{ asset('js/xterm.js') }}"></script>
 <script type="module" src="{{ mix('js/terminal.js') }}"></script>
+<script type="module" src="{{ mix('js/xterm-addon-fit.js') }}"></script>
 <script>
-    
     // Make the terminal window draggable
-
     $(function() {
-    $("#draggable-terminal").draggable({bounds:$("#desktop")}).resizable({ animate: true,
+        $("#draggable-terminal").draggable({bounds:$("#desktop")}).resizable({
+            animate: true,
             ghost: true,
             handles: 'n,s,e,w,ne,se,nw,sw',
-            hide: true
-            
-        })
-});
-
-
+            hide: true,
+            minWidth: "350", // minimum width
+        minHeight: "150"
+        });
+    });
 </script>
 
 <script>
- 
-
     // Get the window
     const macWindow = document.querySelector('.mac-window');
+    const closeButton = document.querySelector('.mac-window-button-close');
+    const minimizeButton = document.querySelector('.mac-window-button-minimize');
+    const maximizeButton = document.querySelector('.mac-window-button-maximize');
+ const titleBar = document.querySelector('.mac-window-titlebar');
     // Define the behavior for each button
     closeButton.addEventListener('click', () => {
         macWindow.style.display = 'none'; // Hide the window
-        footer.style.display = 'none'; // Hide the footer
     });
 
     minimizeButton.addEventListener('click', () => {
-        macWindow.style.height = `0px`; // Minimize the window to the size of the bar
+        macWindow.style.width = `300px`; // Minimize the window to the size of the bar
+        macWindow.style.height = `50px`; // Minimize the window to the size of the bar
     });
-
+    let isMaximized = false;
+    let normalSize = {width: macWindow.style.width, height: macWindow.style.height};
+    let pos = {top: macWindow.style.top, left: macWindow.style.left};
     maximizeButton.addEventListener('click', () => {
-        
-        macWindow.style.width = '100%';
-        $("#draggable-terminal").css({
-        top: 0,
-        left: 0
-    });
+        isMaximized = macWindow.style.width === '100%' && macWindow.style.height === '100vh';
+        if (isMaximized) {
+        // Restore to normal size
+        macWindow.style.width = normalSize.width;
+        macWindow.style.height = normalSize.height;
 
-    $("#draggable-terminal").css({
-        top: -$("#draggable-terminal").offset().top+titleBar.offsetHeight,
-        left: -$("#draggable-terminal").offset().left})
-     // Maximize the window
+        $("#draggable-terminal").css(pos);
+
+        isMaximized = false;
+    } else {
+        // Save current size
+        normalSize = {width: macWindow.style.width, height: macWindow.style.height};
+        pos = {top: macWindow.style.top, left: macWindow.style.left};
+        // Maximize the window
+        macWindow.style.width = '100%';
+       
+
+        $("#draggable-terminal").css({
+            top: 0,
+            left: 0
+        });
+
+        $("#draggable-terminal").css({
+            top: -$("#draggable-terminal").offset().top+titleBar.offsetHeight,
+            left: -$("#draggable-terminal").offset().left
+        });
         macWindow.style.height = '100vh';
+        isMaximized = true;
+    }
     });
 </script>
 @endsection

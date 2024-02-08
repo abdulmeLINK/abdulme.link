@@ -15,6 +15,7 @@ mix.js("resources/js/app.js", "public/js")
         // other PostCSS plugins
     ])
     .copy("node_modules/xterm/lib/xterm.js", "public/js")
+    .copy("node_modules/xterm-addon-fit/lib/xterm-addon-fit.js", "public/js")
     .styles(
         [
             "node_modules/bootstrap/dist/css/bootstrap.css",
