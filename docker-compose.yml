@@ -33,14 +33,12 @@ services:
     networks:
       - app-network
 
-  vite:
+  mix:
     image: node:16
     volumes:
       - ./:/app
     working_dir: /app
     entrypoint: sh -c "npm install && npm run dev -- --host --port=5174"
-    ports:
-      - "5174:5174"
     networks:
       - app-network
 
