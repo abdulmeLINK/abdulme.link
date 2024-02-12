@@ -16,6 +16,10 @@ mix.js("resources/js/app.js", "public/js")
     ])
     .copy("node_modules/xterm/lib/xterm.js", "public/js")
     .copy("node_modules/xterm-addon-fit/lib/xterm-addon-fit.js", "public/js")
+    .copy(
+        "node_modules/xterm-addon-web-links/lib/xterm-addon-web-links.js",
+        "public/js"
+    )
     .styles(
         [
             "node_modules/bootstrap/dist/css/bootstrap.css",

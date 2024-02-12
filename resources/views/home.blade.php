@@ -273,6 +273,7 @@ body::before {
 <script type="module" src="{{ asset('js/xterm.js') }}"></script>
 <script type="module" src="{{ mix('js/terminal.js') }}"></script>
 <script type="module" src="{{ mix('js/xterm-addon-fit.js') }}"></script>
+<script type="module" src="{{ mix('js/xterm-addon-web-links.js') }}"></script>
 <script>
     // Make the terminal window draggable
     $(function() {

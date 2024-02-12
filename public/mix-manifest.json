@@ -3,6 +3,7 @@
     "/css/app.css": "/css/app.css",
     "/js/xterm.js": "/js/xterm.js",
     "/js/xterm-addon-fit.js": "/js/xterm-addon-fit.js",
+    "/js/xterm-addon-web-links.js": "/js/xterm-addon-web-links.js",
     "/css/vendor.css": "/css/vendor.css",
     "/js/terminal.js": "/js/terminal.js"
 }
