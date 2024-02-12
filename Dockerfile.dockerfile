@@ -49,6 +49,8 @@ RUN mkdir -p /var/www/bootstrap/cache && \
 RUN chmod -R ugo+rw /var/www/storage && \
     chmod -R ugo+rw /var/www/bootstrap/cache
 
+RUN mkdir -p /var/www/vendor && chown www:www /var/www/vendor
+
 # Change current user to www
 USER www
 
