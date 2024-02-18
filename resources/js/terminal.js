@@ -247,8 +247,7 @@ const fileSystem = {
             permissions: "r",
             content:
                 "\x1b[33mCertifications\x1b[0m\n\n" +
-                "AWS Certified Developer\n" +
-                "Google Cloud Associate Cloud Engineer",
+                "Advanced Level Python Programming (2020)\n",
         },
     },
     projects: {
