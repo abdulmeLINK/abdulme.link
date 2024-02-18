@@ -92,8 +92,8 @@ const fileSystem = {
             permissions: "r",
             content:
                 "\x1b[33mContact\x1b[0m\n\n" +
-                "📧 Email: abdulmeliksaylan@gmail.com\n" +
-                "🌐 Website: abdulme.link\n",
+                "📧 Email: abdulmeliksaylan@gmail.com | mailto:me@abdulme.link\n" +
+                "🌐 Website: http://abdulme.link\n",
         },
     },
     objective_statement: {
@@ -118,25 +118,22 @@ const fileSystem = {
         },
     },
     work_experience: {
-        "job1.txt": {
+        "freelance.txt": {
             type: "file",
             user: "root",
             permissions: "r",
             content:
-                "\x1b[33mJob 1\x1b[0m\n\n" +
-                "Software Developer at XYZ Company\n" +
-                "Responsibilities: ...\n" +
-                "Achievements: ...",
-        },
-        "job2.txt": {
-            type: "file",
-            user: "root",
-            permissions: "r",
-            content:
-                "\x1b[33mJob 2\x1b[0m\n\n" +
-                "Junior Developer at ABC Company\n" +
-                "Responsibilities: ...\n" +
-                "Achievements: ...",
+                "\x1b[33m📌 Providing a comprehensive range of services primarily focused on mobile and web software development,\x1b[0m 💻 \n\n" +
+                "\x1b[36m🔹 I catered to a diverse clientele seeking solutions for various aspects of their digital platforms. A significant portion of my work involved assisting clients in maintaining or modernizing their existing software infrastructure. This entailed a multitude of tasks, such as revamping user interfaces, integrating new microservices, and incorporating analytical tools to enhance \x1b[33mperformance\x1b[36m and functionality.\x1b[0m\n\n" +
+                "\x1b[36m🔹 For clients looking to rejuvenate their applications, I specialized in reskinning and integrating new features, including facilitating the seamless integration of Google Admob and Google AdSense advertisements to optimize revenue streams. Additionally, I adeptly configured APIs and web interfaces to streamline communication with servers, ensuring smooth data flow and efficient operations. Moreover, I provided support in setting up administrative interfaces, empowering clients to effectively manage their software environments.\x1b[0m\n\n" +
+                "\x1b[36m🔹 In instances where clients required the development of new functionalities and backend systems based on preliminary designs or mock-ups, I leveraged my expertise to bring their concepts to life. Utilizing frameworks such as Flutter, I translated design concepts into fully functional applications, meticulously ensuring alignment with client specifications and preferences.\x1b[0m\n\n" +
+                "\x1b[36m🔹 Moreover, I facilitated the deployment of applications to prominent digital marketplaces, such as Google Play and the App Store, managing all aspects of the process, from market descriptions to APK signing and API integrations. This comprehensive approach ensured a smooth and successful launch for each app, enhancing visibility and accessibility for end-users.\x1b[0m\n\n" +
+                "\x1b[36m🔹 In handling projects ranging from low to mid complexity, I meticulously analyzed client requirements and anticipated demands to develop scalable solutions capable of accommodating growth and fluctuating user volumes. By leveraging my expertise in database management and server optimization, I ensured optimal performance and responsiveness, even under \x1b[33mhigh traffic conditions\x1b[36m.\x1b[0m\n\n" +
+                "\x1b[36m🔹 Additionally, I provided tailored solutions for clients seeking web scraping and automation services to streamline their business processes. Through meticulous planning and execution, I delivered automated solutions that effectively gathered and processed relevant data, empowering clients to make informed decisions and gain a competitive edge in their respective industries.\x1b[0m\n\n" +
+                "\x1b[36m🔹 Over the course of my tenure, I successfully completed nearly \x1b[33m30 projects\x1b[36m spanning durations ranging from two days to three months, each characterized by a collaborative approach and a commitment to exceeding client expectations. With a track record of achieving \x1b[33m100% project completion\x1b[36m and consistently high levels of customer satisfaction, I am well-equipped to address the diverse needs of clients in the realm of software development and beyond.\x1b[0m\n\n" +
+                "\x1b[36m🔹 In addition to serving a diverse clientele, I also provided tailored software solutions to local startups and businesses, addressing their specific needs and contributing to the growth and efficiency of the local business ecosystem. From conceptualization to execution, I collaborated closely with these entities to develop bespoke software applications that aligned with their objectives and operational requirements.\x1b[0m\n\n" +
+                "\x1b[36m🔹 Furthermore, I offered on-site maintenance services, ensuring the smooth functioning and continuous optimization of software systems within the premises of various businesses. This hands-on approach allowed me to promptly address any issues or updates, minimizing downtime and maximizing productivity for my clients.\x1b[0m\n\n" +
+                "\x1b[36m🔹 By fostering strong relationships with local startups and businesses, I not only supported their technological endeavors but also contributed to the overall prosperity of the community. My dedication to providing personalized solutions and ongoing support underscored my commitment to the success and sustainability of these ventures, further solidifying my reputation as a trusted partner in software development and maintenance. 🚀\x1b[0m",
         },
     },
     skills: {
@@ -341,7 +338,55 @@ const fileSystem = {
     },
     // Additional directories and files can be added here
 };
+let currentSuggestionIndex = 0;
+let firstInput = null;
 
+function autoCompleteCommand(input) {
+    let actualInput = firstInput !== null ? firstInput : input;
+    const parts = actualInput.split(" ");
+    const command = parts[0];
+    const path = parts[1] || "";
+    const pathParts = path.split("/");
+    let currentDir = currentPath.reduce((acc, cur) => acc[cur], fileSystem);
+
+    for (let i = 0; i < pathParts.length - 1; i++) {
+        const part = pathParts[i];
+        if (part in currentDir) {
+            currentDir = currentDir[part];
+        } else {
+            // Path does not exist
+            return input;
+        }
+    }
+
+    const lastPart = pathParts[pathParts.length - 1];
+    const suggestions = Object.keys(currentDir).filter(
+        (key) =>
+            key.startsWith(lastPart) &&
+            (currentDir[key].type === "directory" ||
+                currentDir[key].type === "file")
+    );
+
+    console.log(Object.keys(currentDir));
+
+    if (suggestions.length > 0) {
+        // If there are one or more suggestions, auto-complete the command with the current suggestion
+        if (firstInput === null) {
+            firstInput = input;
+            currentSuggestionIndex = 0;
+        }
+        const suggestion =
+            suggestions[currentSuggestionIndex % suggestions.length];
+        currentSuggestionIndex++;
+        return `${command} ${pathParts.slice(0, -1).join("/")}${
+            pathParts.length > 1 ? "/" : ""
+        }${suggestion}`;
+    } else {
+        // If there are no suggestions, do not auto-complete the command
+        firstInput = null;
+        return input;
+    }
+}
 export function initializeTerminal() {
     const fitAddon = new FitAddon.FitAddon();
     const webLinksAddon = new WebLinksAddon.WebLinksAddon();
@@ -381,7 +426,6 @@ export function initializeTerminal() {
     $("#terminal").click(() => {
         term.focus();
     });
-
     let input = "";
     let cursorPosition = 0;
 
@@ -391,7 +435,23 @@ export function initializeTerminal() {
         }
 
         const code = data.charCodeAt(0);
+        if (code !== 9) {
+            firstInput = null;
+        }
+        if (code === 9) {
+            // ASCII code for Tab
+            // Handle Tab key press
+            // Check if the command should have auto-completion
 
+            const completedCommand = autoCompleteCommand(input);
+            if (completedCommand !== input) {
+                // Clear the current input
+                term.write("\b \b".repeat(input.length));
+                term.write(completedCommand); // Write the completed command
+                input = completedCommand; // Update the input
+                cursorPosition = input.length; // Update the cursor position
+            }
+        }
         if (code === 13) {
             term.write("\r\n");
             handleCommand(input, term);
@@ -441,13 +501,27 @@ export function initializeTerminal() {
                 cursorPosition = input.length;
             }
         } else if (code >= 32) {
-            input =
-                input.slice(0, cursorPosition) +
-                data +
-                input.slice(cursorPosition);
-            cursorPosition++;
-            term.write(data + input.slice(cursorPosition));
-            term.write("\b".repeat(input.length - cursorPosition));
+            if (data.length > 1) {
+                // Handle case where data is a string of characters
+                for (let i = 0; i < data.length; i++) {
+                    input =
+                        input.slice(0, cursorPosition) +
+                        data[i] +
+                        input.slice(cursorPosition);
+                    cursorPosition++;
+                    term.write(data[i] + input.slice(cursorPosition));
+                    term.write("\b".repeat(input.length - cursorPosition));
+                }
+            } else {
+                // Handle case where data is a single character
+                input =
+                    input.slice(0, cursorPosition) +
+                    data +
+                    input.slice(cursorPosition);
+                cursorPosition++;
+                term.write(data + input.slice(cursorPosition));
+                term.write("\b".repeat(input.length - cursorPosition));
+            }
         }
 
         console.log(input);
@@ -485,44 +559,72 @@ let commands = {
             );
         },
     },
+
     ls: {
         description: "List directory contents",
-        action: (term, options) => {
+        action: (term, ...options) => {
             const colors = {
                 file: "\x1b[37m", // white
                 directory: "\x1b[34m", // blue
             };
             const reset = "\x1b[0m";
+            const wd = currentPath[currentPath.length - 1];
+            // Extract name from options
+            let name =
+                options.find(
+                    (option) =>
+                        typeof option === "string" && !option.startsWith("-")
+                ) || wd;
 
-            for (let item in fileSystem[currentPath[currentPath.length - 1]]) {
-                let color =
-                    colors[
-                        fileSystem[currentPath[currentPath.length - 1]][item]
-                            .type
-                    ] || colors["file"];
-                let permissions =
-                    fileSystem[currentPath[currentPath.length - 1]][item]
-                        .permissions;
-                let user =
-                    fileSystem[currentPath[currentPath.length - 1]][item].user;
-                let size =
-                    fileSystem[currentPath[currentPath.length - 1]][item]
-                        .size || 0;
-                let modDate =
-                    fileSystem[currentPath[currentPath.length - 1]][item]
-                        .modDate || new Date();
+            if (name == ".") {
+                name = wd;
+            }
 
-                if (options && options.includes("l")) {
-                    writeln(
-                        `${permissions} ${user} ${size} ${modDate.toLocaleDateString()} ${modDate.toLocaleTimeString()} ${color}${item}${reset}`
-                    );
+            // If no name is found, print an error message and return
+            if (!fileSystem[name] && !fileSystem[wd][name]) {
+                writeln(
+                    `ls: cannot access '${name}': No such file or directory`
+                );
+                return;
+            }
+
+            // If the name is a directory, list its contents
+            if (
+                name &&
+                name in fileSystem &&
+                (name == wd || fileSystem[wd][name].type === "directory")
+            ) {
+                for (let item in fileSystem[name]) {
+                    if (typeof fileSystem[name][item] === "object") {
+                        let color =
+                            colors[fileSystem[name][item].type] ||
+                            colors["file"];
+                        let permissions = fileSystem[name][item].permissions;
+                        let user = fileSystem[name][item].user;
+
+                        if (options.includes("-l")) {
+                            writeln(
+                                `${permissions} ${user} ${color}${item}${reset}`
+                            );
+                        } else {
+                            writeln(`${color}${item}${reset}`);
+                        }
+                    }
+                }
+            } else {
+                // If the name is a file, list the file
+                let color = colors[fileSystem[wd][name].type] || colors["file"];
+                let permissions = fileSystem[wd][name].permissions;
+                let user = fileSystem[wd][name].user;
+
+                if (options.includes("-l")) {
+                    writeln(`${permissions} ${user} ${color}${name}${reset}`);
                 } else {
-                    writeln(`${color}${item}${reset}`);
+                    writeln(`${color}${name}${reset}`);
                 }
             }
         },
     },
-
     cd: {
         description: "Change the current directory",
         action: (term, dir) => {
@@ -599,6 +701,7 @@ function handleCommand(command, term) {
     let [cmd, ...args] = command.toLowerCase().trim().split(" ");
     if (commands[cmd]) {
         isOutputing = true;
+        console.log(args);
         commands[cmd].action(term, ...args);
     } else {
         writeln('Command not found. Type "help" for available commands.');

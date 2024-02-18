@@ -1,11 +1,27 @@
+@php
+    // Detect the user's preferred color scheme
+    $colorScheme = $_COOKIE['colorScheme'] ?? 'light';
+
+    // Select the appropriate colors
+    $backgroundColor = $colorScheme === 'dark' ? '#000' : '#fff';
+    $logoColor = $colorScheme === 'dark' ? 'invert(1)' : 'none';
+    $progressBarColor = $colorScheme === 'dark' ? '#333' : '#ccc';
+    $progressColor = $colorScheme === 'dark' ? '#fff' : '#000';
+@endphp
 @extends('layouts.app')
 @section('title', 'Home')
 @section('content')
-<div class="stylish-element-above">
-    <!-- Add content for the stylish element above the terminal here -->
+<div id="boot-up-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: {{ $backgroundColor }}; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 1s;">
+    <!-- The Apple logo -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo" style="width: 60px; filter: {{ $logoColor }};">
+
+    <!-- The progress bar -->
+    <div id="progress-bar" style="position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%); width: 200px; height: 5px; background: {{ $progressBarColor }}; border-radius: 5px; overflow: hidden;">
+        <div id="progress" style="height: 100%; background: {{ $progressColor }}; width: 0;"></div>
+    </div>
 </div>
 
-<div id="desktop"><div class="mac-window" id="draggable-terminal">
+<div id="desktop" style="opacity: 0; transition: opacity 1s;"><div class="mac-window" id="draggable-terminal">
     <div class="mac-window-titlebar">
         <div class="mac-window-buttons">
             <div class="mac-window-button mac-window-button-close"></div>
@@ -18,9 +34,7 @@
     </div>
 </div></div>
 
-<div class="stylish-element-below">
-    <!-- Add content for the stylish element below the terminal here -->
-</div>
+
 
 <style>
     #desktop {
@@ -55,6 +69,8 @@ body::before {
         background-size: cover;
         cursor: url('images/cursor.png'), auto;
     }
+
+    
     .terminal-container {
             flex-grow: 1;
             position: relative;
@@ -165,6 +181,50 @@ body::before {
     /* Add more custom styling as needed */
 </style>
 <script>
+    function checkFirstVisit() {
+        const isFirstVisit = localStorage.getItem('isFirstVisit') === null;
+        localStorage.setItem('isFirstVisit', 'false');
+        return isFirstVisit;
+    }
+
+    function animateProgressBar() {
+        let progress = 0;
+        const interval = setInterval(function() {
+            progress += 1;
+            document.getElementById('progress').style.width = `${progress}%`;
+
+            if (progress >= 100) {
+                clearInterval(interval);
+                fadeOutBootupScreen();
+            }
+        }, 10);
+    }
+
+    function fadeOutBootupScreen() {
+        document.getElementById('boot-up-screen').style.opacity = '0';
+
+        setTimeout(function() {
+            hideBootupScreen();
+            showWebsite();
+        }, 1000); // The timeout should match the transition duration
+    }
+
+    function hideBootupScreen() {
+        document.getElementById('boot-up-screen').style.display = 'none';
+    }
+
+    function showWebsite() {
+        document.getElementById('desktop').style.opacity = '1';
+    }
+
+    // Wait for the window to load
+    window.addEventListener('load', function() {
+        if (checkFirstVisit()) {
+            animateProgressBar();
+        }
+    });
+</script>
+<script>
     // Array of day and night screenshots
     const dayScreenshots = [
         '/images/10-11-6k.jpg',
@@ -210,28 +270,57 @@ body::before {
         return localStorage.getItem('theme') || 'light';
     }
 
-    // Function to preload an image
-    function preloadImage(url) {
-        return new Promise((resolve, reject) => {
-            const img = new Image();
-            img.onload = () => resolve(url);
-            img.onerror = reject;
-            img.src = url;
-        });
-    }
+function preloadImage(url) {
+    return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.responseType = "blob";
 
-    // Function to change the background image
-    async function changeBackground(cTheme = getCurrentTheme()) {
-        const screenshots = cTheme === 'light' ? dayScreenshots : nightScreenshots;
+        xhr.onprogress = (event) => {
+            if (event.lengthComputable) {
+                const progress = (event.loaded / event.total) * 100;
+                document.getElementById('progress').style.width = `${progress}%`;
+
+                if (progress >= 100 && !isFirstVisit) {
+                    fadeOutBootupScreen();
+                }
+            }
+        };
+
+        xhr.onload = function() {
+            if (this.status === 200) {
+                let blob = new Blob([this.response], {type: "image/png"});
+                let img = URL.createObjectURL(blob);
+                resolve(img);
+                document.getElementById('progress').style.width = `100%`;
+                fadeOutBootupScreen();
+            }
+        };
+
+        xhr.onerror = (error) => {
+            console.error(`Failed to load image: ${url}`, error);
+            reject(error);
+        };
+
+        xhr.send();
+    });
+}
+
+// Function to change the background image
+async function changeBackground(cTheme = getCurrentTheme()) {
+    const screenshots = cTheme === 'light' ? dayScreenshots : nightScreenshots;
+    for (let i = 0; i < screenshots.length; i++) {
         const screenshot = selectRandomScreenshot(screenshots);
         try {
             const url = await preloadImage(screenshot);
             document.body.style.setProperty('--background-image', `url(${url})`);
+            break; // If the image is loaded successfully, break the loop
         } catch (error) {
             console.error(`Failed to preload image: ${screenshot}`, error);
+            // If the image fails to load, the loop will continue and try the next image
         }
     }
-
+}
     // Change the window bar color based on the current theme
     function switchTerminalTheme(cTheme) {
         // log cTheme
@@ -289,33 +378,64 @@ body::before {
 </script>
 
 <script>
-    // Get the window
-    const macWindow = document.querySelector('.mac-window');
-    const closeButton = document.querySelector('.mac-window-button-close');
-    const minimizeButton = document.querySelector('.mac-window-button-minimize');
-    const maximizeButton = document.querySelector('.mac-window-button-maximize');
- const titleBar = document.querySelector('.mac-window-titlebar');
-    // Define the behavior for each button
-    closeButton.addEventListener('click', () => {
-        macWindow.style.display = 'none'; // Hide the window
-    });
+// Get the window and buttons
+const macWindow = document.querySelector('.mac-window');
+const closeButton = document.querySelector('.mac-window-button-close');
+const minimizeButton = document.querySelector('.mac-window-button-minimize');
+const maximizeButton = document.querySelector('.mac-window-button-maximize');
+const titleBar = document.querySelector('.mac-window-titlebar');
 
-    minimizeButton.addEventListener('click', () => {
-        macWindow.style.width = `300px`; // Minimize the window to the size of the bar
-        macWindow.style.height = `50px`; // Minimize the window to the size of the bar
-    });
-    let isMaximized = false;
-    let normalSize = {width: macWindow.style.width, height: macWindow.style.height};
-    let pos = {top: macWindow.style.top, left: macWindow.style.left};
-    maximizeButton.addEventListener('click', () => {
-        isMaximized = macWindow.style.width === '100%' && macWindow.style.height === '100vh';
-        if (isMaximized) {
+let isMaximized = false;
+let normalSize = {width: macWindow.style.width, height: macWindow.style.height};
+let pos = {top: macWindow.style.top, left: macWindow.style.left};
+
+/*
+// On page load, check if size and position values exist in localStorage
+if (localStorage.getItem('normalSize')) {
+    normalSize = JSON.parse(localStorage.getItem('normalSize'));
+    macWindow.style.width = normalSize.width;
+    macWindow.style.height = normalSize.height;
+}
+
+if (localStorage.getItem('pos')) {
+    pos = JSON.parse(localStorage.getItem('pos'));
+    macWindow.style.top = pos.top;
+    macWindow.style.left = pos.left;
+}
+*/
+// Create a new ResizeObserver instance and observe the macWindow for size changes
+let resizeObserver = new ResizeObserver(() => {
+    normalSize = {width: macWindow.style.width, height: macWindow.style.height};
+    localStorage.setItem('normalSize', JSON.stringify(normalSize));
+});
+resizeObserver.observe(macWindow);
+
+// Create a new MutationObserver instance and observe the macWindow for position changes
+let mutationObserver = new MutationObserver(() => {
+    pos = {top: macWindow.style.top, left: macWindow.style.left};
+    localStorage.setItem('pos', JSON.stringify(pos));
+});
+mutationObserver.observe(macWindow, { attributes: true, attributeFilter: ['style'] });
+
+// Define the behavior for the close button
+function closeWindow() {
+    macWindow.style.display = 'none'; // Hide the window
+}
+
+// Define the behavior for the minimize button
+function minimizeWindow() {
+    macWindow.style.width = `300px`; // Minimize the window to the size of the bar
+    macWindow.style.height = `50px`; // Minimize the window to the size of the bar
+}
+
+// Define the behavior for the maximize button
+function maximizeWindow() {
+    isMaximized = macWindow.style.width === '100%' && macWindow.style.height === '100vh';
+    if (isMaximized) {
         // Restore to normal size
         macWindow.style.width = normalSize.width;
         macWindow.style.height = normalSize.height;
-
         $("#draggable-terminal").css(pos);
-
         isMaximized = false;
     } else {
         // Save current size
@@ -323,13 +443,10 @@ body::before {
         pos = {top: macWindow.style.top, left: macWindow.style.left};
         // Maximize the window
         macWindow.style.width = '100%';
-       
-
         $("#draggable-terminal").css({
             top: 0,
             left: 0
         });
-
         $("#draggable-terminal").css({
             top: -$("#draggable-terminal").offset().top+titleBar.offsetHeight,
             left: -$("#draggable-terminal").offset().left
@@ -337,6 +454,14 @@ body::before {
         macWindow.style.height = '100vh';
         isMaximized = true;
     }
-    });
+}
+if (window.matchMedia("(max-width: 768px)").matches) {
+        maximizeWindow();
+    }
+
+// Attach event listeners to buttons
+closeButton.addEventListener('click', closeWindow);
+minimizeButton.addEventListener('click', minimizeWindow);
+maximizeButton.addEventListener('click', maximizeWindow);
 </script>
 @endsection
