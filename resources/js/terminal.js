@@ -688,9 +688,9 @@ let commands = {
     mylinks: {
         description: "Show my profile links",
         action: (term) => {
-            writeln("\x1b[36mGitHub:\x1b[0m https://github.com/yourusername");
+            writeln("\x1b[36mGitHub:\x1b[0m https://github.com/abdulmeLINK");
             writeln(
-                "\x1b[34mLinkedIn:\x1b[0m https://linkedin.com/in/yourusername"
+                "\x1b[34mLinkedIn:\x1b[0m https://www.linkedin.com/in/abdulmelik-saylan-889096228/"
             );
         },
     },
