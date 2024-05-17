@@ -42,9 +42,25 @@ services:
     networks:
       - app-network
 
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb-service
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongodb_data:/data/db
+      - ./:/var/www # Make sure your project files are available in the container
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+    command: /bin/bash -c "/var/www/import-json.sh"
 
 volumes:
   vendor:
+  mongodb_data:
 
 networks:
   app-network:

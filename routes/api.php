@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\FileSystemController; //import FileSystemController
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//create route for FileSystemController
+Route::post('filesystem/contents', [FileSystemController::class, 'index']);
+Route::post('about', [AboutController::class, 'index_api']);
+Route::resource('posts', PostController::class);

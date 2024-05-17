@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+use App\Models\Contact;
 use App\Mail\ContactFormSubmitted;
 
 class ContactController extends Controller
@@ -24,7 +24,9 @@ class ContactController extends Controller
         ]);
 
 
+        $contact = new Contact($validatedData);
+        $contact->save();
 
-        Mail::to('you@example.com')->send(new ContactFormSubmitted($validatedData));
+        return redirect('/contact')->with('success', 'Your message has been sent!');
     }
 }
