@@ -19,18 +19,17 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     autoconf \
     pkg-config \
-    libbson-1.0
+    libbson-dev \
+    libicu-dev \
+    g++
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Change current user to root
-USER root
-
 # Install extensions
 RUN pecl install mongodb && \
-    echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini && \
-    docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+    docker-php-ext-enable mongodb && \
+    docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
