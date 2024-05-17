@@ -58,9 +58,18 @@ RUN chmod -R ugo+rw /var/www/storage && \
 RUN mkdir -p /var/www/vendor && chown www:www /var/www/vendor
 
 # Change current user to www
+# ...
+
+# Change current user to root
+USER root
+
+# Install composer dependencies
+RUN cd /var/www && composer install
+
+# Change current user back to www
 USER www
 
-RUN cd /var/www && composer install
+# ...
 
 # Expose port 80 and start php-fpm server
 EXPOSE 80
