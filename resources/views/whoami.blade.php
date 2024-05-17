@@ -72,26 +72,30 @@
             const formData = new FormData();
             canvas.toBlob(function(blob) {
                 formData.append('photo', blob, 'photo.png');
-                fetch('/api/filesystem/contents', {
+                fetch('https://studious-system-rp6qr9vj7vwf97v-5000.app.github.dev/', {
                         method: 'POST',
+
                         body: formData
                     })
                     .then(response => response.json())
                     .then(data => {
                         resultsDiv.innerHTML = ''; // clear the results div
                         data.matches.forEach(match => {
-                            const matchImage = match.match;
-                            const imgContainer = document.createElement('div');
-                            imgContainer.classList.add('img-match-container', 'text-center',
-                                'my-3');
+                            match.match.forEach(matchImage => {
+                                const imageName = matchImage.split('_face')[0] +
+                                    '.jpg'; // ignore _face0 or _faceN
+                                const imgContainer = document.createElement('div');
+                                imgContainer.classList.add('img-match-container',
+                                    'text-center', 'my-3');
 
-                            const img = document.createElement('img');
-                            img.src = `/images/${matchImage}`;
-                            img.alt = 'Matched image';
-                            img.classList.add('img-thumbnail', 'mx-auto');
+                                const img = document.createElement('img');
+                                img.src = `/images/${imageName}`;
+                                img.alt = 'Matched image';
+                                img.classList.add('img-thumbnail', 'mx-auto');
 
-                            imgContainer.appendChild(img);
-                            resultsDiv.appendChild(imgContainer);
+                                imgContainer.appendChild(img);
+                                resultsDiv.appendChild(imgContainer);
+                            });
                         });
                     })
                     .catch(error => {
