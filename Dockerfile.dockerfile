@@ -27,9 +27,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install extensions
-RUN pecl install mongodb && \
-    docker-php-ext-enable mongodb && \
-    docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -61,6 +59,10 @@ RUN mkdir -p /var/www/vendor && chown www:www /var/www/vendor
 
 # Change current user to www
 USER www
+
+# Install MongoDB extension using pecl
+RUN pecl install mongodb && \
+    echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini
 
 RUN cd /var/www && composer install
 
