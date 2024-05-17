@@ -24,9 +24,12 @@ RUN apt-get update && apt-get install -y \
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Change current user to root
+USER root
+
 # Install extensions
 RUN pecl install mongodb && \
-    docker-php-ext-enable mongodb && \
+    echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini && \
     docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # Install composer
@@ -58,18 +61,9 @@ RUN chmod -R ugo+rw /var/www/storage && \
 RUN mkdir -p /var/www/vendor && chown www:www /var/www/vendor
 
 # Change current user to www
-# ...
-
-# Change current user to root
-USER root
-
-# Install composer dependencies
-RUN cd /var/www && composer install
-
-# Change current user back to www
 USER www
 
-# ...
+RUN cd /var/www && composer install
 
 # Expose port 80 and start php-fpm server
 EXPOSE 80
