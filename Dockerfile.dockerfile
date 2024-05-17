@@ -30,8 +30,8 @@ RUN pear config-set php_ini "$PHP_INI_DIR"
 # Install extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl
 # Install MongoDB extension using pecl
-RUN pecl install mongodb && \
-    echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini
+RUN pecl install mongodb \
+    &&  echo "extension=mongodb.so" > $PHP_INI_DIR/conf.d/mongo.ini
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
