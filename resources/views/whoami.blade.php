@@ -71,10 +71,9 @@
             event.preventDefault();
             const formData = new FormData();
             canvas.toBlob(function(blob) {
-                formData.append('photo', blob, 'photo.png');
+                formData.append('photo', blob, 'photo.jpg');
                 fetch('/api/analyze', {
                         method: 'POST',
-
                         body: formData
                     })
                     .then(response => response.json())
@@ -95,6 +94,7 @@
 
                                 imgContainer.appendChild(img);
                                 resultsDiv.appendChild(imgContainer);
+                                a
                             });
                         });
                     })
@@ -103,7 +103,7 @@
                         resultsDiv.innerHTML =
                             '<div class="alert alert-danger" role="alert">AI server is not active</div>';
                     });
-            }, 'image/png');
+            }, 'image/jpeg');
         });
     </script>
 @endsection

@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\AboutController;
 use App\Http\Middleware\TrustProxies;
+use App\Http\Middleware\CorsMiddleware;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +30,7 @@ Route::middleware(TrustProxies::class)->group(function () {
 
     Route::get('/whoami', function () {
         return view('whoami');
-    });
+    })->middleware(CorsMiddleware::class);
 
 
 
