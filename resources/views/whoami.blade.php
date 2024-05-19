@@ -72,7 +72,7 @@
             const formData = new FormData();
             canvas.toBlob(function(blob) {
                 formData.append('photo', blob, 'photo.png');
-                fetch('https://studious-system-rp6qr9vj7vwf97v-5000.app.github.dev/', {
+                fetch('https://faceai.abdulme.link/compare', {
                         method: 'POST',
 
                         body: formData
@@ -101,7 +101,7 @@
                     .catch(error => {
                         console.error('Error:', error);
                         resultsDiv.innerHTML =
-                            '<div class="alert alert-danger" role="alert">An error occurred while processing your request.</div>';
+                            '<div class="alert alert-danger" role="alert">AI server is not active</div>';
                     });
             }, 'image/png');
         });
