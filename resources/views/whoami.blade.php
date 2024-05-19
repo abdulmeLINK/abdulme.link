@@ -81,8 +81,8 @@
                         resultsDiv.innerHTML = ''; // clear the results div
                         data.matches.forEach(match => {
                             match.match.forEach(matchImage => {
-                                const imageName = matchImage.split('_face')[0] +
-                                    '.jpg'; // ignore _face0 or _faceN
+                                const imageName = matchImage.split('_face')[
+                                    0]; // ignore _face0 or _faceN
                                 const imgContainer = document.createElement('div');
                                 imgContainer.classList.add('img-match-container',
                                     'text-center', 'my-3');
@@ -94,7 +94,7 @@
 
                                 imgContainer.appendChild(img);
                                 resultsDiv.appendChild(imgContainer);
-                                a
+
                             });
                         });
                     })

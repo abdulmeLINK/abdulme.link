@@ -3,63 +3,51 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use GuzzleHttp\Cookie\CookieJar;
 
 class FaceRecognition extends Controller
 {
-    public function analyze()
+    public function analyze(Request $request)
     {
-        // The path to the image in the storage directory
-        $imagePath = storage_path('public/1716082490.png');
+        // Check if a file was uploaded
+        if ($request->hasFile('photo')) {
+            // Get the file from the request
+            $photo = $request->file('photo');
 
-        // The URL of the face recognition service
-        $url = 'https://faceai.abdulme.link/compare';
+            // The URL of the face recognition service
+            $url = 'https://faceai.abdulme.link/compare';
 
-        // Open the file in binary mode
-        $file = curl_file_create($imagePath);
+            // The body of the request
+            $body = [
+                'photo' => fopen($photo->getPathname(), 'r')
+            ];
 
-        // The body of the request
-        $body = [
-            'photo' => $file
-        ];
+            // Make the request
+            $start_time = microtime(true);
+            $response = Http::asMultipart()->post($url, $body);
+            $end_time = microtime(true);
 
-        // Initialize cURL
-        $ch = curl_init();
+            // Log the response
+            Log::info('Response:', ['body' => $response->body()]);
 
-        // Set the options
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 120);
+            // Log the response time
+            Log::info('Response time: ' . ($end_time - $start_time) . ' seconds');
 
-        // Make the request
-        $start_time = microtime(true);
-        $response = curl_exec($ch);
-        $end_time = microtime(true);
+            // Decode the JSON response
+            $data = json_decode($response->body(), true);
 
-        // Close the cURL resource
-        curl_close($ch);
+            // Log the decoded data
+            Log::info('Decoded data:', $data);
 
-
-        // Print the response
-        Log::info('Response:', ['response' => $response]);
-
-        // Print the response time
-        Log::info('Response time: ' . ($end_time - $start_time) . ' seconds', []);
-
-
-        $data = json_decode($response, true);
-
-        // Check if $data is not null and contains a 'matches' key
-        if ($data !== null && isset($data['matches'])) {
             // Return the matches
             return response()->json(['matches' => $data['matches']]);
         } else {
+            // Log an error message
+            Log::error('No photo uploaded');
+
             // Return an error response
-            return response()->json(['error' => 'Invalid response from face recognition service']);
+            return response()->json(['error' => 'No photo uploaded']);
         }
     }
 }
