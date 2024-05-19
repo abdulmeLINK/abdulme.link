@@ -72,7 +72,7 @@
             const formData = new FormData();
             canvas.toBlob(function(blob) {
                 formData.append('photo', blob, 'photo.png');
-                fetch('https://faceai.abdulme.link/compare', {
+                fetch('/api/analyze', {
                         method: 'POST',
 
                         body: formData

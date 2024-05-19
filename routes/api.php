@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileSystemController; //import FileSystemController
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\FaceRecognition;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,3 +25,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('filesystem/contents', [FileSystemController::class, 'index']);
 Route::post('about', [AboutController::class, 'index_api']);
 Route::resource('posts', PostController::class);
+Route::post('analyze', [FaceRecognition::class, 'analyze']);
