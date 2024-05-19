@@ -15,7 +15,7 @@ class FaceRecognition extends Controller
 
         $photo = $request->input('photo');
 
-        $response = Http::post('http://localhost:5000/compare', [
+        $response = Http::post('https://faceai.abdulme.link/compare', [
             'multipart' => [
                 [
                     'name'     => 'photo',
