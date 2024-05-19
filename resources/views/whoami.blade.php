@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="d-flex flex-column min-vh-100">
-        <div class="container my-5 flex-grow-1">
+    <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+        <div class="container my-5">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card shadow">
@@ -14,10 +14,15 @@
                                 class="p-4">
                                 @csrf
                                 <div class="form-group mb-3">
-                                    <label for="photo" class="form-label">Capture your photo:</label>
-                                    <video id="video" width="320" height="240" autoplay></video>
-                                    <button id="startbutton" class="btn btn-secondary mt-2">Take photo</button>
-                                    <canvas id="canvas" width="320" height="240" class="d-none"></canvas>
+                                    <div class="d-flex justify-content-center">
+                                        <video id="video" width="320" height="240" autoplay></video>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button id="startbutton" class="btn btn-secondary mt-2">Take photo</button>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <canvas id="canvas" width="320" height="240" class="d-none"></canvas>
+                                    </div>
                                 </div>
                                 <div class="d-grid">
                                     <button type="submit" class="btn btn-success">Compare</button>
@@ -29,12 +34,6 @@
                 </div>
             </div>
         </div>
-
-        <footer class="bg-dark text-white-50 py-3 mt-auto">
-            <div class="container text-center">
-                <small>© {{ date('Y') }} Your Company Name. All rights reserved.</small>
-            </div>
-        </footer>
     </div>
 
     <script>
@@ -79,29 +78,39 @@
                     .then(response => response.json())
                     .then(data => {
                         resultsDiv.innerHTML = ''; // clear the results div
+                        const imgRow = document.createElement('div');
+                        imgRow.classList.add('d-flex', 'flex-wrap', 'justify-content-center');
+                        resultsDiv.appendChild(imgRow);
+
                         data.matches.forEach(match => {
                             match.match.forEach(matchImage => {
                                 const imageName = matchImage.split('_face')[
                                     0]; // ignore _face0 or _faceN
                                 const imgContainer = document.createElement('div');
                                 imgContainer.classList.add('img-match-container',
-                                    'text-center', 'my-3');
+                                    'text-center', 'my-3', 'mx-2');
 
                                 const img = document.createElement('img');
                                 img.src = `/images/${imageName}`;
                                 img.alt = 'Matched image';
                                 img.classList.add('img-thumbnail', 'mx-auto');
 
-                                imgContainer.appendChild(img);
-                                resultsDiv.appendChild(imgContainer);
+                                const imgName = document.createElement('p');
+                                imgName.textContent = imageName.replace(/_/g, ' ')
+                                    .replace(/[0-9]/g, '')
+                                    .replace('.jpg', '');
+                                imgName.classList.add('mt-2');
 
+                                imgContainer.appendChild(img);
+                                imgContainer.appendChild(imgName);
+                                imgRow.appendChild(imgContainer);
                             });
                         });
                     })
                     .catch(error => {
                         console.error('Error:', error);
                         resultsDiv.innerHTML =
-                            '<div class="alert alert-danger" role="alert">AI server is not active</div>';
+                            '<div class="alert alert-danger" role="alert">An Error Occurred</div>';
                     });
             }, 'image/jpeg');
         });

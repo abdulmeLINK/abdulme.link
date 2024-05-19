@@ -25,7 +25,9 @@ class FaceRecognition extends Controller
 
             // Make the request
             $start_time = microtime(true);
-            $response = Http::asMultipart()->post($url, $body);
+
+            $response = Http::asMultipart()->timeout(120)->post($url, $body);
+
             $end_time = microtime(true);
 
             // Log the response

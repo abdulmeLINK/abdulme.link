@@ -6,42 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') - Abdulmelik Saylan</title>
     <link href="{{ asset('css/app.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/vendor.css') }}"  rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/vendor.css') }}" rel="stylesheet" type="text/css" />
     <script type="module" src="{{ asset('js/app.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css"
+        integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
 <body>
-    
+
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mac-navbar">
         <div class="dropdown ml-md-2  flex-column flex-md-row" style="margin-left: 20px">
-            <a class="navbar-brand dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="navbar-brand dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
                 Abdulmelik Saylan
             </a>
-    
+
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/abdulmeLINK" target="_blank"><i class="fab fa-github"></i> Github</a>
+                    <a class="nav-link" href="https://github.com/abdulmeLINK" target="_blank"><i
+                            class="fab fa-github"></i> Github</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://huggingface.co/abdulmeLINK" target="_blank">🤗 HuggingFace</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://www.linkedin.com/in/abdulmelik-saylan-889096228" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a class="nav-link" href="https://www.linkedin.com/in/abdulmelik-saylan-889096228"
+                        target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
                 </li>
             </ul>
         </div>
         <div class="container d-flex justify-content-start flex-column flex-md-row">
-           
+
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
                         <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item {{ Request::is('whoami') ? 'active' : '' }}">
+                        <a class="nav-link" href="/whoami">whoami</a>
                     </li>
                     <li class="nav-item {{ Request::is('about') ? 'active' : '' }}">
                         <a class="nav-link" href="/about">About</a>
@@ -52,10 +60,10 @@
                     <li class="nav-item {{ Request::is('contact') ? 'active' : '' }}">
                         <a class="nav-link" href="/contact">Contact</a>
                     </li>
-                  
+
                 </ul>
             </div>
-          
+
         </div>
 
     </nav>
