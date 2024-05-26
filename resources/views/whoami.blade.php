@@ -71,18 +71,77 @@
             canvas.classList.remove('d-none');
         }, false);
 
-        compareForm.addEventListener('submit', function(event) {
+        compareForm.addEventListener('submit', async function(event) {
             event.preventDefault();
             const formData = new FormData();
 
             if (uploadInput.files.length > 0) {
-                formData.append('photo', uploadInput.files[0]);
+                const file = uploadInput.files[0];
+                const compressedBlob = await compressImage(file);
+                formData.append('photo', compressedBlob, 'photo.jpg');
+                submitForm(formData);
             } else {
-                canvas.toBlob(function(blob) {
-                    formData.append('photo', blob, 'photo.jpg');
+                canvas.toBlob(async function(blob) {
+                    const compressedBlob = await compressImage(blob);
+                    formData.append('photo', compressedBlob, 'photo.jpg');
+                    submitForm(formData);
                 }, 'image/jpeg');
             }
+        });
 
+        function compressImage(file) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        ctx.drawImage(img, 0, 0);
+                        canvas.toBlob(function(blob) {
+                            if (blob.size > 2 * 1024 * 1024) {
+                                resolve(compressImageQuality(blob,
+                                0.7)); // Adjust quality if size > 2MB
+                            } else {
+                                resolve(blob);
+                            }
+                        }, 'image/jpeg', 0.9); // Initial quality setting
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function compressImageQuality(blob, quality) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        ctx.drawImage(img, 0, 0);
+                        canvas.toBlob(function(newBlob) {
+                            if (newBlob.size > 2 * 1024 * 1024 && quality > 0.1) {
+                                resolve(compressImageQuality(newBlob, quality -
+                                0.1)); // Reduce quality further
+                            } else {
+                                resolve(newBlob);
+                            }
+                        }, 'image/jpeg', quality);
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(blob);
+            });
+        }
+
+        function submitForm(formData) {
             fetch('/api/analyze', {
                     method: 'POST',
                     body: formData
@@ -96,11 +155,10 @@
 
                     data.matches.forEach(match => {
                         match.match.forEach(matchImage => {
-                            const imageName = matchImage.split('_face')[
-                                0]; // ignore _face0 or _faceN
+                            const imageName = matchImage.split('_face')[0]; // ignore _face0 or _faceN
                             const imgContainer = document.createElement('div');
-                            imgContainer.classList.add('img-match-container', 'text-center',
-                                'my-3', 'mx-2');
+                            imgContainer.classList.add('img-match-container', 'text-center', 'my-3',
+                                'mx-2');
 
                             const img = document.createElement('img');
                             img.src = `/images/${imageName}`;
@@ -108,8 +166,8 @@
                             img.classList.add('img-thumbnail', 'mx-auto');
 
                             const imgName = document.createElement('p');
-                            imgName.textContent = imageName.replace(/_/g, ' ').replace(/[0-9]/g,
-                                '').replace('.jpg', '');
+                            imgName.textContent = imageName.replace(/_/g, ' ').replace(/[0-9]/g, '')
+                                .replace('.jpg', '');
                             imgName.classList.add('mt-2');
 
                             imgContainer.appendChild(img);
@@ -120,9 +178,8 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    resultsDiv.innerHTML =
-                        '<div class="alert alert-danger" role="alert">An Error Occurred</div>';
+                    resultsDiv.innerHTML = '<div class="alert alert-danger" role="alert">An Error Occurred</div>';
                 });
-        });
+        }
     </script>
 @endsection
