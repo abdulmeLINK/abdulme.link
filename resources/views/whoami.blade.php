@@ -24,6 +24,10 @@
                                         <canvas id="canvas" width="320" height="240" class="d-none"></canvas>
                                     </div>
                                 </div>
+                                <div class="form-group mb-3">
+                                    <label for="upload">Or upload a photo:</label>
+                                    <input type="file" id="upload" name="upload" class="form-control">
+                                </div>
                                 <div class="d-grid">
                                     <button type="submit" class="btn btn-success">Compare</button>
                                 </div>
@@ -42,6 +46,7 @@
         const startbutton = document.getElementById('startbutton');
         const compareForm = document.getElementById('compareForm');
         const resultsDiv = document.getElementById('results');
+        const uploadInput = document.getElementById('upload');
 
         navigator.mediaDevices.getUserMedia({
                 video: true,
@@ -69,50 +74,55 @@
         compareForm.addEventListener('submit', function(event) {
             event.preventDefault();
             const formData = new FormData();
-            canvas.toBlob(function(blob) {
-                formData.append('photo', blob, 'photo.jpg');
-                fetch('/api/analyze', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        resultsDiv.innerHTML = ''; // clear the results div
-                        const imgRow = document.createElement('div');
-                        imgRow.classList.add('d-flex', 'flex-wrap', 'justify-content-center');
-                        resultsDiv.appendChild(imgRow);
 
-                        data.matches.forEach(match => {
-                            match.match.forEach(matchImage => {
-                                const imageName = matchImage.split('_face')[
-                                    0]; // ignore _face0 or _faceN
-                                const imgContainer = document.createElement('div');
-                                imgContainer.classList.add('img-match-container',
-                                    'text-center', 'my-3', 'mx-2');
+            if (uploadInput.files.length > 0) {
+                formData.append('photo', uploadInput.files[0]);
+            } else {
+                canvas.toBlob(function(blob) {
+                    formData.append('photo', blob, 'photo.jpg');
+                }, 'image/jpeg');
+            }
 
-                                const img = document.createElement('img');
-                                img.src = `/images/${imageName}`;
-                                img.alt = 'Matched image';
-                                img.classList.add('img-thumbnail', 'mx-auto');
+            fetch('/api/analyze', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    resultsDiv.innerHTML = ''; // clear the results div
+                    const imgRow = document.createElement('div');
+                    imgRow.classList.add('d-flex', 'flex-wrap', 'justify-content-center');
+                    resultsDiv.appendChild(imgRow);
 
-                                const imgName = document.createElement('p');
-                                imgName.textContent = imageName.replace(/_/g, ' ')
-                                    .replace(/[0-9]/g, '')
-                                    .replace('.jpg', '');
-                                imgName.classList.add('mt-2');
+                    data.matches.forEach(match => {
+                        match.match.forEach(matchImage => {
+                            const imageName = matchImage.split('_face')[
+                                0]; // ignore _face0 or _faceN
+                            const imgContainer = document.createElement('div');
+                            imgContainer.classList.add('img-match-container', 'text-center',
+                                'my-3', 'mx-2');
 
-                                imgContainer.appendChild(img);
-                                imgContainer.appendChild(imgName);
-                                imgRow.appendChild(imgContainer);
-                            });
+                            const img = document.createElement('img');
+                            img.src = `/images/${imageName}`;
+                            img.alt = 'Matched image';
+                            img.classList.add('img-thumbnail', 'mx-auto');
+
+                            const imgName = document.createElement('p');
+                            imgName.textContent = imageName.replace(/_/g, ' ').replace(/[0-9]/g,
+                                '').replace('.jpg', '');
+                            imgName.classList.add('mt-2');
+
+                            imgContainer.appendChild(img);
+                            imgContainer.appendChild(imgName);
+                            imgRow.appendChild(imgContainer);
                         });
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        resultsDiv.innerHTML =
-                            '<div class="alert alert-danger" role="alert">An Error Occurred</div>';
                     });
-            }, 'image/jpeg');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    resultsDiv.innerHTML =
+                        '<div class="alert alert-danger" role="alert">An Error Occurred</div>';
+                });
         });
     </script>
 @endsection
