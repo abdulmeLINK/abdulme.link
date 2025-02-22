@@ -32,7 +32,7 @@ jobs:
         context: .
         file: Dockerfile.dockerfile
         push: true
-        tags: abdulmeLINK/me:latest
+        tags: abdulmelink/me:latest
 
     - name: Verify Docker image
       run: docker images
