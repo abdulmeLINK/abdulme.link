@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  # This service clones the repo into a named volume so that the code is available
+  git-sync:
+    image: alpine/git
+    working_dir: /work
+    command: >
+      sh -c "rm -rf * &&
+             git clone --depth 1 --branch local-db https://github.com/abdulmeLINK/abdulme.link.git ."
+    volumes:
+      - codebase:/work
+    restart: "no"
+    healthcheck:
+      test: [ "CMD", "sh", "-c", "if [ \"$(ls -A /work)\" ]; then exit 0; else exit 1; fi" ]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+
+  app:
+    build:
+      context: "https://github.com/abdulmeLINK/abdulme.link.git#local-db"
+      dockerfile: Dockerfile.dockerfile
+    image: abdulmelink-app:latest
+    container_name: me
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    # Mount the named volume with the cloned repo for the application code.
+    # Also mount the vendor volume so that composer-installed dependencies persist.
+    volumes:
+      - codebase:/var/www
+      - vendor:/var/www/vendor
+    # Override the default command so that if vendor is missing, composer install is run before php-fpm.
+    command: sh -c "cd /var/www && \ if [ ! -f .env ]; then cp .env.example .env && php artisan key:generate && echo 'APP_ID=EXAMPLE_APP_ID' >> .env; fi && \ if [ ! -d vendor ]; then composer install; fi && \ php-fpm"
+    depends_on:
+      git-sync:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx-service
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8080:80"
+    # Mount the same codebase volume so that nginx can serve the Laravel public folder.
+    volumes:
+      - codebase:/var/www
+    # Copy the nginx configuration from the repo (if it exists) then start nginx.
+    entrypoint: sh -c "if [ -f /var/www/nginx.conf ]; then cp /var/www/nginx.conf /etc/nginx/conf.d/default.conf; fi && nginx -g 'daemon off;'"
+    depends_on:
+      - git-sync
+      - app
+    networks:
+      - app-network
+
+  mix:
+    image: node:16
+    working_dir: /app
+    entrypoint: sh -c "npm install && npm run dev -- --host --port=5174"
+    restart: unless-stopped
+    # Mount the same code (the repo should contain your frontend assets) into /app.
+    volumes:
+      - codebase:/app
+    depends_on:
+      - git-sync
+    networks:
+      - app-network
+
+volumes:
+  codebase:
+  vendor:
+
+
+networks:
+  app-network:
+    driver: bridge

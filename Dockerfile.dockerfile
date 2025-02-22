@@ -19,7 +19,6 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     autoconf \
     pkg-config \
-    libbson-dev \
     libicu-dev \
     g++
 
@@ -29,9 +28,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN pear config-set php_ini "$PHP_INI_DIR"
 # Install extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl
-# Install MongoDB extension using pecl
-RUN pecl install mongodb \
-    &&  echo "extension=mongodb.so" > $PHP_INI_DIR/conf.d/mongo.ini
+
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -62,8 +59,6 @@ RUN mkdir -p /var/www/vendor && chown www:www /var/www/vendor
 
 # Change current user to www
 USER www
-
-
 
 RUN cd /var/www && composer install
 

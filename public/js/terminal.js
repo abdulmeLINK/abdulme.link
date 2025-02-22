@@ -25,16 +25,30 @@ console.log(fileSystemJson);
 let currentSuggestionIndex = 0;
 let firstInput = null;
 
+const MAX_HISTORY = 100;
+
+// Initialize command history from localStorage
+try {
+    commandHistory = JSON.parse(localStorage.getItem('terminalHistory')) || [];
+    currentHistoryIndex = commandHistory.length;
+} catch (e) {
+    commandHistory = [];
+    currentHistoryIndex = -1;
+}
+
+let fileSystemInitialized = false;
+
 $.ajax({
-    url: 'api/filesystem/contents',
-    type: 'POST',
+    url: './db/filesystem.json',
+    type: 'GET',
     success: function(data) {
         fileSystem = data;
-        console.log(fileSystem)
-        // do something with fileSystem
+        fileSystemInitialized = true;
+        console.log('Local filesystem loaded:', fileSystem);
     },
     error: function(jqXHR, textStatus, errorThrown) {
-        // handle error
+        console.error('Failed to load local filesystem:', errorThrown);
+        writeln("\x1b[31mError: Failed to load local filesystem. Some commands may not work properly.\x1b[0m");
     }
 });
 
@@ -185,10 +199,7 @@ export function initializeTerminal() {
                     // If the new input is longer, add extra spaces and move the cursor back
                     term.write(" ".repeat(diff) + "\b".repeat(diff));
                 }
-            } else if (
-                arrowKey === "[B" &&
-                currentHistoryIndex < commandHistory.length - 1
-            ) {
+            } else if (arrowKey === "[B" && currentHistoryIndex < commandHistory.length - 1) {
                 // Down arrow key
                 currentHistoryIndex++;
                 term.write("\b \b".repeat(input.length)); // Clear the current input
@@ -254,76 +265,70 @@ let commands = {
     about: {
         description: "Learn more about me",
         action: async function() {
-            var data = await fetchData('api/about');
-            if (data=data.about) {
-                writeln(`\x1b[34m${data.title}\x1b[0m`); // Blue color
-                writeln(`\x1b[31m${data.description}\x1b[0m`); // Red color
+            try {
+                const data = await fetchData('api/about');
+                if (data && data.about) {
+                    writeln(`\x1b[34m${data.about.title}\x1b[0m`); // Blue color
+                    writeln(`\x1b[31m${data.about.description}\x1b[0m`); // Red color
+                } else {
+                    writeln("\x1b[31mError: Could not load about information\x1b[0m");
+                }
+            } catch (error) {
+                writeln(`\x1b[31mError: ${error.message}\x1b[0m`);
             }
         },
-        
     },
 
     ls: {
         description: "List directory contents",
         action: (term, ...options) => {
-            const colors = {
-                file: "\x1b[37m", // white
-                directory: "\x1b[34m", // blue
-            };
-            const reset = "\x1b[0m";
-            const wd = currentPath[currentPath.length - 1];
-            // Extract name from options
-            let name =
-                options.find(
-                    (option) =>
-                        typeof option === "string" && !option.startsWith("-")
-                ) || wd;
-
-            if (name == ".") {
-                name = wd;
-            }
-
-            // If no name is found, print an error message and return
-            if (!fileSystem[name] && !fileSystem[wd][name]) {
-                writeln(
-                    `ls: cannot access '${name}': No such file or directory`
-                );
+            if (!fileSystemInitialized) {
+                writeln("\x1b[31mError: Filesystem not initialized\x1b[0m");
                 return;
             }
-
-            // If the name is a directory, list its contents
-            if (
-                name &&
-                name in fileSystem &&
-                (name == wd || fileSystem[wd][name].type === "directory")
-            ) {
-                for (let item in fileSystem[name]) {
-                    if (typeof fileSystem[name][item] === "object") {
-                        let color =
-                            colors[fileSystem[name][item].type] ||
-                            colors["file"];
-                        let permissions = fileSystem[name][item].permissions;
-                        let user = fileSystem[name][item].user;
-
+            const colors = {
+                file: "\x1b[37m",       // white
+                directory: "\x1b[34m",  // blue
+            };
+            const reset = "\x1b[0m";
+            // Retrieve the current directory object from the local filesystem
+            const currentDir = currentPath.reduce((acc, cur) => acc[cur], fileSystem);
+            // If an optional directory name is provided, use it; otherwise list current contents.
+            let dirName = options.find(
+                (option) => typeof option === "string" && !option.startsWith("-")
+            );
+            if (dirName) {
+                if (!currentDir[dirName] || currentDir[dirName].type !== "directory") {
+                    writeln(`ls: cannot access '${dirName}': No such directory`);
+                    return;
+                }
+                // List the contents of the specified directory
+                const targetDir = currentDir[dirName];
+                for (let item in targetDir) {
+                    if (typeof targetDir[item] === "object") {
+                        let color = colors[targetDir[item].type] || colors.file;
+                        let permissions = targetDir[item].permissions;
+                        let user = targetDir[item].user;
                         if (options.includes("-l")) {
-                            writeln(
-                                `${permissions} ${user} ${color}${item}${reset}`
-                            );
+                            writeln(`${permissions} ${user} ${color}${item}${reset}`);
                         } else {
                             writeln(`${color}${item}${reset}`);
                         }
                     }
                 }
             } else {
-                // If the name is a file, list the file
-                let color = colors[fileSystem[wd][name].type] || colors["file"];
-                let permissions = fileSystem[wd][name].permissions;
-                let user = fileSystem[wd][name].user;
-
-                if (options.includes("-l")) {
-                    writeln(`${permissions} ${user} ${color}${name}${reset}`);
-                } else {
-                    writeln(`${color}${name}${reset}`);
+                // List the contents of the current directory
+                for (let item in currentDir) {
+                    if (typeof currentDir[item] === "object") {
+                        let color = colors[currentDir[item].type] || colors.file;
+                        let permissions = currentDir[item].permissions;
+                        let user = currentDir[item].user;
+                        if (options.includes("-l")) {
+                            writeln(`${permissions} ${user} ${color}${item}${reset}`);
+                        } else {
+                            writeln(`${color}${item}${reset}`);
+                        }
+                    }
                 }
             }
         },
@@ -331,14 +336,22 @@ let commands = {
     cd: {
         description: "Change the current directory",
         action: (term, dir) => {
+            if (!fileSystemInitialized) {
+                writeln("\x1b[31mError: Filesystem not initialized\x1b[0m");
+                return;
+            }
             if (dir === "..") {
                 if (currentPath.length > 1) {
                     currentPath.pop();
                 }
-            } else if (fileSystem[dir]) {
-                currentPath.push(dir);
             } else {
-                writeln(`Directory not found: ${dir}`);
+                // Look up the current directory object based on currentPath
+                const currentDir = currentPath.reduce((acc, cur) => acc[cur], fileSystem);
+                if (currentDir[dir] && currentDir[dir].type === "directory") {
+                    currentPath.push(dir);
+                } else {
+                    writeln(`Directory not found: ${dir}`);
+                }
             }
         },
     },
@@ -352,12 +365,10 @@ let commands = {
     cat: {
         description: "Read file contents",
         action: (term, fileName) => {
-            if (fileSystem[currentPath[currentPath.length - 1]][fileName]) {
-                writeln(
-                    fileSystem[currentPath[currentPath.length - 1]][
-                        fileName
-                    ].content.replace(/\n/g, "\r\n")
-                );
+            // Get the current directory object based on currentPath
+            const currentDir = currentPath.reduce((acc, cur) => acc[cur], fileSystem);
+            if (currentDir[fileName] && currentDir[fileName].type === "file") {
+                writeln(currentDir[fileName].content.replace(/\n/g, "\r\n"));
             } else {
                 writeln(`File not found: ${fileName}`);
             }
@@ -405,7 +416,7 @@ async function fetchData(url) {
         const data = await $.ajax({ url, type: 'POST' });
         return data;
     } catch (error) {
-        writeln(`An error occurred: ${errorThrown}`);
+        writeln(`An error occurred: ${error.message}`);
         return null;
     }
 }
@@ -414,14 +425,24 @@ async function handleCommand(command, term) {
     let [cmd, ...args] = command.toLowerCase().trim().split(" ");
     if (commands[cmd]) {
         isOutputing = true;
-        console.log(args);
         await commands[cmd].action(term, ...args);
     } else {
         writeln('Command not found. Type "help" for available commands.');
     }
 
-    commandHistory.push(command); // Add command to history
-    currentHistoryIndex = commandHistory.length;
+    // Add command to history and persist
+    if (command.trim()) {
+        commandHistory.push(command);
+        if (commandHistory.length > MAX_HISTORY) {
+            commandHistory.shift();
+        }
+        currentHistoryIndex = commandHistory.length;
+        try {
+            localStorage.setItem('terminalHistory', JSON.stringify(commandHistory));
+        } catch (e) {
+            console.warn('Failed to save command history:', e);
+        }
+    }
 }
 
 function animateOutput(output, term, delay = 10) {
