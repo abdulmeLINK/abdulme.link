@@ -21,7 +21,7 @@ services:
     build:
       context: "https://github.com/abdulmeLINK/abdulme.link.git#local-db"
       dockerfile: Dockerfile.dockerfile
-    image: abdulmelink-app:latest
+    image: me:latest
     container_name: me
     restart: unless-stopped
     tty: true
