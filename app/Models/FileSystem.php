@@ -8,6 +8,4 @@ use MongoDB\Laravel\Eloquent\Model;
 class FileSystem extends Model
 {
     use HasFactory;
-    protected $connection = 'mongodb';
-    protected $collection = 'filesystem';
 }
