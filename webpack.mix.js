@@ -9,7 +9,17 @@ mix.webpackConfig({
         },
     },
 });
-mix.js("resources/js/app.js", "public/js")
+mix.js("resources/js/app.js", "public/js", (webpack) => {
+    return {
+        // Add a banner plugin to expose isFirstVisit globally
+        plugins: [
+            new webpack.BannerPlugin({
+                banner: 'window.isFirstVisit = localStorage.getItem("visited") === null; localStorage.setItem("visited", "true");',
+                raw: true,
+            }),
+        ],
+    };
+})
     .postCss("resources/css/app.css", "public/css", [
         require("postcss-import"),
         // other PostCSS plugins

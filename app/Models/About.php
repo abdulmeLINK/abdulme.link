@@ -2,19 +2,16 @@
 
 namespace App\Models;
 
-use MongoDB\Laravel\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class About extends Model
 {
-    protected $connection = 'mongodb';
-    protected $collection = 'abouts';
+    protected $connection = 'mysql';
+    protected $table = 'abouts';
 
     protected $fillable = [
         'title',
         'name',
-        'skill_descrition',
-        'description',
-        'is_active',
     ];
 
     public function skills()
