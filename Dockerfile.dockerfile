@@ -26,12 +26,14 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN pear config-set php_ini "$PHP_INI_DIR"
-# Install extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl
+
+# Install all necessary PHP extensions including tokenizer and dom
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl tokenizer xml dom
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Set memory limit for PHP
 RUN cd /usr/local/etc/php/conf.d/ && \
     echo 'memory_limit = 512M' >> /usr/local/etc/php/conf.d/docker-php-ram-limit.ini
 
@@ -39,22 +41,32 @@ RUN cd /usr/local/etc/php/conf.d/ && \
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
+# Create Laravel directory structure first
+RUN mkdir -p /var/www/storage/logs \
+    /var/www/storage/framework/sessions \
+    /var/www/storage/framework/views \
+    /var/www/storage/framework/cache \
+    /var/www/bootstrap/cache \
+    /var/www/public/js \
+    /var/www/public/css \
+    /var/www/resources/js
+
+# Create Laravel log file
+RUN touch /var/www/storage/logs/laravel.log
+
 # Copy existing application directory contents
 COPY . /var/www
 
 # Copy existing application directory permissions
 COPY --chown=www:www . /var/www
 
-# Create cache directory, laravel.log file, change ownership and permissions
-RUN mkdir -p /var/www/bootstrap/cache && \
-    touch /var/www/storage/logs/laravel.log && \
-    chown -R www:www /var/www/bootstrap/cache /var/www/storage/logs/laravel.log && \
-    chmod -R 755 /var/www/bootstrap/cache /var/www/storage/logs/laravel.log
+# Set proper permissions for Laravel directories
+RUN chmod -R 777 /var/www/storage && \
+    chmod -R 777 /var/www/bootstrap/cache && \
+    chmod 666 /var/www/storage/logs/laravel.log && \
+    chown -R www:www /var/www/storage /var/www/bootstrap/cache
 
-# Change permissions for storage and cache directories
-RUN chmod -R ugo+rw /var/www/storage && \
-    chmod -R ugo+rw /var/www/bootstrap/cache
-
+# Ensure vendor directory exists and has proper permissions
 RUN mkdir -p /var/www/vendor && chown www:www /var/www/vendor
 
 # Change current user to www
