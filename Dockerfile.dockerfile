@@ -27,8 +27,8 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN pear config-set php_ini "$PHP_INI_DIR"
 
-# Install all necessary PHP extensions including tokenizer and dom
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl tokenizer xml dom
+# Install all necessary PHP extensions - tokenizer is built-in with PHP 8.2
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl xml dom
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
