@@ -1,5 +1,6 @@
 const mix = require("laravel-mix");
 const path = require("path");
+const webpack = require("webpack");
 
 mix.webpackConfig({
     resolve: {
@@ -8,18 +9,15 @@ mix.webpackConfig({
             xterm: path.resolve(__dirname, "node_modules/xterm/lib/xterm.js"),
         },
     },
+    plugins: [
+        // This adds the isFirstVisit variable to the global scope
+        new webpack.DefinePlugin({
+            "window.isFirstVisit": 'localStorage.getItem("visited") === null',
+        }),
+    ],
 });
-mix.js("resources/js/app.js", "public/js", (webpack) => {
-    return {
-        // Add a banner plugin to expose isFirstVisit globally
-        plugins: [
-            new webpack.BannerPlugin({
-                banner: 'window.isFirstVisit = localStorage.getItem("visited") === null; localStorage.setItem("visited", "true");',
-                raw: true,
-            }),
-        ],
-    };
-})
+
+mix.js("resources/js/app.js", "public/js")
     .postCss("resources/css/app.css", "public/css", [
         require("postcss-import"),
         // other PostCSS plugins
@@ -37,4 +35,5 @@ mix.js("resources/js/app.js", "public/js", (webpack) => {
         ],
         "public/css/vendor.css"
     )
-    .copy("resources/js/terminal.js", "public/js");
+    .copy("resources/js/terminal.js", "public/js")
+    .version();

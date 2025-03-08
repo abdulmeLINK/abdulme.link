@@ -1,13 +1,18 @@
+import { Terminal } from "xterm";
+import { FitAddon } from "xterm-addon-fit";
+import { WebLinksAddon } from "xterm-addon-web-links";
+
 let isAnimating = false;
 let commandHistory = [];
 let currentHistoryIndex = -1;
 let isOutputing = false;
 let promptLength = 0;
 const term = new Terminal({
+    cursorBlink: true,
     theme: {
-        background: "rgba(0, 0, 0, 0.0)",
+        background: "#1e1e1e",
+        foreground: "#f0f0f0",
     },
-
     allowTransparency: true,
     rendererType: "dom",
 });
@@ -29,18 +34,20 @@ let firstInput = null;
 let fileSystemInitialized = false;
 
 $.ajax({
-    url: './db/filesystem.json',
-    type: 'GET',
-    success: function(data) {
+    url: "./db/filesystem.json",
+    type: "GET",
+    success: function (data) {
         fileSystem = data;
         fileSystemInitialized = true; // mark filesystem as ready
-        console.log('Local filesystem loaded:', fileSystem);
+        console.log("Local filesystem loaded:", fileSystem);
         // Additional initialization if needed with the local filesystem data
     },
-    error: function(jqXHR, textStatus, errorThrown) {
-        console.error('Failed to load local filesystem:', errorThrown);
-        writeln("\x1b[31mError: Failed to load local filesystem. Some commands may not work properly.\x1b[0m");
-    }
+    error: function (jqXHR, textStatus, errorThrown) {
+        console.error("Failed to load local filesystem:", errorThrown);
+        writeln(
+            "\x1b[31mError: Failed to load local filesystem. Some commands may not work properly.\x1b[0m"
+        );
+    },
 });
 
 function autoCompleteCommand(input) {
@@ -57,8 +64,6 @@ function autoCompleteCommand(input) {
     for (let i = 0; i < pathParts.length - 1; i++) {
         const part = pathParts[i];
         if (part in currentDir) {
-
-            
             currentDir = currentDir[part];
         } else {
             // Path does not exist
@@ -263,14 +268,16 @@ let commands = {
     },
     about: {
         description: "Learn more about me",
-        action: async function() {
+        action: async function () {
             try {
-                const data = await fetchData('api/about');
+                const data = await fetchData("api/about");
                 if (data && data.about) {
                     writeln(`\x1b[34m${data.about.title}\x1b[0m`); // Blue color
                     writeln(`\x1b[31m${data.about.description}\x1b[0m`); // Red color
                 } else {
-                    writeln("\x1b[31mError: Could not load about information\x1b[0m");
+                    writeln(
+                        "\x1b[31mError: Could not load about information\x1b[0m"
+                    );
                 }
             } catch (error) {
                 writeln(`\x1b[31mError: ${error.message}\x1b[0m`);
@@ -359,7 +366,10 @@ let commands = {
                     currentPath.pop();
                 }
             } else {
-                const currentDir = currentPath.reduce((acc, cur) => acc[cur], fileSystem);
+                const currentDir = currentPath.reduce(
+                    (acc, cur) => acc[cur],
+                    fileSystem
+                );
                 if (currentDir[dir] && currentDir[dir].type === "directory") {
                     currentPath.push(dir);
                 } else {
@@ -428,7 +438,7 @@ let commands = {
 
 async function fetchData(url) {
     try {
-        const data = await $.ajax({ url, type: 'POST' });
+        const data = await $.ajax({ url, type: "POST" });
         return data;
     } catch (error) {
         writeln(`An error occurred: ${error.message}`);

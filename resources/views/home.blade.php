@@ -359,10 +359,16 @@ async function changeBackground(cTheme = getCurrentTheme()) {
     setInterval(changeBackground, 60 * 1000);
 </script>
 
-<script type="module" src="{{ asset('js/xterm.js') }}"></script>
-<script type="module" src="{{ mix('js/terminal.js') }}"></script>
-<script type="module" src="{{ mix('js/xterm-addon-fit.js') }}"></script>
-<script type="module" src="{{ mix('js/xterm-addon-web-links.js') }}"></script>
+<script src="{{ asset('js/xterm.js') }}"></script>
+<script src="{{ asset('js/xterm-addon-fit.js') }}"></script>
+<script src="{{ asset('js/xterm-addon-web-links.js') }}"></script>
+<script>
+    // Set isFirstVisit directly in case webpack plugin doesn't work
+    window.isFirstVisit = localStorage.getItem("visited") === null;
+    localStorage.setItem("visited", "true");
+</script>
+<script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ mix('js/terminal.js') }}"></script>
 <script>
     // Make the terminal window draggable
     $(function() {
