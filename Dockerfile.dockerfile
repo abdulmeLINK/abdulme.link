@@ -74,6 +74,9 @@ USER www
 
 RUN cd /var/www && composer install
 
-# Expose port 80 and start php-fpm server
-EXPOSE 80
+# Configure PHP-FPM to listen on all interfaces
+RUN sed -i 's/listen = 127.0.0.1:9000/listen = 9000/g' /usr/local/etc/php-fpm.d/www.conf || echo "Could not modify www.conf"
+
+# Expose port 9000 for PHP-FPM
+EXPOSE 9000
 CMD ["php-fpm"]
