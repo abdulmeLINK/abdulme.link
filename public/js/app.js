@@ -2990,17 +2990,29 @@ var themeTexts = document.querySelectorAll(".theme-text");
 var currentTheme = localStorage.getItem("theme");
 function switchTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
-  navbar.classList.remove("navbar-light", "navbar-dark", "bg-light", "bg-dark");
-  navbar.classList.add(theme === "light" ? "navbar-light" : "navbar-dark");
-  navbar.classList.add(theme === "light" ? "bg-light" : "bg-dark");
-  footer.classList.remove("bg-light", "bg-dark");
-  footer.classList.add(theme === "light" ? "bg-light" : "bg-dark");
-  themeTexts.forEach(function (el) {
-    el.classList.remove("text-light", "text-dark");
-    el.classList.add(theme === "light" ? "text-dark" : "text-light");
-  });
+  if (navbar) {
+    navbar.classList.remove("navbar-light", "navbar-dark", "bg-light", "bg-dark");
+    navbar.classList.add(theme === "light" ? "navbar-light" : "navbar-dark");
+    navbar.classList.add(theme === "light" ? "bg-light" : "bg-dark");
+  }
+  if (footer) {
+    footer.classList.remove("bg-light", "bg-dark");
+    footer.classList.add(theme === "light" ? "bg-light" : "bg-dark");
+  }
+  if (themeTexts) {
+    themeTexts.forEach(function (el) {
+      if (el) {
+        el.classList.remove("text-light", "text-dark");
+        el.classList.add(theme === "light" ? "text-dark" : "text-light");
+      }
+    });
+  }
 }
 function initializeTheme() {
+  if (!themeSwitch || !themeLabel) {
+    console.warn("Theme elements not found in the DOM.");
+    return;
+  }
   if (currentTheme) {
     switchTheme(currentTheme);
     if (currentTheme === "light") {

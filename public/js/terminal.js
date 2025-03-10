@@ -1,109 +1,57 @@
+import { Terminal } from "xterm";
+import { FitAddon } from "xterm-addon-fit";
+import { WebLinksAddon } from "xterm-addon-web-links";
+
 let isAnimating = false;
 let commandHistory = [];
 let currentHistoryIndex = -1;
 let isOutputing = false;
 let promptLength = 0;
-const term = new Terminal({
-    theme: {
-        background: "rgba(0, 0, 0, 0.0)",
-    },
-
-    allowTransparency: true,
-    rendererType: "dom",
-});
+let term = null;
 
 // Custom writeln function
 function writeln(data) {
+    if (!term) return;
     isOutputing = true;
     term.writeln(data);
 }
+
 let currentPath = ["home"];
 var fileSystem;
-//export fileSystem as json
-export const fileSystemJson = JSON.stringify(fileSystem);
+//Define fileSystem as json variable but don't export it
+const fileSystemJson = JSON.stringify(fileSystem);
 console.log(fileSystemJson);
 let currentSuggestionIndex = 0;
 let firstInput = null;
 
-const MAX_HISTORY = 100;
-
-// Initialize command history from localStorage
-try {
-    commandHistory = JSON.parse(localStorage.getItem('terminalHistory')) || [];
-    currentHistoryIndex = commandHistory.length;
-} catch (e) {
-    commandHistory = [];
-    currentHistoryIndex = -1;
-}
-
+// ===== NEW: Add filesystem initialization flag =====
 let fileSystemInitialized = false;
 
-$.ajax({
-    url: './db/filesystem.json',
-    type: 'GET',
-    success: function(data) {
-        fileSystem = data;
-        fileSystemInitialized = true;
-        console.log('Local filesystem loaded:', fileSystem);
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-        console.error('Failed to load local filesystem:', errorThrown);
-        writeln("\x1b[31mError: Failed to load local filesystem. Some commands may not work properly.\x1b[0m");
-    }
-});
-
-function autoCompleteCommand(input) {
-    let actualInput = firstInput !== null ? firstInput : input;
-    const parts = actualInput.split(" ");
-    const command = parts[0];
-    const path = parts[1] || "";
-    const pathParts = path.split("/");
-    let currentDir = currentPath.reduce((acc, cur) => acc[cur], fileSystem);
-
-    for (let i = 0; i < pathParts.length - 1; i++) {
-        const part = pathParts[i];
-        if (part in currentDir) {
-            currentDir = currentDir[part];
-        } else {
-            // Path does not exist
-            return input;
-        }
+// Function to initialize the terminal
+function initializeTerminal() {
+    // Check if the terminal container exists
+    const container = document.getElementById("xterm-container");
+    if (!container) {
+        console.warn("Terminal container not found");
+        return;
     }
 
-    const lastPart = pathParts[pathParts.length - 1];
-    const suggestions = Object.keys(currentDir).filter(
-        (key) =>
-            key.startsWith(lastPart) &&
-            (currentDir[key].type === "directory" ||
-                currentDir[key].type === "file")
-    );
+    // Initialize terminal
+    term = new Terminal({
+        cursorBlink: true,
+        theme: {
+            background: "#1e1e1e",
+            foreground: "#f0f0f0",
+        },
+        allowTransparency: true,
+        rendererType: "dom",
+    });
 
-    console.log(Object.keys(currentDir));
-
-    if (suggestions.length > 0) {
-        // If there are one or more suggestions, auto-complete the command with the current suggestion
-        if (firstInput === null) {
-            firstInput = input;
-            currentSuggestionIndex = 0;
-        }
-        const suggestion =
-            suggestions[currentSuggestionIndex % suggestions.length];
-        currentSuggestionIndex++;
-        return `${command} ${pathParts.slice(0, -1).join("/")}${
-            pathParts.length > 1 ? "/" : ""
-        }${suggestion}`;
-    } else {
-        // If there are no suggestions, do not auto-complete the command
-        firstInput = null;
-        return input;
-    }
-}
-export function initializeTerminal() {
-    const fitAddon = new FitAddon.FitAddon();
-    const webLinksAddon = new WebLinksAddon.WebLinksAddon();
+    const fitAddon = new FitAddon();
+    const webLinksAddon = new WebLinksAddon();
     term.loadAddon(webLinksAddon);
     term.loadAddon(fitAddon);
-    term.open(document.getElementById("xterm-container"));
+    term.open(container);
     term.focus();
 
     writeln("Welcome to Abdulmelik Saylan's website!");
@@ -112,31 +60,34 @@ export function initializeTerminal() {
 
     // Get the .mac-window element
     const macWindow = $(".mac-window");
+    if (macWindow.length > 0) {
+        // Create a simple debounce function
+        let debounceTimeout;
+        const debounce = (func, delay) => {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(func, delay);
+        };
 
-    // Create a simple debounce function
-    let debounceTimeout;
-    const debounce = (func, delay) => {
-        clearTimeout(debounceTimeout);
-        debounceTimeout = setTimeout(func, delay);
-    };
+        // Create a new MutationObserver instance
+        const observer = new MutationObserver(() => {
+            // Fit the terminal when the .mac-window size changes, but debounce the call
+            debounce(() => fitAddon.fit(), 200);
+        });
 
-    // Create a new MutationObserver instance
-    const observer = new MutationObserver(() => {
-        // Fit the terminal when the .mac-window size changes, but debounce the call
-        debounce(() => fitAddon.fit(), 200);
-    });
-
-    // Start observing the .mac-window element
-    observer.observe(macWindow[0], {
-        attributes: true,
-        childList: true,
-        characterData: true,
-        subtree: true,
-    });
+        // Start observing the .mac-window element
+        observer.observe(macWindow[0], {
+            attributes: true,
+            childList: true,
+            characterData: true,
+            subtree: true,
+        });
+    }
 
     $("#terminal").click(() => {
-        term.focus();
+        if (term) term.focus();
     });
+
+    // Input handling
     let input = "";
     let cursorPosition = 0;
 
@@ -199,7 +150,10 @@ export function initializeTerminal() {
                     // If the new input is longer, add extra spaces and move the cursor back
                     term.write(" ".repeat(diff) + "\b".repeat(diff));
                 }
-            } else if (arrowKey === "[B" && currentHistoryIndex < commandHistory.length - 1) {
+            } else if (
+                arrowKey === "[B" &&
+                currentHistoryIndex < commandHistory.length - 1
+            ) {
                 // Down arrow key
                 currentHistoryIndex++;
                 term.write("\b \b".repeat(input.length)); // Clear the current input
@@ -247,6 +201,79 @@ export function initializeTerminal() {
     }, 1000);
 }
 
+// Load filesystem data
+$.ajax({
+    url: "./db/filesystem.json",
+    type: "GET",
+    success: function (data) {
+        fileSystem = data;
+        fileSystemInitialized = true; // mark filesystem as ready
+        console.log("Local filesystem loaded:", fileSystem);
+        // Additional initialization if needed with the local filesystem data
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+        console.error("Failed to load local filesystem:", errorThrown);
+        writeln(
+            "\x1b[31mError: Failed to load local filesystem. Some commands may not work properly.\x1b[0m"
+        );
+    },
+});
+
+// Initialize terminal after DOM is loaded
+document.addEventListener("DOMContentLoaded", function () {
+    initializeTerminal();
+});
+
+function autoCompleteCommand(input) {
+    let actualInput = firstInput !== null ? firstInput : input;
+    if (!fileSystemInitialized) {
+        return input; // Skip auto-completion if filesystem is not loaded
+    }
+    const parts = actualInput.split(" ");
+    const command = parts[0];
+    const path = parts[1] || "";
+    const pathParts = path.split("/");
+    let currentDir = currentPath.reduce((acc, cur) => acc[cur], fileSystem);
+
+    for (let i = 0; i < pathParts.length - 1; i++) {
+        const part = pathParts[i];
+        if (part in currentDir) {
+            currentDir = currentDir[part];
+        } else {
+            // Path does not exist
+            return input;
+        }
+    }
+
+    const lastPart = pathParts[pathParts.length - 1];
+    const suggestions = Object.keys(currentDir).filter(
+        (key) =>
+            key.startsWith(lastPart) &&
+            (currentDir[key].type === "directory" ||
+                currentDir[key].type === "file")
+    );
+
+    console.log(Object.keys(currentDir));
+
+    if (suggestions.length > 0) {
+        // If there are one or more suggestions, auto-complete the command with the current suggestion
+        if (firstInput === null) {
+            firstInput = input;
+            currentSuggestionIndex = 0;
+        }
+        const suggestion =
+            suggestions[currentSuggestionIndex % suggestions.length];
+        currentSuggestionIndex++;
+        return `${command} ${pathParts.slice(0, -1).join("/")}${
+            pathParts.length > 1 ? "/" : ""
+        }${suggestion}`;
+    } else {
+        // If there are no suggestions, do not auto-complete the command
+        firstInput = null;
+        return input;
+    }
+}
+
 let commands = {
     help: {
         description: "Show available commands",
@@ -264,14 +291,16 @@ let commands = {
     },
     about: {
         description: "Learn more about me",
-        action: async function() {
+        action: async function () {
             try {
-                const data = await fetchData('api/about');
+                const data = await fetchData("api/about");
                 if (data && data.about) {
                     writeln(`\x1b[34m${data.about.title}\x1b[0m`); // Blue color
                     writeln(`\x1b[31m${data.about.description}\x1b[0m`); // Red color
                 } else {
-                    writeln("\x1b[31mError: Could not load about information\x1b[0m");
+                    writeln(
+                        "\x1b[31mError: Could not load about information\x1b[0m"
+                    );
                 }
             } catch (error) {
                 writeln(`\x1b[31mError: ${error.message}\x1b[0m`);
@@ -287,48 +316,63 @@ let commands = {
                 return;
             }
             const colors = {
-                file: "\x1b[37m",       // white
-                directory: "\x1b[34m",  // blue
+                file: "\x1b[37m", // white
+                directory: "\x1b[34m", // blue
             };
             const reset = "\x1b[0m";
-            // Retrieve the current directory object from the local filesystem
-            const currentDir = currentPath.reduce((acc, cur) => acc[cur], fileSystem);
-            // If an optional directory name is provided, use it; otherwise list current contents.
-            let dirName = options.find(
-                (option) => typeof option === "string" && !option.startsWith("-")
-            );
-            if (dirName) {
-                if (!currentDir[dirName] || currentDir[dirName].type !== "directory") {
-                    writeln(`ls: cannot access '${dirName}': No such directory`);
-                    return;
-                }
-                // List the contents of the specified directory
-                const targetDir = currentDir[dirName];
-                for (let item in targetDir) {
-                    if (typeof targetDir[item] === "object") {
-                        let color = colors[targetDir[item].type] || colors.file;
-                        let permissions = targetDir[item].permissions;
-                        let user = targetDir[item].user;
+            const wd = currentPath[currentPath.length - 1];
+            // Extract name from options
+            let name =
+                options.find(
+                    (option) =>
+                        typeof option === "string" && !option.startsWith("-")
+                ) || wd;
+
+            if (name == ".") {
+                name = wd;
+            }
+
+            // If no name is found, print an error message and return
+            if (!fileSystem[name] && !fileSystem[wd][name]) {
+                writeln(
+                    `ls: cannot access '${name}': No such file or directory`
+                );
+                return;
+            }
+
+            // If the name is a directory, list its contents
+            if (
+                name &&
+                name in fileSystem &&
+                (name == wd || fileSystem[wd][name].type === "directory")
+            ) {
+                for (let item in fileSystem[name]) {
+                    if (typeof fileSystem[name][item] === "object") {
+                        let color =
+                            colors[fileSystem[name][item].type] ||
+                            colors["file"];
+                        let permissions = fileSystem[name][item].permissions;
+                        let user = fileSystem[name][item].user;
+
                         if (options.includes("-l")) {
-                            writeln(`${permissions} ${user} ${color}${item}${reset}`);
+                            writeln(
+                                `${permissions} ${user} ${color}${item}${reset}`
+                            );
                         } else {
                             writeln(`${color}${item}${reset}`);
                         }
                     }
                 }
             } else {
-                // List the contents of the current directory
-                for (let item in currentDir) {
-                    if (typeof currentDir[item] === "object") {
-                        let color = colors[currentDir[item].type] || colors.file;
-                        let permissions = currentDir[item].permissions;
-                        let user = currentDir[item].user;
-                        if (options.includes("-l")) {
-                            writeln(`${permissions} ${user} ${color}${item}${reset}`);
-                        } else {
-                            writeln(`${color}${item}${reset}`);
-                        }
-                    }
+                // If the name is a file, list the file
+                let color = colors[fileSystem[wd][name].type] || colors["file"];
+                let permissions = fileSystem[wd][name].permissions;
+                let user = fileSystem[wd][name].user;
+
+                if (options.includes("-l")) {
+                    writeln(`${permissions} ${user} ${color}${name}${reset}`);
+                } else {
+                    writeln(`${color}${name}${reset}`);
                 }
             }
         },
@@ -345,8 +389,10 @@ let commands = {
                     currentPath.pop();
                 }
             } else {
-                // Look up the current directory object based on currentPath
-                const currentDir = currentPath.reduce((acc, cur) => acc[cur], fileSystem);
+                const currentDir = currentPath.reduce(
+                    (acc, cur) => acc[cur],
+                    fileSystem
+                );
                 if (currentDir[dir] && currentDir[dir].type === "directory") {
                     currentPath.push(dir);
                 } else {
@@ -365,10 +411,12 @@ let commands = {
     cat: {
         description: "Read file contents",
         action: (term, fileName) => {
-            // Get the current directory object based on currentPath
-            const currentDir = currentPath.reduce((acc, cur) => acc[cur], fileSystem);
-            if (currentDir[fileName] && currentDir[fileName].type === "file") {
-                writeln(currentDir[fileName].content.replace(/\n/g, "\r\n"));
+            if (fileSystem[currentPath[currentPath.length - 1]][fileName]) {
+                writeln(
+                    fileSystem[currentPath[currentPath.length - 1]][
+                        fileName
+                    ].content.replace(/\n/g, "\r\n")
+                );
             } else {
                 writeln(`File not found: ${fileName}`);
             }
@@ -413,7 +461,7 @@ let commands = {
 
 async function fetchData(url) {
     try {
-        const data = await $.ajax({ url, type: 'POST' });
+        const data = await $.ajax({ url, type: "POST" });
         return data;
     } catch (error) {
         writeln(`An error occurred: ${error.message}`);
@@ -425,24 +473,14 @@ async function handleCommand(command, term) {
     let [cmd, ...args] = command.toLowerCase().trim().split(" ");
     if (commands[cmd]) {
         isOutputing = true;
+        console.log(args);
         await commands[cmd].action(term, ...args);
     } else {
         writeln('Command not found. Type "help" for available commands.');
     }
 
-    // Add command to history and persist
-    if (command.trim()) {
-        commandHistory.push(command);
-        if (commandHistory.length > MAX_HISTORY) {
-            commandHistory.shift();
-        }
-        currentHistoryIndex = commandHistory.length;
-        try {
-            localStorage.setItem('terminalHistory', JSON.stringify(commandHistory));
-        } catch (e) {
-            console.warn('Failed to save command history:', e);
-        }
-    }
+    commandHistory.push(command); // Add command to history
+    currentHistoryIndex = commandHistory.length;
 }
 
 function animateOutput(output, term, delay = 10) {
@@ -485,7 +523,3 @@ function promptUser(term) {
     term.write(printable);
     promptLength = prompt.length;
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    initializeTerminal();
-});

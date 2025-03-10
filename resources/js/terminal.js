@@ -7,25 +7,19 @@ let commandHistory = [];
 let currentHistoryIndex = -1;
 let isOutputing = false;
 let promptLength = 0;
-const term = new Terminal({
-    cursorBlink: true,
-    theme: {
-        background: "#1e1e1e",
-        foreground: "#f0f0f0",
-    },
-    allowTransparency: true,
-    rendererType: "dom",
-});
+let term = null;
 
 // Custom writeln function
 function writeln(data) {
+    if (!term) return;
     isOutputing = true;
     term.writeln(data);
 }
+
 let currentPath = ["home"];
 var fileSystem;
-//export fileSystem as json
-export const fileSystemJson = JSON.stringify(fileSystem);
+//Define fileSystem as json variable but don't export it
+const fileSystemJson = JSON.stringify(fileSystem);
 console.log(fileSystemJson);
 let currentSuggestionIndex = 0;
 let firstInput = null;
@@ -33,78 +27,31 @@ let firstInput = null;
 // ===== NEW: Add filesystem initialization flag =====
 let fileSystemInitialized = false;
 
-$.ajax({
-    url: "./db/filesystem.json",
-    type: "GET",
-    success: function (data) {
-        fileSystem = data;
-        fileSystemInitialized = true; // mark filesystem as ready
-        console.log("Local filesystem loaded:", fileSystem);
-        // Additional initialization if needed with the local filesystem data
-    },
-    error: function (jqXHR, textStatus, errorThrown) {
-        console.error("Failed to load local filesystem:", errorThrown);
-        writeln(
-            "\x1b[31mError: Failed to load local filesystem. Some commands may not work properly.\x1b[0m"
-        );
-    },
-});
-
-function autoCompleteCommand(input) {
-    let actualInput = firstInput !== null ? firstInput : input;
-    if (!fileSystemInitialized) {
-        return input; // Skip auto-completion if filesystem is not loaded
-    }
-    const parts = actualInput.split(" ");
-    const command = parts[0];
-    const path = parts[1] || "";
-    const pathParts = path.split("/");
-    let currentDir = currentPath.reduce((acc, cur) => acc[cur], fileSystem);
-
-    for (let i = 0; i < pathParts.length - 1; i++) {
-        const part = pathParts[i];
-        if (part in currentDir) {
-            currentDir = currentDir[part];
-        } else {
-            // Path does not exist
-            return input;
-        }
+// Function to initialize the terminal
+function initializeTerminal() {
+    // Check if the terminal container exists
+    const container = document.getElementById("xterm-container");
+    if (!container) {
+        console.warn("Terminal container not found");
+        return;
     }
 
-    const lastPart = pathParts[pathParts.length - 1];
-    const suggestions = Object.keys(currentDir).filter(
-        (key) =>
-            key.startsWith(lastPart) &&
-            (currentDir[key].type === "directory" ||
-                currentDir[key].type === "file")
-    );
+    // Initialize terminal
+    term = new Terminal({
+        cursorBlink: true,
+        theme: {
+            background: "#1e1e1e",
+            foreground: "#f0f0f0",
+        },
+        allowTransparency: true,
+        rendererType: "dom",
+    });
 
-    console.log(Object.keys(currentDir));
-
-    if (suggestions.length > 0) {
-        // If there are one or more suggestions, auto-complete the command with the current suggestion
-        if (firstInput === null) {
-            firstInput = input;
-            currentSuggestionIndex = 0;
-        }
-        const suggestion =
-            suggestions[currentSuggestionIndex % suggestions.length];
-        currentSuggestionIndex++;
-        return `${command} ${pathParts.slice(0, -1).join("/")}${
-            pathParts.length > 1 ? "/" : ""
-        }${suggestion}`;
-    } else {
-        // If there are no suggestions, do not auto-complete the command
-        firstInput = null;
-        return input;
-    }
-}
-export function initializeTerminal() {
-    const fitAddon = new FitAddon.FitAddon();
-    const webLinksAddon = new WebLinksAddon.WebLinksAddon();
+    const fitAddon = new FitAddon();
+    const webLinksAddon = new WebLinksAddon();
     term.loadAddon(webLinksAddon);
     term.loadAddon(fitAddon);
-    term.open(document.getElementById("xterm-container"));
+    term.open(container);
     term.focus();
 
     writeln("Welcome to Abdulmelik Saylan's website!");
@@ -113,31 +60,34 @@ export function initializeTerminal() {
 
     // Get the .mac-window element
     const macWindow = $(".mac-window");
+    if (macWindow.length > 0) {
+        // Create a simple debounce function
+        let debounceTimeout;
+        const debounce = (func, delay) => {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(func, delay);
+        };
 
-    // Create a simple debounce function
-    let debounceTimeout;
-    const debounce = (func, delay) => {
-        clearTimeout(debounceTimeout);
-        debounceTimeout = setTimeout(func, delay);
-    };
+        // Create a new MutationObserver instance
+        const observer = new MutationObserver(() => {
+            // Fit the terminal when the .mac-window size changes, but debounce the call
+            debounce(() => fitAddon.fit(), 200);
+        });
 
-    // Create a new MutationObserver instance
-    const observer = new MutationObserver(() => {
-        // Fit the terminal when the .mac-window size changes, but debounce the call
-        debounce(() => fitAddon.fit(), 200);
-    });
-
-    // Start observing the .mac-window element
-    observer.observe(macWindow[0], {
-        attributes: true,
-        childList: true,
-        characterData: true,
-        subtree: true,
-    });
+        // Start observing the .mac-window element
+        observer.observe(macWindow[0], {
+            attributes: true,
+            childList: true,
+            characterData: true,
+            subtree: true,
+        });
+    }
 
     $("#terminal").click(() => {
-        term.focus();
+        if (term) term.focus();
     });
+
+    // Input handling
     let input = "";
     let cursorPosition = 0;
 
@@ -249,6 +199,79 @@ export function initializeTerminal() {
             term.write("\x1b[?25l");
         }, 500);
     }, 1000);
+}
+
+// Load filesystem data
+$.ajax({
+    url: "./db/filesystem.json",
+    type: "GET",
+    success: function (data) {
+        fileSystem = data;
+        fileSystemInitialized = true; // mark filesystem as ready
+        console.log("Local filesystem loaded:", fileSystem);
+        // Additional initialization if needed with the local filesystem data
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+        console.error("Failed to load local filesystem:", errorThrown);
+        writeln(
+            "\x1b[31mError: Failed to load local filesystem. Some commands may not work properly.\x1b[0m"
+        );
+    },
+});
+
+// Initialize terminal after DOM is loaded
+document.addEventListener("DOMContentLoaded", function () {
+    initializeTerminal();
+});
+
+function autoCompleteCommand(input) {
+    let actualInput = firstInput !== null ? firstInput : input;
+    if (!fileSystemInitialized) {
+        return input; // Skip auto-completion if filesystem is not loaded
+    }
+    const parts = actualInput.split(" ");
+    const command = parts[0];
+    const path = parts[1] || "";
+    const pathParts = path.split("/");
+    let currentDir = currentPath.reduce((acc, cur) => acc[cur], fileSystem);
+
+    for (let i = 0; i < pathParts.length - 1; i++) {
+        const part = pathParts[i];
+        if (part in currentDir) {
+            currentDir = currentDir[part];
+        } else {
+            // Path does not exist
+            return input;
+        }
+    }
+
+    const lastPart = pathParts[pathParts.length - 1];
+    const suggestions = Object.keys(currentDir).filter(
+        (key) =>
+            key.startsWith(lastPart) &&
+            (currentDir[key].type === "directory" ||
+                currentDir[key].type === "file")
+    );
+
+    console.log(Object.keys(currentDir));
+
+    if (suggestions.length > 0) {
+        // If there are one or more suggestions, auto-complete the command with the current suggestion
+        if (firstInput === null) {
+            firstInput = input;
+            currentSuggestionIndex = 0;
+        }
+        const suggestion =
+            suggestions[currentSuggestionIndex % suggestions.length];
+        currentSuggestionIndex++;
+        return `${command} ${pathParts.slice(0, -1).join("/")}${
+            pathParts.length > 1 ? "/" : ""
+        }${suggestion}`;
+    } else {
+        // If there are no suggestions, do not auto-complete the command
+        firstInput = null;
+        return input;
+    }
 }
 
 let commands = {
@@ -500,7 +523,3 @@ function promptUser(term) {
     term.write(printable);
     promptLength = prompt.length;
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    initializeTerminal();
-});
