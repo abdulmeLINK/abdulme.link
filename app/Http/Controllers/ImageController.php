@@ -37,7 +37,7 @@ class ImageController extends Controller
         try {
             $imageData = $this->storageService->getImageUrl(
                 "wallpapers/{$id}",
-                'portfolio-wallpapers',
+                'portfolio-assets',
                 true // Generate thumbnail
             );
             
@@ -159,6 +159,30 @@ class ImageController extends Controller
             return response()->json([
                 'success' => false,
                 'error' => 'Failed to clear cache',
+                'message' => config('app.debug') ? $e->getMessage() : null
+            ], 500);
+        }
+    }
+
+    /**
+     * Get all wallpapers with URLs and thumbnails
+     * 
+     * @return JsonResponse
+     */
+    public function wallpapers(): JsonResponse
+    {
+        try {
+            $wallpapersData = $this->storageService->getWallpapers();
+            
+            return response()->json([
+                'success' => true,
+                'data' => $wallpapersData
+            ]);
+            
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Failed to load wallpapers',
                 'message' => config('app.debug') ? $e->getMessage() : null
             ], 500);
         }

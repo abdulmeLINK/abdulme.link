@@ -89,6 +89,7 @@ Route::get('/loading-messages', [DesktopController::class, 'getLoadingMessages']
 // Image Storage API endpoints (Supabase Storage with local fallback)
 Route::prefix('images')->group(function () {
     Route::get('/wallpaper/{id}', [ImageController::class, 'wallpaper']);
+    Route::get('/wallpapers', [ImageController::class, 'wallpapers']);
     Route::get('/project/{projectId}', [ImageController::class, 'projectImages']);
     Route::get('/asset', [ImageController::class, 'asset']);
     Route::get('/statistics', [ImageController::class, 'statistics']);

@@ -158,6 +158,7 @@ class SupabaseStorageService
                     'category' => $wallpaper['category'],
                     'type' => $wallpaper['type'],
                     'colors' => $wallpaper['colors'] ?? [],
+                    'filename' => $wallpaper['filename'],
                     'fullImage' => $imageData['url'],
                     'thumbnail' => $imageData['thumbnail'] ?? $imageData['url'],
                     'source' => $imageData['source'],
@@ -276,7 +277,7 @@ class SupabaseStorageService
         $filename = $pathInfo['filename'];
         $extension = $pathInfo['extension'];
         
-        return "{$dirname}/thumbnails/{$filename}-thumb.{$extension}";
+        return "{$dirname}/thumbnails/{$filename}.{$extension}";
     }
     
     /**
@@ -289,7 +290,7 @@ class SupabaseStorageService
         $filename = $pathInfo['filename'];
         $extension = $pathInfo['extension'];
         
-        return "{$dirname}/thumbnails/{$filename}-thumb.{$extension}";
+        return "{$dirname}/thumbnails/{$filename}.{$extension}";
     }
     
     /**

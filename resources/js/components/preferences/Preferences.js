@@ -785,9 +785,13 @@ export default class Preferences {
         if (!galleryContainer) return;
 
         try {
-            const response = await fetch('/wallpapers-manifest.json');
+            const response = await fetch('/api/images/wallpapers');
             const data = await response.json();
-            this.renderWallpaperGallery(galleryContainer, data.wallpapers || []);
+            if (data.success) {
+                this.renderWallpaperGallery(galleryContainer, data.data.wallpapers || []);
+            } else {
+                throw new Error(data.error || 'Failed to load wallpapers');
+            }
         } catch (error) {
             console.error('Failed to load wallpapers:', error);
             galleryContainer.innerHTML = '<div class="wallpaper-error">Failed to load wallpapers</div>';
@@ -816,54 +820,87 @@ export default class Preferences {
         
         const gallery = document.createElement('div');
         gallery.className = 'wallpaper-gallery';
-        
+
+        // Render items immediately with lightweight placeholders.
+        // Each image will load asynchronously and update its state when ready.
         wallpapers.forEach(wallpaper => {
             const item = document.createElement('div');
             const isSelected = currentWallpaperId === wallpaper.id;
             item.className = `wallpaper-item ${isSelected ? 'selected' : ''}`;
-            if (isSelected) {
-                console.log('✅ Selected wallpaper:', wallpaper.name, wallpaper.id);
-            }
             item.dataset.wallpaperId = wallpaper.id;
             item.dataset.wallpaperFilename = wallpaper.filename;
-            
+
+            // Image element with progressive loading behavior
             const img = document.createElement('img');
-            // Use thumbnail path for better performance
-            const thumbnailPath = `/images/wallpapers/thumbnails/${wallpaper.filename}`;
-            const fallbackPath = `/images/wallpapers/${wallpaper.filename}`;
-            
-            img.src = thumbnailPath;
-            img.alt = wallpaper.name;
+            img.alt = wallpaper.name || '';
             img.loading = 'lazy';
-            
-            // Fallback to full image if thumbnail doesn't exist
-            let hasFallenBack = false;
-            img.onerror = () => {
-                if (!hasFallenBack && wallpaper.filename) {
-                    hasFallenBack = true;
-                    img.src = fallbackPath;
-                } else if (!wallpaper.filename) {
-                    // If no filename, remove the broken image
-                    img.style.display = 'none';
-                }
-            };
-            
+            img.decoding = 'async';
+            img.className = 'wallpaper-thumb loading';
+            img.setAttribute('aria-hidden', 'false');
+
+            // Info block (rendered immediately)
             const info = document.createElement('div');
             info.className = 'wallpaper-info';
             info.innerHTML = `
                 <div class="wallpaper-name">${wallpaper.name}</div>
-                <div class="wallpaper-version">${wallpaper.version}</div>
+                <div class="wallpaper-version">${wallpaper.version || ''}</div>
             `;
-            
+
+            // Append item to gallery first so the browser can start painting placeholders
             item.appendChild(img);
             item.appendChild(info);
-            
-            // Add click handler
-            item.addEventListener('click', () => this.selectWallpaper(wallpaper, item));
-            
             gallery.appendChild(item);
+
+            // Click handler
+            item.addEventListener('click', () => this.selectWallpaper(wallpaper, item));
+
+            // Load the image asynchronously after insertion to avoid blocking layout
+            // Use a small timeout to yield to the DOM thread
+            setTimeout(() => {
+                let src = wallpaper.thumbnail || wallpaper.fullImage || '';
+                if (!src) {
+                    // No image available — hide item
+                    item.style.display = 'none';
+                    return;
+                }
+
+                let hasFallenBack = false;
+
+                img.onload = () => {
+                    img.classList.remove('loading');
+                    item.classList.add('loaded');
+                };
+
+                img.onerror = () => {
+                    // Try fallback to full image if thumbnail failed
+                    if (!hasFallenBack && wallpaper.fullImage && wallpaper.fullImage !== src) {
+                        hasFallenBack = true;
+                        src = wallpaper.fullImage;
+                        img.src = src;
+                        return;
+                    }
+
+                    // If still failing, remove the item after a brief grace period
+                    img.classList.remove('loading');
+                    img.classList.add('error');
+                    setTimeout(() => { item.style.display = 'none'; }, 1200);
+                };
+
+                // Safety timeout: if image doesn't load within 8s, mark as error
+                const failTimer = setTimeout(() => {
+                    if (img.classList.contains('loading')) {
+                        img.classList.remove('loading');
+                        img.classList.add('error');
+                    }
+                }, 8000);
+
+                img.onloadend = img.onloadend || function() { clearTimeout(failTimer); };
+
+                // Kick off load
+                img.src = src;
+            }, 0);
         });
-        
+
         container.innerHTML = '';
         container.appendChild(gallery);
     }
@@ -887,7 +924,9 @@ export default class Preferences {
         EventBus.emit('wallpaper:change', {
             id: wallpaper.id,
             filename: wallpaper.filename,
-            type: wallpaper.type
+            type: wallpaper.type,
+            url: wallpaper.fullImage,
+            thumbnail: wallpaper.thumbnail
         });
         
         console.log('Wallpaper selected:', wallpaper.name);

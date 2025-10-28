@@ -858,7 +858,7 @@ code,pre{
 }
 
 .desktop-icon:hover .icon-image{
-    filter:drop-shadow(0 4px 12px rgba(0, 0, 0, .4))  drop-shadow(0 0 0 1px rgba(255, 255, 255, .1));
+    filter:drop-shadow(0 4px 12px rgba(0, 0, 0, .4)) drop-shadow(0 0 0 1px rgba(255, 255, 255, .1));
 }
 
 .icon-label{
@@ -1226,15 +1226,14 @@ code,pre{
 
 .dock-container.left{
     left:8px;
-}
-
-.dock-container.left,.dock-container.right{
     top:50%;
     transform:translateY(-50%);
 }
 
 .dock-container.right{
     right:8px;
+    top:50%;
+    transform:translateY(-50%);
 }
 
 .dock-container.auto-hide{
@@ -1259,7 +1258,7 @@ code,pre{
     background:var(--dock-bg) !important;
     border:1px solid var(--dock-border) !important;
     border-radius:16px !important;
-    box-shadow: var(--dock-shadow), inset 0 1px 0 var(--dock-inset-highlight), inset 0 -1px 0 var(--dock-inset-shadow) !important;
+    box-shadow:var(--dock-shadow), inset 0 1px 0 var(--dock-inset-highlight), inset 0 -1px 0 var(--dock-inset-shadow) !important;
     justify-content:center !important;
     padding:8px 12px !important;
     transition:var(--theme-transition);
@@ -1298,7 +1297,7 @@ code,pre{
     background-repeat:no-repeat;
     background-size:cover;
     border-radius:16px;
-    box-shadow: var(--dock-icon-shadow), var(--shadow-sm), inset 0 0 0 1px var(--dock-icon-border);
+    box-shadow:var(--dock-icon-shadow), var(--shadow-sm), inset 0 0 0 1px var(--dock-icon-border);
     display:block;
     flex-shrink:0;
     height:var(--dock-icon-size) !important;
@@ -1354,7 +1353,7 @@ code,pre{
     background:var(--dock-indicator);
     border-radius:50%;
     bottom:-8px;
-    box-shadow: 0 0 4px var(--dock-indicator), var(--shadow-sm);
+    box-shadow:0 0 4px var(--dock-indicator), var(--shadow-sm);
     height:5px;
     opacity:0;
     position:absolute;
@@ -1894,7 +1893,7 @@ code,pre{
 }
 
 .xterm .xterm-rows{
-    text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff4150, 0 0 15px #00ff4125;
+    text-shadow:0 0 5px #00ff41, 0 0 10px #00ff4150, 0 0 15px #00ff4125;
 }
 
 .terminal-amber{
@@ -2128,7 +2127,7 @@ code,pre{
 .alien-fullscreen:before{
     border:40px solid #2a2a2a;
     bottom:0;
-    box-shadow: inset 0 0 20px rgba(0,0,0,.8),inset 0 0 40px rgba(0,0,0,.5),inset -10px -10px 30px rgba(0,0,0,.3),inset 10px 10px 30px hsla(0,0%,100%,.05);
+    box-shadow:inset 0 0 20px rgba(0,0,0,.8),inset 0 0 40px rgba(0,0,0,.5),inset -10px -10px 30px rgba(0,0,0,.3),inset 10px 10px 30px hsla(0,0%,100%,.05);
     left:0;
     right:0;
     top:0;
@@ -2220,14 +2219,14 @@ code,pre{
 }
 
 .alien-fullscreen .crt-effect{
-    background: linear-gradient(180deg, transparent 1px, rgba(0,0,0,.1) 0), linear-gradient(90deg, transparent 1px, rgba(0,0,0,.1) 0);
+    background:linear-gradient(180deg, transparent 1px, rgba(0,0,0,.1) 0), linear-gradient(90deg, transparent 1px, rgba(0,0,0,.1) 0);
     background-size:100% 2px, 2px 100%;
     opacity:.3;
     z-index:9996;
 }
 
 .alien-fullscreen .xterm-rows{
-    text-shadow: 0 0 2px currentColor, 0 0 4px currentColor, 0 0 8px rgba(57,255,20,.5) !important;
+    text-shadow:0 0 2px currentColor, 0 0 4px currentColor, 0 0 8px rgba(57,255,20,.5) !important;
 }
 
 .alien-fullscreen .xterm-screen{
@@ -4249,10 +4248,11 @@ code,pre{
     }
     
     .timeline-connector{
+        left:-35px;
         right:auto;
     }
     
-    .edu-connector,.timeline-connector{
+    .edu-connector{
         left:-35px;
     }
     
@@ -6447,7 +6447,7 @@ code,pre{
     -webkit-font-smoothing:antialiased !important;
     -moz-osx-font-smoothing:grayscale !important;
     align-items:center !important;
-    background: radial-gradient(circle at center, #1a1a1a 0, #000 100%) !important;
+    background:radial-gradient(circle at center, #1a1a1a 0, #000 100%) !important;
     color:#fff !important;
     display:flex !important;
     flex-direction:column !important;
@@ -6786,7 +6786,7 @@ code,pre{
 
 @media (prefers-color-scheme:light){
     .boot-overlay{
-        background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.8)), url(/images/profile.jpg);
+        background:linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.8)), url(/images/profile.jpg);
     }
 }
 

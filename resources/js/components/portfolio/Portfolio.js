@@ -561,6 +561,7 @@ export default class Portfolio {
                                     src="${galleryItems[this.currentImageIndex].src || this.getPlaceholder()}" 
                                     alt="${project.title}"
                                     class="gallery-image"
+                                    style="max-width: 100%; max-height: 60vh; width: auto; height: auto; object-fit: contain; display: block; margin: 0 auto;"
                                     onerror="this.src='${this.getPlaceholder()}'"
                                 >
                             ` : `
@@ -785,6 +786,7 @@ export default class Portfolio {
                         src="${currentItem.src || this.getPlaceholder()}" 
                         alt="${this.currentProject.title}"
                         class="gallery-image"
+                        style="max-width: 100%; max-height: 60vh; width: auto; height: auto; object-fit: contain; display: block; margin: 0 auto;"
                         onerror="this.src='${this.getPlaceholder()}'"
                     >
                 `;
