@@ -1,0 +1,213 @@
+{
+  "profile_images": {
+    "primary": "profile.jpg",
+    "headshot": "headshot.jpg", 
+    "about_photo": "abdulmelik_saylan.jpg",
+    "cursor": "cursor.png"
+  },
+  "wallpapers": [
+    {
+      "id": "sonoma-light",
+      "name": "Sonoma Light",
+      "filename": "14-Sonoma-Light.jpg",
+      "version": "macOS Sonoma",
+      "category": "System",
+      "type": "light",
+      "colors": ["#87CEEB", "#98FB98", "#F0E68C"]
+    },
+    {
+      "id": "sonoma-dark", 
+      "name": "Sonoma Dark",
+      "filename": "14-Sonoma-Dark.jpg",
+      "version": "macOS Sonoma",
+      "category": "System",
+      "type": "dark",
+      "colors": ["#1a1a1a", "#2d2d2d", "#404040"]
+    },
+    {
+      "id": "ventura-light",
+      "name": "Ventura Light",
+      "filename": "Ventura light.jpg", 
+      "version": "macOS Ventura",
+      "category": "System",
+      "type": "light",
+      "colors": ["#4A90E2", "#7ED321", "#F5A623"]
+    },
+    {
+      "id": "ventura-dark",
+      "name": "Ventura Dark", 
+      "filename": "Ventura dark.jpg",
+      "version": "macOS Ventura", 
+      "category": "System",
+      "type": "dark",
+      "colors": ["#0B1426", "#1B2951", "#2A3F5F"]
+    },
+    {
+      "id": "big-sur-color-night",
+      "name": "Big Sur Color Night",
+      "filename": "11-0-Big-Sur-Color-Night.jpg",
+      "version": "macOS Big Sur",
+      "category": "System",
+      "type": "dark", 
+      "colors": ["#1A0033", "#330066", "#4D0080"]
+    },
+    {
+      "id": "big-sur-color-day",
+      "name": "Big Sur Color Day",
+      "filename": "11-0-Color-Day.jpg",
+      "version": "macOS Big Sur",
+      "category": "System", 
+      "type": "light",
+      "colors": ["#FF6B35", "#F7931E", "#FFD23F"]
+    },
+    {
+      "id": "big-sur-day",
+      "name": "Big Sur Day",
+      "filename": "11-0-Day.jpg", 
+      "version": "macOS Big Sur",
+      "category": "System",
+      "type": "light",
+      "colors": ["#87CEEB", "#98FB98", "#DDA0DD"]
+    },
+    {
+      "id": "big-sur-night",
+      "name": "Big Sur Night", 
+      "filename": "11-0-Night.jpg",
+      "version": "macOS Big Sur",
+      "category": "System",
+      "type": "dark",
+      "colors": ["#0F0F0F", "#1F1F1F", "#2F2F2F"]
+    },
+    {
+      "id": "monterey-dark", 
+      "name": "Monterey Dark",
+      "filename": "12-Dark.jpg",
+      "version": "macOS Monterey",
+      "category": "System",
+      "type": "dark",
+      "colors": ["#000814", "#001D3D", "#003566"]
+    },
+    {
+      "id": "yosemite-1",
+      "name": "Yosemite Original",
+      "filename": "Yosemite.jpg",
+      "version": "macOS Yosemite", 
+      "category": "Classic",
+      "type": "light",
+      "colors": ["#4A90E2", "#7ED321", "#BD10E0"]
+    },
+    {
+      "id": "yosemite-2",
+      "name": "Yosemite Valley",
+      "filename": "Yosemite 2.jpg",
+      "version": "macOS Yosemite",
+      "category": "Classic", 
+      "type": "light",
+      "colors": ["#5AC8FA", "#007AFF", "#34AADC"]
+    },
+    {
+      "id": "yosemite-3",
+      "name": "Yosemite Mountains", 
+      "filename": "Yosemite 3.jpg",
+      "version": "macOS Yosemite",
+      "category": "Classic",
+      "type": "light",
+      "colors": ["#FF9500", "#FF2D92", "#AF52DE"]
+    },
+    {
+      "id": "yosemite-4",
+      "name": "Yosemite Lake",
+      "filename": "Yosemite 4.jpg",
+      "version": "macOS Yosemite",
+      "category": "Classic",
+      "type": "light", 
+      "colors": ["#30D158", "#007AFF", "#5AC8FA"]
+    },
+    {
+      "id": "yosemite-5",
+      "name": "Yosemite Forest",
+      "filename": "Yosemite 5.jpg", 
+      "version": "macOS Yosemite",
+      "category": "Classic",
+      "type": "light",
+      "colors": ["#34C759", "#30D158", "#00C7BE"]
+    },
+    {
+      "id": "sierra",
+      "name": "Sierra",
+      "filename": "Sierra.jpg",
+      "version": "macOS Sierra", 
+      "category": "Classic",
+      "type": "light",
+      "colors": ["#FF9500", "#FF2D55", "#AF52DE"]
+    },
+    {
+      "id": "catalina-10-15-day",
+      "name": "Catalina Day",
+      "filename": "10-15-Day.jpg", 
+      "version": "macOS Catalina",
+      "category": "System",
+      "type": "light",
+      "colors": ["#007AFF", "#5AC8FA", "#34AADC"]
+    },
+    {
+      "id": "catalina-10-15-night", 
+      "name": "Catalina Night",
+      "filename": "10-15-Night.jpg",
+      "version": "macOS Catalina",
+      "category": "System",
+      "type": "dark",
+      "colors": ["#1C1C1E", "#2C2C2E", "#3A3A3C"]
+    },
+    {
+      "id": "mojave-14-day",
+      "name": "Mojave Day",
+      "filename": "10-14-Day-6k.jpg",
+      "version": "macOS Mojave",
+      "category": "System",
+      "type": "light", 
+      "colors": ["#FFD60A", "#FF9F0A", "#FF6900"]
+    },
+    {
+      "id": "mojave-14-night",
+      "name": "Mojave Night",
+      "filename": "10-14-Night-6k.jpg", 
+      "version": "macOS Mojave",
+      "category": "System",
+      "type": "dark",
+      "colors": ["#1D1B20", "#2D2A32", "#48464C"]
+    },
+    {
+      "id": "high-sierra-variants",
+      "name": "High Sierra Collection", 
+      "filenames": ["10-13-6k.jpg", "10-11-6k.jpg", "10-6-6k.jpg", "10-6-Server-6k.jpg", "10-7-6k.jpg", "10-8-6k.jpg"],
+      "version": "macOS High Sierra",
+      "category": "System",
+      "type": "mixed",
+      "colors": ["#667C89", "#8B9DC3", "#DFE3EE"]
+    },
+    {
+      "id": "artistic-starry-night",
+      "name": "The Starry Night", 
+      "filename": "The-Starry-Night.jpg",
+      "version": "Artistic",
+      "category": "Art",
+      "type": "mixed",
+      "colors": ["#1E3A8A", "#FCD34D", "#F59E0B"]
+    },
+    {
+      "id": "artistic-zebra",
+      "name": "Zebra Pattern",
+      "filename": "Zebra.jpg", 
+      "version": "Artistic",
+      "category": "Art",
+      "type": "mixed",
+      "colors": ["#000000", "#FFFFFF", "#808080"]
+    }
+  ],
+  "categories": ["System", "Classic", "Art"],
+  "versions": ["macOS Sonoma", "macOS Ventura", "macOS Big Sur", "macOS Monterey", "macOS Catalina", "macOS Mojave", "macOS High Sierra", "macOS Sierra", "macOS Yosemite", "Artistic"],
+  "total_count": 27,
+  "auto_rotation_interval": 1800000,
+  "transition_duration": 1000
+}

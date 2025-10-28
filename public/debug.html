@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boot Screen Debug</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            color: white;
+        }
+        
+        .debug-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 1000000;
+        }
+        
+        .test-boot-screen {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background: linear-gradient(135deg, #000000, #1a1a1a) !important;
+            color: #ffffff !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            z-index: 999999 !important;
+            opacity: 1 !important;
+        }
+        
+        .boot-logo {
+            font-size: 80px;
+            margin-bottom: 30px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .boot-title {
+            font-size: 32px;
+            font-weight: 100;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        
+        .boot-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-info">
+        <div>Boot Screen Debug</div>
+        <div id="status">Loading...</div>
+    </div>
+    
+    <div class="test-boot-screen">
+        <div class="boot-logo">🍎</div>
+        <h1 class="boot-title">AbdulmeLink Portfolio</h1>
+        <div class="boot-subtitle">Test Boot Screen</div>
+    </div>
+    
+    <script>
+        console.log('Debug page loaded');
+        
+        // Test visibility
+        const bootScreen = document.querySelector('.test-boot-screen');
+        const computedStyle = window.getComputedStyle(bootScreen);
+        
+        const debugInfo = {
+            display: computedStyle.display,
+            opacity: computedStyle.opacity,
+            zIndex: computedStyle.zIndex,
+            position: computedStyle.position,
+            visibility: computedStyle.visibility,
+            width: computedStyle.width,
+            height: computedStyle.height,
+            backgroundColor: computedStyle.backgroundColor
+        };
+        
+        console.log('Boot screen computed styles:', debugInfo);
+        document.getElementById('status').innerHTML = JSON.stringify(debugInfo, null, 2).replace(/\n/g, '<br>').replace(/ /g, '&nbsp;');
+        
+        // Test if element is actually visible
+        const rect = bootScreen.getBoundingClientRect();
+        console.log('Boot screen rect:', rect);
+        
+        setTimeout(() => {
+            console.log('Boot screen still visible after 2 seconds');
+        }, 2000);
+    </script>
+</body>
+</html>

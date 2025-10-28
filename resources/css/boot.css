@@ -1,0 +1,65 @@
+/* Boot Screen Styles - AbdulmeLink Portfolio
+   This file provides additional boot screen enhancements
+   Main styles are in components/bootscreen.css */
+
+/* Ensure proper font smoothing on all devices */
+.boot-overlay * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Hardware acceleration for smooth animations */
+.boot-content,
+.apple-logo,
+.boot-progress-fill {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+}
+
+/* Ensure boot screen is always on top */
+.boot-overlay {
+    isolation: isolate;
+}
+
+/* Prevent text selection during boot */
+.boot-overlay {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Force hardware acceleration */
+.boot-overlay {
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 768px) {
+    .boot-overlay {
+        -webkit-text-size-adjust: 100%;
+    }
+}
+
+/* Print styles - hide boot screen */
+@media print {
+    .boot-overlay {
+        display: none !important;
+    }
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .boot-overlay,
+    .boot-content,
+    .apple-logo,
+    .boot-progress-fill {
+        will-change: auto;
+        transform: none;
+        animation: none !important;
+        transition-duration: 0.1s !important;
+    }
+}

@@ -1,0 +1,83 @@
+{
+  "boot_sequence": {
+    "initial": [
+      "Starting LinkOS...",
+      "Checking system integrity...",
+      "Loading kernel extensions...",
+      "Initializing hardware..."
+    ],
+    "components": [
+      "Starting system services...",
+      "Loading WindowServer...",
+      "Initializing Core Graphics...",
+      "Starting launchd...",
+      "Loading user preferences..."
+    ],
+    "wallpapers": [
+      "Initializing desktop...",
+      "Loading desktop pictures...",
+      "Setting up display profiles...",
+      "Optimizing graphics performance..."
+    ],
+    "finalizing": [
+      "Starting Finder...",
+      "Loading menu bar...",
+      "Initializing dock...",
+      "Preparing desktop...",
+      ""
+    ]
+  },
+  "return_visitor": {
+    "quick_boot": [
+      "Resuming session...",
+      "Loading user environment...",
+      "Restoring window state...",
+      ""
+    ],
+    "skip_messages": [
+      "Fast boot...",
+      ""
+    ]
+  },
+  "loading_states": {
+    "wallpapers": {
+      "thumbnails": "Generating previews...",
+      "full_res": "Loading high quality...",
+      "caching": "Optimizing for speed..."
+    },
+    "terminal": {
+      "init": "Booting terminal...",
+      "filesystem": "Loading file system...",
+      "commands": "Preparing commands..."
+    },
+    "portfolio": {
+      "projects": "Loading projects...",
+      "images": "Preparing galleries...",
+      "data": "Fetching details..."
+    },
+    "about": {
+      "profile": "Loading profile...",
+      "skills": "Calculating expertise...",
+      "timeline": "Building experience..."
+    }
+  },
+  "error_messages": {
+    "network": "Having trouble connecting...",
+    "assets": "Some assets are taking longer...",
+    "fallback": "Loading backup version...",
+    "retry": "Trying again..."
+  },
+  "personal_touches": [
+    "Fun fact: I don't have any Apple Device!",
+    "Tip: Try right-clicking the desktop",
+    "Easter egg: Type 'theme alien' in terminal",
+    "Fact: LinkOS was inspired by macOS!",
+    "Hint: Check out the games in the terminal"
+  ],
+  "progress_stages": [
+    { "min": 0, "max": 20, "category": "initial" },
+    { "min": 20, "max": 50, "category": "components" },
+    { "min": 50, "max": 80, "category": "wallpapers" },
+    { "min": 80, "max": 100, "category": "finalizing" }
+  ]
+}

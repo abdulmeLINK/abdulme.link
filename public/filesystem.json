@@ -1,1 +1,166 @@
-{"home":{"subjects.txt":{"type":"file","user":"root","permissions":"r","content":"\u001b[33mSubjects\u001b[0m\n\n📚 Computer Science\n🔬 Artificial Intelligence\n🌐 Web Development\n⚡️ Data Science\n🎮 Game Development"},"projects.txt":{"type":"file","user":"root","permissions":"r","content":"\u001b[33mProjects\u001b[0m\n\n🌍 Personal Website: Built a responsive website using HTML, CSS, and JavaScript.\n🤖 Chatbot: Developed a natural language processing chatbot using Python and NLTK.\n📊 Data Analysis: Performed data analysis and visualization on a real-world dataset using Python and Pandas.\n🎯 Game App: Created a mobile game app using Unity and C#.\n🤝 Volunteer Platform: Developed a web platform to connect volunteers with local community organizations."},"contact_information":{"type":"directory","user":"root","permissions":"r"},"objective_statement":{"type":"directory","user":"root","permissions":"r"},"education":{"type":"directory","user":"root","permissions":"r"},"work_experience":{"type":"directory","user":"root","permissions":"r"},"skills":{"type":"directory","user":"root","permissions":"r"},"certifications":{"type":"directory","user":"root","permissions":"r"},"projects":{"type":"directory","user":"root","permissions":"r"},"references":{"type":"directory","user":"root","permissions":"r"}},"contact_information":{"contact.txt":{"type":"file","user":"root","permissions":"r","content":"\u001b[33mContact\u001b[0m\n\n📧 Email: abdulmeliksaylan@gmail.com | mailto:me@abdulme.link\n🌐 Website: http://abdulme.link\n"}},"objective_statement":{"objective.txt":{"type":"file","user":"root","permissions":"r","content":"\u001b[33mObjective\u001b[0m\n\nA highly motivated individual seeking a software development position..."}},"education":{"education.txt":{"type":"file","user":"root","permissions":"r","content":"\u001b[33mEducation\u001b[0m\n\nBachelor's Degree in Software Engineering (ongoing)\nUniversity of Muğla Sıtkı Koçman, Muğla, TR"}},"work_experience":{"freelance.txt":{"type":"file","user":"root","permissions":"r","content":"\u001b[33m📌 Providing a comprehensive range of services primarily focused on mobile and web software development,\u001b[0m 💻 \n\n\u001b[36m🔹 I catered to a diverse clientele seeking solutions for various aspects of their digital platforms. A significant portion of my work involved assisting clients in maintaining or modernizing their existing software infrastructure. This entailed a multitude of tasks, such as revamping user interfaces, integrating new microservices, and incorporating analytical tools to enhance \u001b[33mperformance\u001b[36m and functionality.\u001b[0m\n\n\u001b[36m🔹 For clients looking to rejuvenate their applications, I specialized in reskinning and integrating new features, including facilitating the seamless integration of Google Admob and Google AdSense advertisements to optimize revenue streams. Additionally, I adeptly configured APIs and web interfaces to streamline communication with servers, ensuring smooth data flow and efficient operations. Moreover, I provided support in setting up administrative interfaces, empowering clients to effectively manage their software environments.\u001b[0m\n\n\u001b[36m🔹 In instances where clients required the development of new functionalities and backend systems based on preliminary designs or mock-ups, I leveraged my expertise to bring their concepts to life. Utilizing frameworks such as Flutter, I translated design concepts into fully functional applications, meticulously ensuring alignment with client specifications and preferences.\u001b[0m\n\n\u001b[36m🔹 Moreover, I facilitated the deployment of applications to prominent digital marketplaces, such as Google Play and the App Store, managing all aspects of the process, from market descriptions to APK signing and API integrations. This comprehensive approach ensured a smooth and successful launch for each app, enhancing visibility and accessibility for end-users.\u001b[0m\n\n\u001b[36m🔹 In handling projects ranging from low to mid complexity, I meticulously analyzed client requirements and anticipated demands to develop scalable solutions capable of accommodating growth and fluctuating user volumes. By leveraging my expertise in database management and server optimization, I ensured optimal performance and responsiveness, even under \u001b[33mhigh traffic conditions\u001b[36m.\u001b[0m\n\n\u001b[36m🔹 Additionally, I provided tailored solutions for clients seeking web scraping and automation services to streamline their business processes. Through meticulous planning and execution, I delivered automated solutions that effectively gathered and processed relevant data, empowering clients to make informed decisions and gain a competitive edge in their respective industries.\u001b[0m\n\n\u001b[36m🔹 Over the course of my tenure, I successfully completed nearly \u001b[33m30 projects\u001b[36m spanning durations ranging from two days to three months, each characterized by a collaborative approach and a commitment to exceeding client expectations. With a track record of achieving \u001b[33m100% project completion\u001b[36m and consistently high levels of customer satisfaction, I am well-equipped to address the diverse needs of clients in the realm of software development and beyond.\u001b[0m\n\n\u001b[36m🔹 In addition to serving a diverse clientele, I also provided tailored software solutions to local startups and businesses, addressing their specific needs and contributing to the growth and efficiency of the local business ecosystem. From conceptualization to execution, I collaborated closely with these entities to develop bespoke software applications that aligned with their objectives and operational requirements.\u001b[0m\n\n\u001b[36m🔹 Furthermore, I offered on-site maintenance services, ensuring the smooth functioning and continuous optimization of software systems within the premises of various businesses. This hands-on approach allowed me to promptly address any issues or updates, minimizing downtime and maximizing productivity for my clients.\u001b[0m\n\n\u001b[36m🔹 By fostering strong relationships with local startups and businesses, I not only supported their technological endeavors but also contributed to the overall prosperity of the community. My dedication to providing personalized solutions and ongoing support underscored my commitment to the success and sustainability of these ventures, further solidifying my reputation as a trusted partner in software development and maintenance. 🚀\u001b[0m"}},"skills":{"info.txt":{"type":"file","user":"root","permissions":"r","content":"\u001b[33mSkills\u001b[0m\n\n🔹 Programming Languages\n🔹 Frameworks\n🔹 Environments\n🔹 Development Tools\n🔹 Cloud Services\n🔹 Design Tools\n🔹 Hardware\n\u001b[32mNote:\u001b[0m The skills listed here are ones that I have used in at least one project, not just taken a course or familiar with the syntax. I believe that the best way to learn a programming language or framework is to use it in a real-world project, not just read about it or watch tutorials. This is why I have only listed the ones that I have used in a project or competition."},"languages.txt":{"type":"file","user":"root","permissions":"r","content":"\u001b[33m🔤 Languages\u001b[0m\n\n• C\n• C++\n• C#\n• Dart\n• Go\n• HTML\n• Java\n• JavaScript\n• Python\n• PHP\n• SQL\n• XML Scheme"},"frameworks.txt":{"type":"file","user":"root","permissions":"r","content":"\u001b[33m🛠️ Frameworks\u001b[0m\n\n• Flutter\n• Laravel\n• NodeJS\n• VueJS (familiar)\n• Bootstrap\n• Unity"},"environments.txt":{"type":"file","user":"root","permissions":"r","content":"\u001b[33m🌐 Environments\u001b[0m\n\n• Linux (primary)\n• Windows\n• Android Studio\n• ADB"},"development_tools.txt":{"type":"file","user":"root","permissions":"r","content":"\u001b[33m🔧 Development Tools\u001b[0m\n\n• Git\n• Google Colab\n• XAMPP\n• Nginx\n• Visual Studio\n• Web Debug Tools"},"cloud_services.txt":{"type":"file","user":"root","permissions":"r","content":"\u001b[33m☁️ Cloud Services\u001b[0m\n\n• AWS\n• Firebase\n• Google Cloud\n• Heroku"},"design_tools.txt":{"type":"file","user":"root","permissions":"r","content":"\u001b[33m🎨 Design Tools\u001b[0m\n\n• Adobe XD\n• SketchUp"},"hardware.txt":{"type":"file","user":"root","permissions":"r","content":"\u001b[33m🖥️ Hardware\u001b[0m\n\n• Arduino\n• NodeMCU\n• Raspberry Pi"}},"certifications":{"certifications.txt":{"type":"file","user":"root","permissions":"r","content":"\u001b[33mCertifications\u001b[0m\n\nAdvanced Level Python Programming (2020)\n"}},"projects":{"charm.txt":{"type":"file","user":"root","permissions":"r","content":"🔹 \u001b[1;33mCharm (2021) (Test Phase):\u001b[0m\n   • 🚀 Launched the project with an idea that app gives free video games, promotions and community to the people who don’t have access to this kind of products.\n   • 🌐 Created the remotely updatable localization system.\n   • 💼 Designed and built sponsorship system.\n   • 🏗️ Created the full app structure, frontend to backend.\n   • 🛠️ Utilized: \u001b[1;36mDart, Flutter, AWS, Admob, Firebase, Google Services, PHP, Laravel, HTML, Javascript, Bootstrap\u001b[0m"},"liseler_arasi_iha_yarismasi.txt":{"type":"file","user":"root","permissions":"r","content":"🔹 \u001b[1;33mLiseler Arası IHA Yarışması TEKNOFEST-TÜBİTAK (2020) (Team) (Competition):\u001b[0m\n   • 🚁 Designed and built multi-copter drone circuit by using Flight Computer, ESC, Electric Motors, fuse etc.\n   • 🌐 Implemented the 4G communication method to the Flight Computer thus, range of control almost became global without satellite communication.\n   • 📐 Designed the 3D model of the drone frame.\n   • 💻 Structured the service software that awakes and manages the 4G module.\n   • 📝 Predicted the flight performance, overall utilization and overall cost before funding arrived, documented and reported them to the competition committee.\n   • 📦 Managed all the purchase process, delivery tracking and expense proofs to be proven to committee.\n   • 👥 Supervised and taught the processes to the 2 students in the our 3-member team by explaining the work principles behind the drone.\n   • 🛠️ Utilized: \u001b[1;36mPython, Bash script, Mission Planner Ground Control Software, QGroundControl, Raspberry pi, Emerald Navio2, Sketch Up, Sixfab 4G module, ESC, Electric Motor\u001b[0m"},"two_factor_authentication_based_vault.txt":{"type":"file","user":"root","permissions":"r","content":"🔹 \u001b[1;33m2-Factor Authentication Based Vault TÜBİTAK 4006 (2019) (Solo):\u001b[0m\n   • 🔒 Implemented 2-Factor Authentication System to a private vault using an Android app and mail verification system.\n   • 📐 Designed the circuit establishes the connection between modules and microcontrollers.\n   • 💻 Structured the connection protocol between microcontrollers by using I/O pins.\n   • 📱 Created Native Android app for tracking status of the vault.\n   • 🛠️ Utilized: \u001b[1;36mArduino, NodeMCU, Java, XML, Firebase, Blynk\u001b[0m"},"smart_house_demo.txt":{"type":"file","user":"root","permissions":"r","content":"🔹 \u001b[1;33mSmart House Demo TÜBİTAK 4006 (2019) (Team):\u001b[0m\n   • 🏠 Designed and built the full structure and software of Bluetooth communication between mobile app and micro controllers.\n   • 💡 Designed and built the circuit that demonstrates lights, outlets and automated doors by using LEDs, sensors and motors.\n   • 🛠️ Utilized: \u001b[1;36mArduino, C, Java\u001b[0m"},"games":{"type":"directory","user":"root","permissions":"r"}},"games":{"satellite_management.txt":{"type":"file","user":"root","permissions":"r","content":"🔹 \u001b[1;33mSatellite Management (2018) (Game) (Removed):\u001b[0m\n   • 🎮 Created an idle type and space theme game using Unity game engine.\n   • 🛠️ Utilized: \u001b[1;36mC#, Unity, Admob\u001b[0m"},"geometry_zombies.txt":{"type":"file","user":"root","permissions":"r","content":"🔹 \u001b[1;33mGeometry Zombies (2018) (Game) (Removed):\u001b[0m\n   • 🎮 Created an idle type and space theme game using Unity game engine.\n   • 🛠️ Utilized: \u001b[1;36mC#, Unity, Admob, Firebase, Google Play Games\u001b[0m"}},"references":{"references.txt":{"type":"file","user":"root","permissions":"r","content":"\u001b[33mReferences\u001b[0m\n\nAvailable upon request"}}}
+{
+  "_metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-09-28T10:00:00Z",
+    "description": "Virtual file system for terminal simulation"
+  },
+  "home": {
+    "type": "directory",
+    "modified": "Sep 28 10:00",
+    "size": 4096,
+    "contents": {
+      "abdulmelik": {
+        "type": "directory",
+        "modified": "Sep 28 10:00",
+        "size": 4096,
+        "contents": {
+          "README.md": {
+            "type": "file",
+            "modified": "Sep 28 10:00",
+            "size": 245,
+            "content": "# Welcome to AbdulmeLink Portfolio Terminal! 🚀\n\nThis is a fully functional terminal simulation built with xterm.js.\n\nAvailable commands:\n- ls: List directory contents\n- cd: Change directory\n- cat: Display file contents\n- help: Show all commands\n- whoami: Display user info\n- neofetch: System information\n\nGames:\n- snake: Play Snake game\n- tictactoe: Play Tic-tac-toe\n- typing-test: Test your typing speed\n\nEnjoy exploring! ✨"
+          },
+          "projects": {
+            "type": "directory",
+            "modified": "Sep 28 09:30",
+            "size": 4096,
+            "contents": {
+              "portfolio": {
+                "type": "directory",
+                "modified": "Sep 28 09:30",
+                "size": 4096,
+                "contents": {
+                  "package.json": {
+                    "type": "file",
+                    "modified": "Sep 28 09:30",
+                    "size": 1024,
+                    "content": "{\n  \"name\": \"abdulme-portfolio\",\n  \"version\": \"1.0.0\",\n  \"description\": \"LinkOS-style portfolio website\",\n  \"main\": \"index.js\",\n  \"dependencies\": {\n    \"laravel\": \"^10.0.0\",\n    \"gsap\": \"^3.12.0\",\n    \"xterm\": \"^5.3.0\"\n  }\n}"
+                  },
+                  "README.md": {
+                    "type": "file",
+                    "modified": "Sep 28 09:15",
+                    "size": 512,
+                    "content": "# AbdulmeLink Portfolio\n\nA pixel-perfect LinkOS desktop experience built with Laravel and vanilla JavaScript.\n\n## Features\n- 27 dynamic wallpapers\n- Authentic LinkOS dock\n- Terminal with xterm.js\n- Portfolio showcase\n- Preferences system\n\n## Performance\n- <3s initial load\n- 60fps animations\n- Progressive enhancement"
+                  }
+                }
+              },
+              "ai-chatbot": {
+                "type": "directory",
+                "modified": "Aug 15 14:20",
+                "size": 4096,
+                "contents": {
+                  "main.py": {
+                    "type": "file",
+                    "modified": "Aug 15 14:20",
+                    "size": 2048,
+                    "content": "#!/usr/bin/env python3\n# AI Chatbot with NLP and sentiment analysis\n\nimport tensorflow as tf\nfrom transformers import pipeline\n\nclass IntelligentChatBot:\n    def __init__(self):\n        self.sentiment_analyzer = pipeline('sentiment-analysis')\n        self.intent_classifier = self.load_model()\n    \n    def process_message(self, message):\n        sentiment = self.sentiment_analyzer(message)\n        intent = self.classify_intent(message)\n        return self.generate_response(intent, sentiment)\n\nif __name__ == '__main__':\n    bot = IntelligentChatBot()\n    print('AI Chatbot initialized! 🤖')"
+                  },
+                  "requirements.txt": {
+                    "type": "file",
+                    "modified": "Aug 15 14:15",
+                    "size": 256,
+                    "content": "tensorflow==2.13.0\ntransformers==4.30.0\nfastapi==0.68.0\nuvicorn==0.15.0\nnltk==3.8.0\nscikit-learn==1.3.0\npandas==2.0.3\nnumpy==1.24.3"
+                  }
+                }
+              }
+            }
+          },
+          "documents": {
+            "type": "directory",
+            "modified": "Sep 20 16:45",
+            "size": 4096,
+            "contents": {
+              "resume.txt": {
+                "type": "file",
+                "modified": "Sep 20 16:45",
+                "size": 1536,
+                "content": "ABDULMELIK SAYLAN\nFull-Stack Developer & AI Enthusiast\n\nEXPERIENCE:\n• Senior Full-Stack Developer (2023-Present)\n  - Built scalable web applications with Laravel & Vue.js\n  - Implemented AI-powered features using TensorFlow\n  - Led team of 5 developers on enterprise projects\n\n• Mobile Developer (2022-2023)\n  - Developed React Native apps with 100k+ downloads\n  - Integrated payment systems and real-time features\n  - Optimized performance for 60fps animations\n\nSKILLS:\n• Languages: JavaScript, TypeScript, Python, PHP, Dart\n• Frameworks: Laravel, React, Vue.js, Flutter, TensorFlow\n• Tools: Docker, AWS, Redis, MySQL, MongoDB\n\nCONTACT:\n• Email: hello@abdulme.link\n• GitHub: github.com/abdulmelik\n• LinkedIn: linkedin.com/in/abdulmelik"
+              },
+              "notes.md": {
+                "type": "file",
+                "modified": "Sep 25 11:30",
+                "size": 768,
+                "content": "# Development Notes\n\n## Portfolio Project Goals\n- [x] Authentic LinkOS experience\n- [x] 60fps smooth animations\n- [x] Progressive loading system\n- [ ] Advanced terminal games\n- [ ] Theme customization\n\n## Performance Targets\n- Initial load: <3 seconds\n- Animation FPS: 60 (desktop), 30 (mobile)\n- Memory usage: <100MB\n- Bundle size: <2MB gzipped\n\n## Browser Support\n- Chrome: Optimized\n- Firefox: Compatible\n- Safari: Compatible\n- Edge: Basic support"
+              }
+            }
+          },
+          "skills": {
+            "type": "directory",
+            "modified": "Sep 15 13:20",
+            "size": 4096,
+            "contents": {
+              "frontend.json": {
+                "type": "file",
+                "modified": "Sep 15 13:20",
+                "size": 512,
+                "content": "{\n  \"languages\": {\n    \"JavaScript\": { \"level\": \"Expert\", \"years\": 6 },\n    \"TypeScript\": { \"level\": \"Advanced\", \"years\": 4 },\n    \"CSS\": { \"level\": \"Expert\", \"years\": 7 },\n    \"HTML\": { \"level\": \"Expert\", \"years\": 7 }\n  },\n  \"frameworks\": {\n    \"React\": { \"level\": \"Expert\", \"years\": 5 },\n    \"Vue.js\": { \"level\": \"Advanced\", \"years\": 3 },\n    \"GSAP\": { \"level\": \"Advanced\", \"years\": 2 }\n  }\n}"
+              },
+              "backend.json": {
+                "type": "file",
+                "modified": "Sep 15 13:15",
+                "size": 384,
+                "content": "{\n  \"languages\": {\n    \"PHP\": { \"level\": \"Expert\", \"years\": 5 },\n    \"Python\": { \"level\": \"Advanced\", \"years\": 3 },\n    \"Node.js\": { \"level\": \"Advanced\", \"years\": 4 }\n  },\n  \"frameworks\": {\n    \"Laravel\": { \"level\": \"Expert\", \"years\": 4 },\n    \"FastAPI\": { \"level\": \"Intermediate\", \"years\": 2 },\n    \"Express.js\": { \"level\": \"Advanced\", \"years\": 3 }\n  }\n}"
+              }
+            }
+          },
+          ".bashrc": {
+            "type": "file",
+            "modified": "Sep 28 10:00",
+            "size": 256,
+            "content": "# Terminal configuration\nexport PS1='abdulmelik@portfolio:~$ '\nexport PATH=$PATH:/usr/local/bin\n\n# Aliases\nalias ll='ls -la'\nalias la='ls -A'\nalias l='ls -CF'\nalias cls='clear'\n\n# Welcome message\necho \"Welcome to AbdulmeLink Portfolio Terminal! 🚀\""
+          },
+          ".profile": {
+            "type": "file",
+            "modified": "Sep 28 10:00",
+            "size": 128,
+            "content": "# User profile settings\nUSER=abdulmelik\nHOME=/home/abdulmelik\nSHELL=/bin/bash\nTERM=xterm-256color"
+          }
+        }
+      }
+    }
+  },
+  "bin": {
+    "type": "directory",
+    "modified": "Sep 28 10:00",
+    "size": 4096,
+    "contents": {
+      "ls": {
+        "type": "file",
+        "modified": "Sep 28 10:00",
+        "size": 32768,
+        "content": "Binary executable: ls command"
+      },
+      "cat": {
+        "type": "file",
+        "modified": "Sep 28 10:00",
+        "size": 24576,
+        "content": "Binary executable: cat command"
+      },
+      "pwd": {
+        "type": "file",
+        "modified": "Sep 28 10:00",
+        "size": 16384,
+        "content": "Binary executable: pwd command"
+      }
+    }
+  },
+  "etc": {
+    "type": "directory",
+    "modified": "Sep 28 10:00",
+    "size": 4096,
+    "contents": {
+      "hostname": {
+        "type": "file",
+        "modified": "Sep 28 10:00",
+        "size": 32,
+        "content": "abdulme-portfolio"
+      },
+      "os-release": {
+        "type": "file",
+        "modified": "Sep 28 10:00",
+        "size": 256,
+        "content": "NAME=\"AbdulmeLink Terminal\"\nVERSION=\"1.0.0\"\nID=abdulme-terminal\nPRETTY_NAME=\"AbdulmeLink Portfolio Terminal v1.0.0\"\nHOME_URL=\"https://abdulme.link\""
+      }
+    }
+  }
+}

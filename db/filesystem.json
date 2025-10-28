@@ -1,0 +1,29 @@
+{
+  "home": {
+    "type": "directory",
+    "permissions": "drwxr-xr-x",
+    "user": "owner",
+    "readme.txt": {
+      "type": "file",
+      "permissions": "-rw-r--r--",
+      "user": "owner",
+      "content": "Welcome to the home directory!\nYou can add files and folders here."
+    },
+    "projects": {
+      "type": "directory",
+      "permissions": "drwxr-xr-x",
+      "user": "owner",
+      "project1.txt": {
+        "type": "file",
+        "permissions": "-rw-r--r--",
+        "user": "owner",
+        "content": "Description for Project 1..."
+      },
+      "folderA": {
+        "type": "directory",
+        "permissions": "drwxr-xr-x",
+        "user": "owner"
+      }
+    }
+  }
+} 

@@ -2,31 +2,81 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Portfolio;
+use App\Contracts\PortfolioServiceInterface;
+use App\Http\Resources\ProjectResource;
+use App\Http\Resources\ProjectCollection;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
+/**
+ * Portfolio Controller - Project CRUD operations
+ * Thin controller following Laravel best practices
+ */
 class PortfolioController extends Controller
 {
-    public function index()
+    protected PortfolioServiceInterface $portfolioService;
+
+    public function __construct(PortfolioServiceInterface $portfolioService)
     {
-        $projects = Portfolio::all();
-
-        $texts = (object)[
-            'name' => 'Abdulmelik Saylan',
-            'welcome_message' => 'Welcome to my portfolio',
-            'project_description' => 'Here are some of my projects',
-        ];
-
-        return view('portfolio', ['projects' => $projects, 'texts' => $texts]);
+        $this->portfolioService = $portfolioService;
     }
 
-    public function show($name)
+    /**
+     * Get all portfolio projects with optional filtering
+     */
+    public function index(Request $request): JsonResponse
     {
-        $project = Portfolio::where('name', $name)->first();
-
-        if ($project) {
-            return view('portfolio_item', ['project' => $project]);
+        try {
+            $data = $this->portfolioService->getAllProjects();
+            
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'data' => $data['projects'], // Direct array, not wrapped in ResourceCollection
+                    'meta' => [
+                        'total_projects' => $data['totalProjects'],
+                        'featured_count' => $data['featuredCount'],
+                        'last_updated' => $data['lastUpdated'],
+                        'categories' => $data['categories']
+                    ]
+                ],
+                '_metadata' => $data['_metadata'] ?? ['source' => 'unknown'] // Include data source metadata
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Failed to load portfolio projects',
+                'message' => config('app.debug') ? $e->getMessage() : null
+            ], 500);
         }
+    }
 
-        return abort(404, 'Project not found');
+    /**
+     * Get single project by ID
+     */
+    public function show(string $id): JsonResponse
+    {
+        try {
+            $projects = $this->portfolioService->getAllProjects();
+            $project = collect($projects['projects'])->firstWhere('id', $id);
+            
+            if (!$project) {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Project not found'
+                ], 404);
+            }
+            
+            return response()->json([
+                'success' => true,
+                'data' => new ProjectResource($project)
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Failed to load project',
+                'message' => config('app.debug') ? $e->getMessage() : null
+            ], 500);
+        }
     }
 }

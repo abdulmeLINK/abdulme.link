@@ -1,0 +1,280 @@
+{
+  "_metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-09-28T10:00:00Z",
+    "description": "Available terminal commands and their descriptions"
+  },
+  "categories": {
+    "basic": {
+      "name": "Basic Commands",
+      "description": "Essential file system navigation and information commands",
+      "color": "#4A9EFF"
+    },
+    "games": {
+      "name": "Games",
+      "description": "Interactive games and entertainment",
+      "color": "#F59E0B"
+    },
+    "system": {
+      "name": "System Info",
+      "description": "System information and user details",
+      "color": "#10B981"
+    },
+    "utility": {
+      "name": "Utilities",
+      "description": "Helpful utilities and tools",
+      "color": "#8B5CF6"
+    }
+  },
+  "commands": {
+    "ls": {
+      "category": "basic",
+      "name": "ls",
+      "description": "List directory contents with color coding",
+      "usage": "ls [options] [directory]",
+      "options": [
+        {
+          "flag": "-l",
+          "description": "Long format listing with details"
+        },
+        {
+          "flag": "-a",
+          "description": "Show all files including hidden"
+        }
+      ],
+      "examples": [
+        "ls",
+        "ls -l",
+        "ls -la projects"
+      ],
+      "color": "#4A9EFF"
+    },
+    "cd": {
+      "category": "basic",
+      "name": "cd",
+      "description": "Change current directory",
+      "usage": "cd [directory]",
+      "options": [],
+      "examples": [
+        "cd projects",
+        "cd ..",
+        "cd /",
+        "cd"
+      ],
+      "color": "#4A9EFF"
+    },
+    "pwd": {
+      "category": "basic",
+      "name": "pwd",
+      "description": "Print current working directory path",
+      "usage": "pwd",
+      "options": [],
+      "examples": [
+        "pwd"
+      ],
+      "color": "#4A9EFF"
+    },
+    "cat": {
+      "category": "basic",
+      "name": "cat",
+      "description": "Display file contents with syntax highlighting",
+      "usage": "cat [filename]",
+      "options": [],
+      "examples": [
+        "cat README.md",
+        "cat package.json"
+      ],
+      "color": "#4A9EFF"
+    },
+    "clear": {
+      "category": "utility",
+      "name": "clear",
+      "description": "Clear terminal screen with smooth animation",
+      "usage": "clear",
+      "aliases": ["cls"],
+      "options": [],
+      "examples": [
+        "clear",
+        "cls"
+      ],
+      "color": "#8B5CF6"
+    },
+    "help": {
+      "category": "utility",
+      "name": "help",
+      "description": "Display all available commands with descriptions",
+      "usage": "help [command]",
+      "options": [],
+      "examples": [
+        "help",
+        "help ls"
+      ],
+      "color": "#8B5CF6"
+    },
+    "whoami": {
+      "category": "system",
+      "name": "whoami",
+      "description": "Display current user information and profile",
+      "usage": "whoami",
+      "options": [],
+      "examples": [
+        "whoami"
+      ],
+      "color": "#10B981"
+    },
+    "neofetch": {
+      "category": "system",
+      "name": "neofetch",
+      "description": "Display system information with ASCII art",
+      "usage": "neofetch",
+      "options": [],
+      "examples": [
+        "neofetch"
+      ],
+      "color": "#10B981"
+    },
+    "snake": {
+      "category": "games",
+      "name": "snake",
+      "description": "Play the classic Snake game with arrow keys",
+      "usage": "snake",
+      "options": [],
+      "examples": [
+        "snake"
+      ],
+      "color": "#F59E0B",
+      "controls": {
+        "movement": "Arrow keys or WASD",
+        "pause": "Space",
+        "quit": "Escape or 'q'"
+      }
+    },
+    "tictactoe": {
+      "category": "games",
+      "name": "tictactoe",
+      "description": "Play Tic-tac-toe against AI with difficulty levels",
+      "usage": "tictactoe [difficulty]",
+      "options": [
+        {
+          "flag": "easy",
+          "description": "Easy AI opponent"
+        },
+        {
+          "flag": "medium",
+          "description": "Medium AI opponent"
+        },
+        {
+          "flag": "hard",
+          "description": "Hard AI opponent"
+        }
+      ],
+      "examples": [
+        "tictactoe",
+        "tictactoe easy",
+        "tictactoe hard"
+      ],
+      "color": "#F59E0B",
+      "controls": {
+        "select": "Number keys 1-9",
+        "restart": "'r'",
+        "quit": "'q'"
+      }
+    },
+    "typing-test": {
+      "category": "games",
+      "name": "typing-test",
+      "description": "Test your typing speed with WPM calculation",
+      "usage": "typing-test [duration]",
+      "options": [
+        {
+          "flag": "30",
+          "description": "30 second test"
+        },
+        {
+          "flag": "60",
+          "description": "60 second test (default)"
+        },
+        {
+          "flag": "120",
+          "description": "120 second test"
+        }
+      ],
+      "examples": [
+        "typing-test",
+        "typing-test 30",
+        "typing-test 120"
+      ],
+      "color": "#F59E0B",
+      "controls": {
+        "start": "Start typing",
+        "restart": "Ctrl+R",
+        "quit": "Escape"
+      }
+    },
+    "history": {
+      "category": "utility",
+      "name": "history",
+      "description": "Display command history",
+      "usage": "history",
+      "options": [],
+      "examples": [
+        "history"
+      ],
+      "color": "#8B5CF6"
+    },
+    "date": {
+      "category": "system",
+      "name": "date",
+      "description": "Display current date and time",
+      "usage": "date",
+      "options": [],
+      "examples": [
+        "date"
+      ],
+      "color": "#10B981"
+    },
+    "echo": {
+      "category": "utility",
+      "name": "echo",
+      "description": "Display text output",
+      "usage": "echo [text]",
+      "options": [],
+      "examples": [
+        "echo Hello World",
+        "echo \"Welcome to my terminal!\""
+      ],
+      "color": "#8B5CF6"
+    }
+  },
+  "shortcuts": {
+    "navigation": {
+      "Ctrl+A": "Move cursor to beginning of line",
+      "Ctrl+E": "Move cursor to end of line",
+      "Ctrl+K": "Delete from cursor to end of line",
+      "Ctrl+U": "Delete from cursor to beginning of line",
+      "Ctrl+W": "Delete previous word",
+      "Ctrl+L": "Clear screen (same as clear command)"
+    },
+    "history": {
+      "↑": "Previous command in history",
+      "↓": "Next command in history",
+      "Ctrl+R": "Search command history"
+    },
+    "terminal": {
+      "Ctrl+C": "Cancel current command",
+      "Ctrl+D": "Exit terminal",
+      "Tab": "Auto-complete command/path",
+      "Ctrl+Z": "Suspend current process"
+    }
+  },
+  "tips": [
+    "Use 'help' to see all available commands",
+    "Try 'ls -la' to see detailed file information",
+    "Use Tab key for auto-completion",
+    "Arrow keys navigate through command history",
+    "Type 'snake' or 'tictactoe' to play games",
+    "Use 'clear' to clean up the terminal",
+    "Try 'neofetch' for system information",
+    "Commands are case-sensitive"
+  ]
+}

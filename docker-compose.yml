@@ -1,9 +1,6 @@
 version: '3'
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile.dockerfile
     image: me
     container_name: me
     restart: unless-stopped
@@ -14,11 +11,13 @@ services:
     working_dir: /var/www
     volumes:
       - ./:/var/www
-      - vendor:/var/www/vendor
+      # Using local codebase but installing dependencies in the container
     ports:
       - "5173:5173"
     networks:
       - app-network
+    # Run composer install for local development and ensure APP_KEY is generated
+    command: sh -c "cd /var/www && if [ ! -f .env ]; then cp .env.example .env; fi && composer install && php artisan key:generate --force && php-fpm"
 
   nginx:
     image: nginx:stable-alpine
@@ -32,6 +31,8 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     networks:
       - app-network
+    depends_on:
+      - app
 
   mix:
     image: node:16
@@ -39,25 +40,11 @@ services:
       - ./:/app
     working_dir: /app
     entrypoint: sh -c "npm install && npm run dev -- --host --port=5174"
-    networks:
-      - app-network
-
-  mongodb:
-    image: mongo:latest
-    container_name: mongodb-service
     restart: unless-stopped
-    volumes:
-      - mongodb_data:/data/db
-      - ./:/var/www # Make sure your project files are available in the container
-    ports:
-      - "27017:27017"
+    depends_on:
+      - app
     networks:
       - app-network
-    command: /bin/bash -c "/var/www/import-json.sh"
-
-volumes:
-  vendor:
-  mongodb_data:
 
 networks:
   app-network:

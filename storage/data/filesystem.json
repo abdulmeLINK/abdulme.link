@@ -1,0 +1,346 @@
+{
+  "_metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-09-28T10:00:00Z",
+    "description": "Virtual file system for terminal simulation"
+  },
+  "home": {
+    "type": "directory",
+    "modified": "Sep 28 10:00",
+    "size": 4096,
+    "contents": {
+      "abdulmelik": {
+        "type": "directory",
+        "modified": "Sep 28 10:00",
+        "size": 4096,
+        "contents": {
+          "README.md": {
+            "type": "file",
+            "modified": "Sep 28 10:00",
+            "size": 245,
+            "content": "# Welcome to AbdulmeLink Portfolio Terminal! 🚀\n\nThis is a fully functional terminal simulation built with xterm.js.\n\nAvailable commands:\n- ls: List directory contents\n- cd: Change directory\n- cat: Display file contents\n- help: Show all commands\n- whoami: Display user info\n- neofetch: System information\n\nGames:\n- snake: Play Snake game\n- tictactoe: Play Tic-tac-toe\n- typing-test: Test your typing speed\n\nEnjoy exploring! ✨"
+          },
+          "projects": {
+            "type": "directory",
+            "modified": "Oct 25 10:00",
+            "size": 4096,
+            "contents": {
+              "flopynet": {
+                "type": "directory",
+                "modified": "Jul 15 14:20",
+                "size": 4096,
+                "contents": {
+                  "README.md": {
+                    "type": "file",
+                    "modified": "Jul 15 14:20",
+                    "size": 2048,
+                    "content": "# FLOPY-NET: Federated Learning + SDN Platform\n\nOpen-source research platform integrating federated machine learning training with Software Defined Networking control.\n\n## Architecture\n- **Federated Learning**: PyTorch Flower framework\n- **SDN Controller**: Ryu SDN controller\n- **Backend**: FastAPI with Docker orchestration\n- **Frontend**: React TypeScript dashboard\n\n## Features\n- Distributed ML experiments\n- Reproducible research environment\n- Real-time network monitoring\n- Comprehensive documentation (140+ pages)\n\n## Quick Start\n```bash\n# Clone the repository\ngit clone https://github.com/abdulmeLINK/flopynet.git\ncd flopynet\n\n# Start with Docker\ndocker-compose up -d\n\n# Access dashboard\nopen http://localhost:3000\n```\n\n## Research Impact\n- Senior capstone project\n- Presented to department staff\n- Open-source contribution to ML community\n\n## Tech Stack\n- Python, Docker, PyTorch, FastAPI, React, TypeScript\n- Ryu SDN, Flower FL, PostgreSQL"
+                  },
+                  "docker-compose.yml": {
+                    "type": "file",
+                    "modified": "Jul 15 14:15",
+                    "size": 1024,
+                    "content": "version: '3.8'\nservices:\n  sdn-controller:\n    image: ryu-controller\n    ports:\n      - '6633:6633'\n  federated-server:\n    build: ./server\n    ports:\n      - '8080:8080'\n  dashboard:\n    build: ./dashboard\n    ports:\n      - '3000:3000'\n  database:\n    image: postgres:13\n    environment:\n      POSTGRES_DB: flopynet\n      POSTGRES_USER: admin\n      POSTGRES_PASSWORD: secure123"
+                  },
+                  "requirements.txt": {
+                    "type": "file",
+                    "modified": "Jul 15 14:10",
+                    "size": 256,
+                    "content": "torch==2.0.1\nflwr==1.0.0\nfastapi==0.95.0\nuvicorn==0.21.1\nryu==4.34\npsycopg2-binary==2.9.6\npydantic==1.10.7\nnumpy==1.24.2"
+                  }
+                }
+              },
+              "quakerate": {
+                "type": "directory",
+                "modified": "Oct 01 16:45",
+                "size": 4096,
+                "contents": {
+                  "README.md": {
+                    "type": "file",
+                    "modified": "Oct 01 16:45",
+                    "size": 1536,
+                    "content": "# QuakeRate - Earthquake Risk Prediction Platform\n\nMVP earthquake risk prediction platform with geospatial analysis, real-time notifications, and ML-powered messaging.\n\n## Features\n- **Geospatial Analysis**: Interactive maps with risk zones\n- **Real-time Notifications**: Push notifications for high-risk areas\n- **ML Messaging**: AI-powered risk communication\n- **API Scalability**: 50k+ calls/day with serverless optimization\n\n## Architecture\n- **Frontend**: Flutter mobile app\n- **Backend**: Python FastAPI with Firebase\n- **Database**: Supabase PostgreSQL\n- **ML**: TensorFlow for risk prediction\n- **Maps**: Google Maps integration\n\n## Performance\n- 40% cost reduction through serverless migration\n- Sub-second API response times\n- 99.9% uptime\n\n## Impact\n- Presented to Istanbul Municipality\n- Public safety implementation potential\n- Complete technical documentation\n\n## Tech Stack\n- Flutter, Python, Firebase, Supabase, TensorFlow, PostgreSQL"
+                  },
+                  "lib": {
+                    "type": "directory",
+                    "modified": "Oct 01 16:40",
+                    "size": 4096,
+                    "contents": {
+                      "main.dart": {
+                        "type": "file",
+                        "modified": "Oct 01 16:40",
+                        "size": 2048,
+                        "content": "import 'package:flutter/material.dart';\nimport 'package:firebase_core/firebase_core.dart';\nimport 'package:supabase_flutter/supabase_flutter.dart';\n\nvoid main() async {\n  WidgetsFlutterBinding.ensureInitialized();\n  await Firebase.initializeApp();\n  await Supabase.initialize(\n    url: 'https://your-project.supabase.co',\n    anonKey: 'your-anon-key',\n  );\n  runApp(QuakeRateApp());\n}\n\nclass QuakeRateApp extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return MaterialApp(\n      title: 'QuakeRate',\n      theme: ThemeData(primarySwatch: Colors.red),\n      home: HomePage(),\n    );\n  }\n}"
+                      }
+                    }
+                  },
+                  "requirements.txt": {
+                    "type": "file",
+                    "modified": "Oct 01 16:35",
+                    "size": 384,
+                    "content": "fastapi==0.95.0\nuvicorn==0.21.1\ntensorflow==2.12.0\nsupabase==1.0.3\npsycopg2-binary==2.9.6\nfirebase-admin==6.0.1\ngeopy==2.2.0\nnumpy==1.24.2\npandas==1.5.3"
+                  }
+                }
+              },
+              "zero-waste": {
+                "type": "directory",
+                "modified": "Nov 01 11:30",
+                "size": 4096,
+                "contents": {
+                  "README.md": {
+                    "type": "file",
+                    "modified": "Nov 01 11:30",
+                    "size": 1024,
+                    "content": "# Zero Waste Project - Google Award Winner\n\nBackend and real-time metrics dashboard for Google-award-winning sustainability initiative.\n\n## Features\n- **QR Workflow**: Automated waste tracking\n- **Real-time Dashboard**: Grafana metrics visualization\n- **Database Schema**: Optimized for high-throughput\n- **API Endpoints**: RESTful Laravel backend\n\n## Tech Stack\n- Laravel, PHP, MySQL, Flutter, Grafana, dokku PaaS\n\n## Achievement\n- 🏆 Google Sustainability Award 2022\n- University 30th Anniversary Project\n- Real-time environmental monitoring"
+                  },
+                  "app": {
+                    "type": "directory",
+                    "modified": "Nov 01 11:25",
+                    "size": 4096,
+                    "contents": {
+                      "Http": {
+                        "type": "directory",
+                        "modified": "Nov 01 11:25",
+                        "size": 4096,
+                        "contents": {
+                          "Controllers": {
+                            "type": "directory",
+                            "modified": "Nov 01 11:20",
+                            "size": 4096,
+                            "contents": {
+                              "WasteController.php": {
+                                "type": "file",
+                                "modified": "Nov 01 11:20",
+                                "size": 1536,
+                                "content": "<?php\n\nnamespace App\\Http\\Controllers;\n\nuse Illuminate\\Http\\Request;\nuse App\\Services\\WasteService;\n\nclass WasteController extends Controller\n{\n    protected $wasteService;\n\n    public function __construct(WasteService $wasteService)\n    {\n        $this->wasteService = $wasteService;\n    }\n\n    public function track(Request $request)\n    {\n        $qrCode = $request->input('qr_code');\n        $binId = $request->input('bin_id');\n        \n        return $this->wasteService->processWasteEntry($qrCode, $binId);\n    }\n\n    public function getMetrics()\n    {\n        return response()->json($this->wasteService->getRealtimeMetrics());\n    }\n}"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "composer.json": {
+                    "type": "file",
+                    "modified": "Nov 01 11:15",
+                    "size": 512,
+                    "content": "{\n  \"name\": \"mu.edu.tr/zero-waste\",\n  \"description\": \"Google award-winning sustainability platform\",\n  \"type\": \"project\",\n  \"require\": {\n    \"php\": \"^8.1\",\n    \"laravel/framework\": \"^10.0\",\n    \"laravel/sanctum\": \"^3.2\"\n  }\n}"
+                  }
+                }
+              },
+              "tubitak-drone": {
+                "type": "directory",
+                "modified": "Sep 15 13:45",
+                "size": 4096,
+                "contents": {
+                  "README.md": {
+                    "type": "file",
+                    "modified": "Sep 15 13:45",
+                    "size": 896,
+                    "content": "# TUBITAK Autonomous Drone - National Finalist\n\nAutonomous drone with 4G cellular connectivity. National finalist in TEKNOFEST competition.\n\n## Features\n- **4G Connectivity**: First cellular drone in competition\n- **Autonomous Flight**: Mission Planner integration\n- **Circuit Design**: Custom electronics\n- **Linux Bridge**: 4G telemetry system\n\n## Tech Stack\n- Python, Bash, Linux, Raspberry Pi, Emlid Navio2\n\n## Achievement\n- 🏆 National Finalist - TEKNOFEST 2020\n- Presented to BAYKAR\n- Complete technical documentation"
+                  },
+                  "scripts": {
+                    "type": "directory",
+                    "modified": "Sep 15 13:40",
+                    "size": 4096,
+                    "contents": {
+                      "telemetry.py": {
+                        "type": "file",
+                        "modified": "Sep 15 13:40",
+                        "size": 1024,
+                        "content": "#!/usr/bin/env python3\n\n# 4G Telemetry Bridge for Autonomous Drone\n\nimport socket\nimport serial\nimport time\n\nclass TelemetryBridge:\n    def __init__(self):\n        self.serial_port = '/dev/ttyAMA0'\n        self.baud_rate = 57600\n        self.server_ip = '192.168.1.100'\n        self.server_port = 8888\n        \n    def connect_4g(self):\n        # Initialize 4G cellular connection\n        # Linux network configuration\n        pass\n    \n    def start_bridge(self):\n        ser = serial.Serial(self.serial_port, self.baud_rate)\n        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\n        sock.connect((self.server_ip, self.server_port))\n        \n        while True:\n            data = ser.readline()\n            sock.send(data)\n            time.sleep(0.1)\n\nif __name__ == '__main__':\n    bridge = TelemetryBridge()\n    bridge.start_bridge()"
+                      }
+                    }
+                  }
+                }
+              },
+              "charm": {
+                "type": "directory",
+                "modified": "Mar 01 09:15",
+                "size": 4096,
+                "contents": {
+                  "README.md": {
+                    "type": "file",
+                    "modified": "Mar 01 09:15",
+                    "size": 768,
+                    "content": "# Charm - Free Games & Promotions Platform\n\nMobile platform providing free video games and promotional content.\n\n## Features\n- **Open Beta**: Free gaming experience\n- **Localization**: Remotely updatable content\n- **Sponsorship**: Integrated promotion framework\n- **Ad-Supported**: AdMob monetization\n\n## Tech Stack\n- Flutter, Dart, AWS, Firebase, Laravel, PHP\n\n## Status\n- ✅ Open Beta Launched\n- 🔄 Migrating to private edge cloud"
+                  },
+                  "lib": {
+                    "type": "directory",
+                    "modified": "Mar 01 09:10",
+                    "size": 4096,
+                    "contents": {
+                      "main.dart": {
+                        "type": "file",
+                        "modified": "Mar 01 09:10",
+                        "size": 512,
+                        "content": "import 'package:flutter/material.dart';\nimport 'package:firebase_core/firebase_core.dart';\nimport 'package:google_mobile_ads/google_mobile_ads.dart';\n\nvoid main() async {\n  WidgetsFlutterBinding.ensureInitialized();\n  await Firebase.initializeApp();\n  await MobileAds.instance.initialize();\n  runApp(CharmApp());\n}\n\nclass CharmApp extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return MaterialApp(\n      title: 'Charm',\n      home: HomePage(),\n    );\n  }\n}"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "documents": {
+            "type": "directory",
+            "modified": "Sep 20 16:45",
+            "size": 4096,
+            "contents": {
+              "resume.txt": {
+                "type": "file",
+                "modified": "Oct 27 10:30",
+                "size": 4096,
+                "content": "ABDULMELIK SAYLAN\nabdulmeliksaylan@gmail.com | linkedin.com/in/abdulmelik | github.com/abdulmeLINK\n\nPROFESSIONAL SUMMARY\nFull-Stack Engineer with almost 3 years of experience building scalable, containerized web applications. Expertise in JavaScript/TypeScript, Node.js and modern frameworks like React, with strong skills in SQL, NoSQL and Docker-based deployments. Proven track record delivering high-performance solutions in agile teams, optimizing CI/CD pipelines and system reliability. Contributed to sustainability-focused projects, including a real-time metrics dashboard for a zero-waste initiative.\n\nTECHNICAL SKILLS\n• Core Competencies: Agile/Scrum, Sprint Planning, Code Reviews, Test-Driven Development (TDD)\n• Frontend Technologies: JavaScript, TypeScript, Svelte, React, HTML/CSS\n• Backend & Cloud: Node.js, Serverless (AWS Lambda), FastAPI, Python, Docker\n• Databases & Geospatial: PostgreSQL, Supabase, Geospatial Data, Mapbox, Google Street Maps\n• Tools & DevOps: Git & GitLab, CI/CD, Docker Compose, Kubernetes, Linux/UNIX\n\nWORK EXPERIENCE\n\nScale Al (Outlier) | Nov 2024 - Sep 2025\nProgramming Expert - Freelance Remote\n• Authored and reviewed manually 200+ programming tasks and prompts for multi-modal LLM code-generation state-of-the-art models, designing challenging and edge-case problems in Python and Java.\n• Provided manual in-depth debugging, pattern-based code review, and prompt optimization to improve AI output quality in production-grade pipelines.\n• Focus: Python, Java, Bash, Git, Adversarial ML, LLMs, Prompt Engineering\n• Technologies: Python, Java, Bash, Git, Adversarial ML, LLMs, Prompt Engineering\n\nLattice Work BV | Jul 2024 - Sep 2024\nField Application Engineer – Erasmus Internship | Hybrid, Eindhoven, NL\n• Automated firmware/process upgrades for 22 AmberPRO edge devices (Python/Docker), and prepared VAlsense AI demos for COMPUTEX and Smart City Expo in collaboration with international developer teams.\n• Mentored a new intern on Linux, Docker, and networking fundamentals; tested multi-brand camera integration, documenting and reporting 50+ detection and platform issues.\n• Managed SSL, redirects, and GDPR compliance for latticework.eu; streamlined processes and stakeholder communication for branch/global teams.\n• Technologies: Python, Docker, Linux, Networking, Edge AI, SSL/TLS, GDPR, Troubleshooting, Maintenance, Git/GitLab\n\nCrowMind LLC | Nov 2022 - Oct 2023\nSoftware Engineer – Contract (NDA) | Remote, Texas, USA\n• Led architecture and delivery of MVP earthquake risk prediction platform: scaling design (DAU, API, DB, network), migration guides, and systems diagrams (Firebase + Serverless Functions → Supabase/Postgres/Fully Serverless); all documentation and technical analysis.\n• Built core backend, geospatial analysis pipelines, and web client using Svelte, integrating Mapbox and Google Street Maps, leveraging serverless functions; drove cost optimization (40% savings) and performance improvements with observable 50k+ API calls/day, integrating ML messaging, real-time notifications, and analytics.\n• Presented to 10+ stakeholders from Istanbul Municipality for public safety review. Quake Rate: YouTube Channel (project demos)\n• Technologies: Python, Dart/Flutter, JavaScript, Firebase, Supabase, PostgreSQL, Docker, TensorFlow, Node.js, Serverless, Analytics, Git\n\nIndependent Consulting | Jan 2019 - Nov 2022\nFull-Stack Developer - Freelance | Remote\n• UBS Healthcare: Developed QR and barcode reporting (REST, batch jobs) for 100+ daily users, automating Ministry of Health workflows: cut manual workload by 99.96% and improved regulatory compliance.\n• Mobile Apps/SaaS: Built authentication, sponsorship, analytics, and multi-lingual mobile APIs for NDA clients; managed end-to-end CI/CD and cloud automation across production deployments.\n• Other Projects: Video streaming with payments and S3, real-time grocery/shipping logistics, WhatsApp automation (data extraction, UI scripting).\n• Technologies: Laravel, PHP, Node.js, FastAPI, Flutter, Redis, S3, WebSocket, Automation, Git, Svelte, Serverless, Mapbox, Google Street Maps\n• Integrated Svelte frontend with a serverless backend for interactive geospatial mapping, leveraging Mapbox and Google Street Maps to deliver dynamic client dashboards.\n\nEDUCATION\nMugla Sitki Kocman University | 2021 - Jul 2025\nBachelor of Engineering, Software Engineering\n• GPA: 3.19\n• Achievements: Honors\n• Coursework: AI, Machine Learning, Data Science, Software Architecture, Software Design Patterns, Interdisciplinary Project\n\nPROJECTS & COMPETITIONS\n\nSenior Capstone: FLOPY-NET (Federated Learning + SDN) | 2025\n• Designed and launched an open-source research platform integrating federated ML training with SDN control.\n• Led full-stack architecture (Docker, PyTorch, FastAPI, Ryu), built user interfaces, authored 140+ page documentation, and managed reproducible distributed ML experiments.\n• Presented project, architecture diagrams, and demos to department staff and students.\n• Github & Documentation PDF\n\nResearch Volunteer: Zero Waste Project (University, NDA) | 2022\n• Developed and integrated backend and real-time metrics dashboards for Google-award-winning sustainability initiative, handling DB schema, QR workflow, Flutter/Grafana for the university's 30th anniversary event (delivered under institutional NDA).\n• Project Announcement\n\nTeam Lead: TUBITAK Highschoolers National Drone Finalist | 2020\n• Led a 3-member team, delivering a national finalist autonomous drone (circuit design, 3D physics, Pi/Navio2, 4G telemetry).\n• Prepared full documentation; built Linux bridge for 4G connectivity and IPAM for VPN/UDP.\n• Presented to BAYKAR (world-leading drone exporter); delivered competition's first 4G cellular drone.\n\nInventor: TUBITAK 2FA Security Vault (Patent: 2021/003227) | 2019\n• Developed an embedded, hardware-based 2FA vault utilizing custom UART protocol, encryption, and a secure Android companion app.\n• Patent filed/titled via Turkish Patent Office, demoed to over 300 officials at national events.\n\nCERTIFICATIONS\n• Redis for Javascript Developers: Certified by Redis\n• C1 Level English: Amsterdam University College\n• Android, PHP, REST-API: Linkedin Skills Assessment, 2023\n• T3 Foundation Jury: Assessed students for High Skilled Education Class (2022)\n• Python: BTK Academy/TR, Advanced, 2020"
+              },
+              "notes.md": {
+                "type": "file",
+                "modified": "Sep 25 11:30",
+                "size": 768,
+                "content": "# Development Notes\n\n## Portfolio Project Goals\n- [x] Authentic LinkOS experience\n- [x] 60fps smooth animations\n- [x] Progressive loading system\n- [ ] Advanced terminal games\n- [ ] Theme customization\n\n## Performance Targets\n- Initial load: <3 seconds\n- Animation FPS: 60 (desktop), 30 (mobile)\n- Memory usage: <100MB\n- Bundle size: <2MB gzipped\n\n## Browser Support\n- Chrome: Optimized\n- Firefox: Compatible\n- Safari: Compatible\n- Edge: Basic support"
+              }
+            }
+          },
+          "skills": {
+            "type": "directory",
+            "modified": "Oct 25 12:00",
+            "size": 4096,
+            "contents": {
+              "frontend.json": {
+                "type": "file",
+                "modified": "Oct 25 12:00",
+                "size": 512,
+                "content": "{\n  \"languages\": {\n    \"JavaScript\": { \"level\": \"Expert\", \"years\": 6 },\n    \"TypeScript\": { \"level\": \"Advanced\", \"years\": 4 },\n    \"CSS\": { \"level\": \"Expert\", \"years\": 7 },\n    \"HTML\": { \"level\": \"Expert\", \"years\": 7 }\n  },\n  \"frameworks\": {\n    \"React\": { \"level\": \"Expert\", \"years\": 5 },\n    \"Vue.js\": { \"level\": \"Advanced\", \"years\": 3 },\n    \"GSAP\": { \"level\": \"Advanced\", \"years\": 2 },\n    \"Bootstrap\": { \"level\": \"Expert\", \"years\": 4 }\n  },\n  \"tools\": {\n    \"Webpack\": { \"level\": \"Advanced\", \"years\": 3 },\n    \"Vite\": { \"level\": \"Intermediate\", \"years\": 1 },\n    \"npm/yarn\": { \"level\": \"Expert\", \"years\": 5 }\n  }\n}"
+              },
+              "backend.json": {
+                "type": "file",
+                "modified": "Oct 25 11:55",
+                "size": 384,
+                "content": "{\n  \"languages\": {\n    \"PHP\": { \"level\": \"Expert\", \"years\": 5 },\n    \"Python\": { \"level\": \"Advanced\", \"years\": 4 },\n    \"Node.js\": { \"level\": \"Advanced\", \"years\": 4 }\n  },\n  \"frameworks\": {\n    \"Laravel\": { \"level\": \"Expert\", \"years\": 4 },\n    \"FastAPI\": { \"level\": \"Advanced\", \"years\": 2 },\n    \"Express.js\": { \"level\": \"Advanced\", \"years\": 3 }\n  },\n  \"databases\": {\n    \"MySQL\": { \"level\": \"Expert\", \"years\": 5 },\n    \"PostgreSQL\": { \"level\": \"Advanced\", \"years\": 3 },\n    \"Redis\": { \"level\": \"Advanced\", \"years\": 2 },\n    \"MongoDB\": { \"level\": \"Intermediate\", \"years\": 2 }\n  }\n}"
+              },
+              "mobile.json": {
+                "type": "file",
+                "modified": "Oct 25 11:50",
+                "size": 256,
+                "content": "{\n  \"frameworks\": {\n    \"Flutter\": { \"level\": \"Advanced\", \"years\": 3 },\n    \"React Native\": { \"level\": \"Intermediate\", \"years\": 2 },\n    \"Dart\": { \"level\": \"Advanced\", \"years\": 3 }\n  },\n  \"platforms\": {\n    \"iOS\": { \"level\": \"Intermediate\", \"years\": 2 },\n    \"Android\": { \"level\": \"Advanced\", \"years\": 3 }\n  }\n}"
+              },
+              "ai-ml.json": {
+                "type": "file",
+                "modified": "Oct 25 11:45",
+                "size": 320,
+                "content": "{\n  \"frameworks\": {\n    \"TensorFlow\": { \"level\": \"Advanced\", \"years\": 3 },\n    \"PyTorch\": { \"level\": \"Advanced\", \"years\": 2 },\n    \"scikit-learn\": { \"level\": \"Advanced\", \"years\": 3 }\n  },\n  \"specializations\": {\n    \"Computer Vision\": { \"level\": \"Intermediate\", \"years\": 2 },\n    \"NLP\": { \"level\": \"Intermediate\", \"years\": 1 },\n    \"Federated Learning\": { \"level\": \"Advanced\", \"years\": 1 }\n  }\n}"
+              },
+              "devops.json": {
+                "type": "file",
+                "modified": "Oct 25 11:40",
+                "size": 288,
+                "content": "{\n  \"containerization\": {\n    \"Docker\": { \"level\": \"Advanced\", \"years\": 3 },\n    \"Kubernetes\": { \"level\": \"Intermediate\", \"years\": 1 }\n  },\n  \"cloud\": {\n    \"AWS\": { \"level\": \"Advanced\", \"years\": 2 },\n    \"Firebase\": { \"level\": \"Expert\", \"years\": 3 },\n    \"Supabase\": { \"level\": \"Advanced\", \"years\": 2 }\n  },\n  \"tools\": {\n    \"Git\": { \"level\": \"Expert\", \"years\": 6 },\n    \"Linux\": { \"level\": \"Advanced\", \"years\": 4 }\n  }\n}"
+              }
+            }
+          },
+          ".bashrc": {
+            "type": "file",
+            "modified": "Oct 27 09:00",
+            "size": 512,
+            "content": "# Terminal configuration\nexport PS1='abdulmelik@portfolio:~$ '\nexport PATH=$PATH:/usr/local/bin:/home/abdulmelik/.local/bin\n\n# Aliases\nalias ll='ls -la'\nalias la='ls -A'\nalias l='ls -CF'\nalias cls='clear'\nalias ..='cd ..'\nalias ...='cd ../..'\n\n# Git aliases\nalias gs='git status'\nalias ga='git add'\nalias gc='git commit'\nalias gp='git push'\nalias gl='git log --oneline'\n\n# Welcome message\necho \"Welcome to AbdulmeLink Portfolio Terminal! 🚀\"\necho \"Type 'help' for available commands.\"\n\necho \"Last login: $(date)\""
+          },
+          ".profile": {
+            "type": "file",
+            "modified": "Oct 27 09:00",
+            "size": 256,
+            "content": "# User profile settings\nUSER=abdulmelik\nHOME=/home/abdulmelik\nSHELL=/bin/bash\nTERM=xterm-256color\nLANG=en_US.UTF-8\n\n# Environment variables\nexport EDITOR=nano\nexport VISUAL=code\n\nexport GITHUB_USER=abdulmeLINK\nexport NPM_TOKEN=your-npm-token-here"
+          },
+          ".ssh": {
+            "type": "directory",
+            "modified": "Oct 27 08:30",
+            "size": 4096,
+            "contents": {
+              "id_rsa.pub": {
+                "type": "file",
+                "modified": "Oct 27 08:30",
+                "size": 416,
+                "content": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7VbLrIbIu3KtOeQJnDXcPVLpVdEYRQFdJdKQ== abdulmelik@portfolio"
+              },
+              "known_hosts": {
+                "type": "file",
+                "modified": "Oct 27 08:30",
+                "size": 1024,
+                "content": "github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
+              },
+              "config": {
+                "type": "file",
+                "modified": "Oct 27 08:30",
+                "size": 256,
+                "content": "Host github.com\n    HostName github.com\n    User git\n    IdentityFile ~/.ssh/id_rsa\n\nHost gitlab.com\n    HostName gitlab.com\n    User git\n    IdentityFile ~/.ssh/id_rsa"
+              }
+            }
+          },
+          ".config": {
+            "type": "directory",
+            "modified": "Oct 27 08:45",
+            "size": 4096,
+            "contents": {
+              "git": {
+                "type": "directory",
+                "modified": "Oct 27 08:45",
+                "size": 4096,
+                "contents": {
+                  "config": {
+                    "type": "file",
+                    "modified": "Oct 27 08:45",
+                    "size": 384,
+                    "content": "[user]\n    name = Abdulmelik Saylan\n    email = abdulmeliksaylan@gmail.com\n\n[core]\n    editor = nano\n    autocrlf = input\n\n[alias]\n    st = status\n    co = checkout\n    ci = commit\n    br = branch\n    lg = log --oneline --graph --decorate\n\n[init]\n    defaultBranch = main"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "bin": {
+    "type": "directory",
+    "modified": "Sep 28 10:00",
+    "size": 4096,
+    "contents": {
+      "ls": {
+        "type": "file",
+        "modified": "Sep 28 10:00",
+        "size": 32768,
+        "content": "Binary executable: ls command"
+      },
+      "cat": {
+        "type": "file",
+        "modified": "Sep 28 10:00",
+        "size": 24576,
+        "content": "Binary executable: cat command"
+      },
+      "pwd": {
+        "type": "file",
+        "modified": "Sep 28 10:00",
+        "size": 16384,
+        "content": "Binary executable: pwd command"
+      }
+    }
+  },
+  "etc": {
+    "type": "directory",
+    "modified": "Sep 28 10:00",
+    "size": 4096,
+    "contents": {
+      "hostname": {
+        "type": "file",
+        "modified": "Sep 28 10:00",
+        "size": 32,
+        "content": "abdulme-portfolio"
+      },
+      "os-release": {
+        "type": "file",
+        "modified": "Sep 28 10:00",
+        "size": 256,
+        "content": "NAME=\"AbdulmeLink Terminal\"\nVERSION=\"1.0.0\"\nID=abdulme-terminal\nPRETTY_NAME=\"AbdulmeLink Portfolio Terminal v1.0.0\"\nHOME_URL=\"https://abdulme.link\""
+      }
+    }
+  }
+}

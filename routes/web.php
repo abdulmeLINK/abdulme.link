@@ -1,11 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\PortfolioController;
-use App\Http\Controllers\AboutController;
-use App\Http\Middleware\TrustProxies;
-use App\Http\Middleware\CorsMiddleware;
+use App\Http\Controllers\BootController;
+use App\Http\Controllers\DesktopController;
+use App\Http\Controllers\LandingController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,23 +16,46 @@ use App\Http\Middleware\CorsMiddleware;
 |
 */
 
-Route::middleware(TrustProxies::class)->group(function () {
-    Route::get('/', function () {
-        return view('home');
-    });
+/**
+ * Desktop - Full LinkOS experience (default landing page)
+ */
+Route::get('/', [DesktopController::class, 'index'])->name('desktop');
 
-    Route::get('/about', [AboutController::class, 'index']);
+/**
+ * Legacy landing page - redirect to desktop
+ */
+Route::get('/landing', function () {
+    return redirect()->route('desktop');
+})->name('landing');
 
-    Route::get('/contact', [ContactController::class, 'show']);
-    Route::post('/contact', [ContactController::class, 'mail']);
+/**
+ * Boot sequence routes - handles standalone LinkOS-style startup (legacy)
+ */
+Route::get('/boot', [BootController::class, 'show'])->name('boot');
+Route::get('/api/boot/status', [BootController::class, 'status'])->name('boot.status');
+Route::post('/api/boot/visited', [BootController::class, 'markVisited'])->name('boot.visited');
+Route::post('/api/boot/reset', [BootController::class, 'reset'])->name('boot.reset');
+Route::get('/api/boot/system-status', [BootController::class, 'getSystemStatus'])->name('boot.system-status');
 
+/**
+ * Desktop routes (also accessible via /desktop for backwards compatibility)
+ */
+Route::get('/desktop', [DesktopController::class, 'index']);
 
-    Route::get('/whoami', function () {
-        return view('whoami');
-    })->middleware(CorsMiddleware::class);
+/**
+ * Desktop API endpoints
+ */
+Route::get('/api/desktop/boot-status', [DesktopController::class, 'bootStatus'])->name('desktop.boot-status');
+Route::post('/api/desktop/skip-boot', [DesktopController::class, 'skipBoot'])->name('desktop.skip-boot');
+Route::post('/api/desktop/reset-boot', [DesktopController::class, 'resetBoot'])->name('desktop.reset-boot');
 
+/**
+ * Test and API routes
+ */
+Route::get('/api/test/current-wallpaper', [DesktopController::class, 'getCurrentWallpaper'])->name('test.current-wallpaper');
+Route::get('/api/loading-sequence', [DesktopController::class, 'getLoadingSequence'])->name('api.loading-sequence');
 
-
-    Route::get('/portfolio', [PortfolioController::class, 'index']);
-    Route::get('/portfolio/{name}',  [PortfolioController::class, 'show']);
-});
+/**
+ * Legacy boot test route (for debugging)
+ */
+Route::get('/boot-test', [BootController::class, 'test'])->name('boot.test');

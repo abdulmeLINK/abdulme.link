@@ -1,0 +1,632 @@
+{
+  "_metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-10-21T10:00:00Z",
+    "description": "Personal information, skills, experience and education data"
+  },
+  "personal": {
+    "name": "Abdulmelik Saylan",
+    "title": "Full-Stack Engineer & Software Developer",
+    "tagline": "Building scalable systems, one commit at a time",
+    "location": "Mugla, Turkey",
+    "email": "abdulmeliksaylan@gmail.com",
+    "phone": "Contact me for phone number",
+    "website": "https://flopynet.abdulme.link",
+    "profileImage": "/images/abdulmelik_saylan.jpg",
+    "bio": "Full-Stack Engineer with almost 3 years professional experience building scalable and containerized SaaS platforms with thousands of concurrent users. Strong engineering background (BEng, Software Engineering, Honors) and hands-on expertise with SQL, NoSQL, and in-memory databases. Proven ability to deliver reliable, high-performance solutions in agile environments, optimize systems for stability and growth, and collaborate effectively within motivated teams. Proactive in maintaining up-to-date developer guides, API specs, architectural diagrams and system documentation. Open to remote work.",
+    "interests": [
+      "Federated Learning",
+      "Software Defined Networking (SDN)",
+      "Edge Computing & IoT",
+      "Artificial Intelligence & Machine Learning",
+      "Prompt Engineering & LLMs",
+      "Containerization & DevOps",
+      "System Architecture",
+      "Open Source Contribution",
+      "Security-First Development",
+      "Mobile Application Development"
+    ],
+    "languages": [
+      {
+        "name": "Turkish",
+        "level": "Native",
+        "proficiency": 100
+      },
+      {
+        "name": "English",
+        "level": "C1 (Advanced)",
+        "proficiency": 90
+      }
+    ]
+  },
+  "social": {
+    "github": {
+      "url": "https://github.com/abdulmeLINK",
+      "username": "abdulmeLINK",
+      "followers": 50,
+      "repositories": 25
+    },
+    "linkedin": {
+      "url": "https://linkedin.com/in/abdulmelik",
+      "connections": 500
+    },
+    "website": {
+      "url": "https://flopynet.abdulme.link",
+      "title": "FLOPY-NET Project"
+    }
+  },
+  "skills": {
+    "languages": {
+      "category": "Programming Languages",
+      "color": "#3B82F6",
+      "technologies": [
+        {
+          "name": "Python",
+          "level": "Advanced",
+          "years": 3,
+          "proficiency": 88,
+          "projects": 15
+        },
+        {
+          "name": "Java",
+          "level": "Advanced",
+          "years": 3,
+          "proficiency": 85,
+          "projects": 12
+        },
+        {
+          "name": "PHP",
+          "level": "Advanced",
+          "years": 4,
+          "proficiency": 87,
+          "projects": 20
+        },
+        {
+          "name": "JavaScript",
+          "level": "Expert",
+          "years": 5,
+          "proficiency": 90,
+          "projects": 25
+        },
+        {
+          "name": "TypeScript",
+          "level": "Advanced",
+          "years": 3,
+          "proficiency": 85,
+          "projects": 15
+        },
+        {
+          "name": "Dart",
+          "level": "Intermediate",
+          "years": 2,
+          "proficiency": 78,
+          "projects": 8
+        },
+        {
+          "name": "Bash",
+          "level": "Advanced",
+          "years": 3,
+          "proficiency": 82,
+          "projects": 18
+        },
+        {
+          "name": "SQL",
+          "level": "Advanced",
+          "years": 3,
+          "proficiency": 85,
+          "projects": 20
+        }
+      ]
+    },
+    "frameworks": {
+      "category": "Frameworks & APIs",
+      "color": "#10B981",
+      "technologies": [
+        {
+          "name": "FastAPI",
+          "level": "Advanced",
+          "years": 2,
+          "proficiency": 85,
+          "projects": 10
+        },
+        {
+          "name": "Flask",
+          "level": "Advanced",
+          "years": 2,
+          "proficiency": 83,
+          "projects": 8
+        },
+        {
+          "name": "Django",
+          "level": "Intermediate",
+          "years": 1,
+          "proficiency": 75,
+          "projects": 5
+        },
+        {
+          "name": "React",
+          "level": "Advanced",
+          "years": 3,
+          "proficiency": 85,
+          "projects": 12
+        },
+        {
+          "name": "Laravel",
+          "level": "Advanced",
+          "years": 3,
+          "proficiency": 87,
+          "projects": 15
+        },
+        {
+          "name": "Node.js",
+          "level": "Advanced",
+          "years": 3,
+          "proficiency": 84,
+          "projects": 14
+        },
+        {
+          "name": "Flutter",
+          "level": "Intermediate",
+          "years": 2,
+          "proficiency": 80,
+          "projects": 8
+        },
+        {
+          "name": "Leaflet.js",
+          "level": "Intermediate",
+          "years": 1,
+          "proficiency": 76,
+          "projects": 4
+        }
+      ]
+    },
+    "databases": {
+      "category": "Database & Cloud",
+      "color": "#8B5CF6",
+      "technologies": [
+        {
+          "name": "MySQL",
+          "level": "Advanced",
+          "years": 3,
+          "proficiency": 87,
+          "projects": 18
+        },
+        {
+          "name": "PostgreSQL",
+          "level": "Advanced",
+          "years": 2,
+          "proficiency": 85,
+          "projects": 12
+        },
+        {
+          "name": "SQLite",
+          "level": "Advanced",
+          "years": 2,
+          "proficiency": 82,
+          "projects": 10
+        },
+        {
+          "name": "MongoDB",
+          "level": "Intermediate",
+          "years": 2,
+          "proficiency": 78,
+          "projects": 8
+        },
+        {
+          "name": "Redis",
+          "level": "Advanced",
+          "years": 2,
+          "proficiency": 85,
+          "projects": 12
+        },
+        {
+          "name": "AWS RDS",
+          "level": "Intermediate",
+          "years": 1,
+          "proficiency": 75,
+          "projects": 5
+        },
+        {
+          "name": "S3",
+          "level": "Advanced",
+          "years": 2,
+          "proficiency": 83,
+          "projects": 10
+        },
+        {
+          "name": "Supabase",
+          "level": "Advanced",
+          "years": 1,
+          "proficiency": 82,
+          "projects": 6
+        },
+        {
+          "name": "Firebase",
+          "level": "Advanced",
+          "years": 2,
+          "proficiency": 84,
+          "projects": 10
+        }
+      ]
+    },
+    "devops": {
+      "category": "DevOps & Infrastructure",
+      "color": "#F59E0B",
+      "technologies": [
+        {
+          "name": "Docker",
+          "level": "Expert",
+          "years": 3,
+          "proficiency": 92,
+          "projects": 22
+        },
+        {
+          "name": "Docker Compose",
+          "level": "Expert",
+          "years": 3,
+          "proficiency": 90,
+          "projects": 20
+        },
+        {
+          "name": "AWS EC2",
+          "level": "Advanced",
+          "years": 2,
+          "proficiency": 82,
+          "projects": 10
+        },
+        {
+          "name": "AWS Lambda",
+          "level": "Intermediate",
+          "years": 1,
+          "proficiency": 76,
+          "projects": 5
+        },
+        {
+          "name": "Linux/UNIX",
+          "level": "Expert",
+          "years": 4,
+          "proficiency": 90,
+          "projects": 25
+        },
+        {
+          "name": "CI/CD",
+          "level": "Advanced",
+          "years": 2,
+          "proficiency": 83,
+          "projects": 12
+        },
+        {
+          "name": "Kubernetes",
+          "level": "Intermediate",
+          "years": 1,
+          "proficiency": 72,
+          "projects": 4
+        },
+        {
+          "name": "Grafana",
+          "level": "Intermediate",
+          "years": 1,
+          "proficiency": 75,
+          "projects": 5
+        }
+      ]
+    },
+    "ai": {
+      "category": "AI & ML",
+      "color": "#EF4444",
+      "technologies": [
+        {
+          "name": "Prompt Engineering",
+          "level": "Advanced",
+          "years": 1,
+          "proficiency": 85,
+          "projects": 10
+        },
+        {
+          "name": "LLMs",
+          "level": "Advanced",
+          "years": 1,
+          "proficiency": 83,
+          "projects": 8
+        },
+        {
+          "name": "PyTorch",
+          "level": "Advanced",
+          "years": 1,
+          "proficiency": 82,
+          "projects": 5
+        },
+        {
+          "name": "TensorFlow",
+          "level": "Intermediate",
+          "years": 1,
+          "proficiency": 75,
+          "projects": 4
+        },
+        {
+          "name": "GitHub Copilot",
+          "level": "Expert",
+          "years": 1,
+          "proficiency": 88,
+          "projects": 15
+        },
+        {
+          "name": "Cursor AI",
+          "level": "Advanced",
+          "years": 1,
+          "proficiency": 84,
+          "projects": 12
+        }
+      ]
+    },
+    "other": {
+      "category": "Other Technologies",
+      "color": "#06B6D4",
+      "technologies": [
+        {
+          "name": "SDN (Software Defined Networking)",
+          "level": "Advanced",
+          "years": 1,
+          "proficiency": 85,
+          "projects": 3
+        },
+        {
+          "name": "Edge Computing",
+          "level": "Intermediate",
+          "years": 1,
+          "proficiency": 78,
+          "projects": 4
+        },
+        {
+          "name": "GNS3",
+          "level": "Intermediate",
+          "years": 1,
+          "proficiency": 72,
+          "projects": 2
+        },
+        {
+          "name": "Mapbox",
+          "level": "Intermediate",
+          "years": 1,
+          "proficiency": 76,
+          "projects": 3
+        },
+        {
+          "name": "OpenStreetMaps",
+          "level": "Intermediate",
+          "years": 1,
+          "proficiency": 75,
+          "projects": 3
+        },
+        {
+          "name": "REST API",
+          "level": "Expert",
+          "years": 3,
+          "proficiency": 90,
+          "projects": 20
+        },
+        {
+          "name": "Microservices",
+          "level": "Advanced",
+          "years": 2,
+          "proficiency": 83,
+          "projects": 8
+        },
+        {
+          "name": "Agile/Scrum",
+          "level": "Advanced",
+          "years": 3,
+          "proficiency": 85,
+          "projects": 15
+        }
+      ]
+    }
+  },
+  "experience": [
+    {
+      "id": "scale-ai-2024",
+      "title": "Programming Expert",
+      "company": "Scale AI (Outlier)",
+      "location": "Remote",
+      "type": "Freelance",
+      "duration": {
+        "start": "2024-11-01",
+        "end": "2025-09-30",
+        "formatted": "Nov 2024 - Sep 2025"
+      },
+      "description": "Authored and reviewed manually 200+ programming tasks and prompts for multi-modal LLM code-generation state-of-the-art models, designing challenging and edge-case problems in Python and Java.",
+      "achievements": [
+        "Created 200+ manual programming tasks for LLM training",
+        "Provided in-depth debugging and pattern-based code review",
+        "Optimized prompts to improve AI output quality in production pipelines",
+        "Worked with adversarial ML techniques for code generation",
+        "Specialized in Python, Java, Bash, and Git workflows"
+      ],
+      "technologies": ["Python", "Java", "Bash", "Git", "Prompt Engineering", "LLMs", "Adversarial ML"]
+    },
+    {
+      "id": "latticework-2024",
+      "title": "Field Application Engineer",
+      "company": "LatticeWork BV",
+      "location": "Eindhoven, Netherlands (Hybrid)",
+      "type": "Erasmus Internship",
+      "duration": {
+        "start": "2024-07-01",
+        "end": "2024-09-30",
+        "formatted": "Jul 2024 - Sep 2024"
+      },
+      "description": "Automated firmware/process upgrades for 22 AmberPRO edge devices using Python and Docker. Prepared VAIsense AI demos for COMPUTEX and Smart City Expo in collaboration with international developer teams.",
+      "achievements": [
+        "Automated firmware upgrades for 22 AmberPRO edge devices",
+        "Prepared VAIsense AI demos for COMPUTEX and Smart City Expo",
+        "Mentored new intern on Linux, Docker, and networking fundamentals",
+        "Tested multi-brand camera integration, documented 50+ detection issues",
+        "Managed SSL, redirects, and GDPR compliance for latticework.eu",
+        "Streamlined processes for branch/global team communication"
+      ],
+      "technologies": ["Python", "Docker", "Linux", "Networking", "Edge AI", "SSL/TLS", "GDPR", "Git", "GitLab"]
+    },
+    {
+      "id": "crowmind-2022",
+      "title": "Software Engineer",
+      "company": "CrowMind LLC",
+      "location": "Texas, USA (Remote)",
+      "type": "Contract",
+      "duration": {
+        "start": "2022-11-01",
+        "end": "2023-10-31",
+        "formatted": "Nov 2022 - Oct 2023"
+      },
+      "description": "Led architecture and delivery of MVP earthquake risk prediction platform (QuakeRate). Designed scalable architecture for DAU, API, DB, and network. Built core backend, geospatial analysis pipelines, and mobile/web clients.",
+      "achievements": [
+        "Led architecture of earthquake risk prediction platform from MVP to production",
+        "Migrated from Firebase to Supabase/Postgres serverless architecture",
+        "Achieved 40% cost optimization to handle 50k+ API calls/day",
+        "Built geospatial analysis pipelines with real-time notifications",
+        "Integrated ML messaging and analytics systems",
+        "Presented to 10+ stakeholders from Istanbul Municipality for public safety review",
+        "Delivered complete technical documentation and migration guides"
+      ],
+      "technologies": ["Python", "Dart", "Flutter", "JavaScript", "Firebase", "Supabase", "PostgreSQL", "Docker", "TensorFlow", "Node.js", "Serverless", "Analytics", "Git"]
+    },
+    {
+      "id": "independent-2019",
+      "title": "Full-Stack Developer",
+      "company": "Independent Consulting",
+      "location": "Remote",
+      "type": "Freelance",
+      "duration": {
+        "start": "2019-01-01",
+        "end": "2022-11-30",
+        "formatted": "Jan 2019 - Nov 2022"
+      },
+      "description": "Delivered diverse full-stack solutions for healthcare, mobile SaaS, e-commerce, and automation clients. Specialized in Laravel, FastAPI, Node.js, and Flutter development with cloud automation.",
+      "achievements": [
+        "UBS Healthcare: Built QR/barcode reporting system for 100+ daily users",
+        "Automated Ministry of Health workflows, cutting manual workload by 99.96%",
+        "Developed multi-lingual mobile APIs with authentication and analytics",
+        "Implemented video streaming with payments and S3 integration",
+        "Built real-time grocery/shipping logistics systems",
+        "Created WhatsApp automation tools for data extraction and UI scripting",
+        "Managed end-to-end CI/CD and cloud automation across production deployments"
+      ],
+      "technologies": ["Laravel", "PHP", "Node.js", "FastAPI", "Flutter", "Redis", "S3", "WebSocket", "Automation", "Git"]
+    }
+  ],
+  "education": [
+    {
+      "id": "mugla-sitki-kocman-bachelor",
+      "degree": "Bachelor of Engineering (Honors)",
+      "field": "Software Engineering",
+      "institution": "Mugla Sitki Kocman University",
+      "location": "Mugla, Turkey",
+      "duration": {
+        "start": "2021-09-01",
+        "end": "2025-07-31",
+        "formatted": "Sep 2021 - Jul 2025"
+      },
+      "gpa": "3.19/4.0",
+      "description": "Comprehensive software engineering education with focus on AI, machine learning, data science, software architecture, and design patterns. Graduated with Honors degree.",
+      "achievements": [
+        "Graduated with Honors (GPA: 3.19/4.0)",
+        "Led Senior Capstone Project: FLOPY-NET (Federated Learning + SDN)",
+        "Research Volunteer on Zero Waste Project (Google-award-winning)",
+        "Authored 140+ page technical documentation for capstone",
+        "Presented project demos to department staff and students"
+      ],
+      "coursework": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Data Science",
+        "Software Architecture",
+        "Software Design Patterns",
+        "Interdisciplinary Project",
+        "Database Systems",
+        "Computer Networks",
+        "Operating Systems",
+        "Web Development"
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "id": "redis-javascript-developer",
+      "name": "Redis for JavaScript developers",
+      "issuer": "Redis",
+      "date": "2023-06-15",
+      "validUntil": null,
+      "credentialId": "nbheo8nc1as3cd",
+      "url": "https://university.redis.io/certificate/nbheo8nc1as3cd"
+    },
+    {
+      "id": "english-b2-c1-amsterdam",
+      "name": "English Language Level B2/C1",
+      "issuer": "Amsterdam University College",
+      "date": "2023-06-01",
+      "validUntil": null,
+      "credentialId": null,
+      "url": null
+    },
+    {
+      "id": "python-advanced-btk",
+      "name": "Advanced Level Python Programming",
+      "issuer": "Bilgi Teknolojileri ve İletişim Kurumu - BTK - ICT",
+      "date": "2020-11-01",
+      "validUntil": null,
+      "credentialId": "epYwpoLm",
+      "url": "https://www.btkakademi.gov.tr/portal/certificate/validate?certificateId=epYwpoLm"
+    },
+    {
+      "id": "kubernetes-linux-foundation",
+      "name": "Introduction to Kubernetes",
+      "issuer": "The Linux Foundation",
+      "date": null,
+      "validUntil": null,
+      "credentialId": "b7cd6860-4830-4383-be7c-63c192362d0e",
+      "url": "https://www.credly.com/badges/b7cd6860-4830-4383-be7c-63c192362d0e/public_url"
+    },
+    {
+      "id": "teknofest-drone-finalist",
+      "name": "Unmanned Aerial Vehicle Competition National Finalist",
+      "issuer": "TEKNOFEST",
+      "date": "2020-09-01",
+      "validUntil": null,
+      "credentialId": "59926911571399",
+      "url": "https://drdogrulama.sanayi.gov.tr/en/verify/59926911571399"
+    }
+  ],
+  "awards": [
+    {
+      "id": "tubitak-drone-finalist-2020",
+      "name": "TUBITAK National Drone Competition Finalist",
+      "issuer": "TUBITAK (Turkish Scientific Council)",
+      "date": "2020-09-15",
+      "description": "Led 3-member team delivering national finalist autonomous drone with 4G cellular connectivity. Presented to BAYKAR, world-leading drone exporter. First 4G cellular drone in competition."
+    },
+    {
+      "id": "t3-foundation-jury-2022",
+      "name": "T3 Foundation Jury Member",
+      "issuer": "T3 Foundation",
+      "date": "2022-06-01",
+      "description": "Assessed students for High Skilled Education Class selection process."
+    },
+    {
+      "id": "tubitak-patent-2021",
+      "name": "Inventor - 2FA Security Vault Patent",
+      "issuer": "Turkish Patent Office",
+      "date": "2021-03-15",
+      "description": "Patent filed (2021/003227) for embedded hardware-based 2FA vault with custom UART protocol, encryption, and Android companion app. Demoed to 300+ officials at national events."
+    }
+  ],
+  "stats": {
+    "yearsExperience": 3,
+    "projectsCompleted": 27,
+    "technologiesUsed": 35,
+    "githubCommits": 2000,
+    "linesOfCode": 150000,
+    "openSourceContributions": 15,
+    "certifications": 5,
+    "awards": 3,
+    "patentsPublished": 1
+  }
+}

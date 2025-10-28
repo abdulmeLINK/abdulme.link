@@ -1,0 +1,118 @@
+{
+  "apps": [
+    {
+      "id": "finder",
+      "name": "Finder",
+      "icon": "/images/icons/finder.svg",
+      "type": "internal",
+      "component": "Finder",
+      "description": "Browse files and folders",
+      "position": { "x": 60, "y": 60 },
+      "featured": true
+    },
+    {
+      "id": "portfolio",
+      "name": "Portfolio", 
+      "icon": "/images/icons/portfolio.svg",
+      "type": "internal",
+      "component": "Portfolio",
+      "description": "View my projects and work samples",
+      "position": { "x": 180, "y": 60 },
+      "featured": true
+    },
+    {
+      "id": "terminal",
+      "name": "Terminal",
+      "icon": "/images/icons/terminal.svg", 
+      "type": "internal",
+      "component": "Terminal",
+      "description": "Interactive command line interface",
+      "position": { "x": 300, "y": 60 },
+      "featured": true
+    },
+    {
+      "id": "about",
+      "name": "About Me",
+      "icon": "/images/icons/about.svg",
+      "type": "internal", 
+      "component": "About",
+      "description": "Learn about my background and experience",
+      "position": { "x": 420, "y": 60 },
+      "featured": true
+    },
+    {
+      "id": "contact",
+      "name": "Contact",
+      "icon": "/images/icons/contact.svg",
+      "type": "internal",
+      "component": "Contact", 
+      "description": "Get in touch with me",
+      "position": { "x": 540, "y": 60 },
+      "featured": true
+    },
+    {
+      "id": "preferences",
+      "name": "System Preferences",
+      "icon": "/images/icons/preferences.svg",
+      "type": "internal",
+      "component": "Preferences",
+      "description": "Customize desktop settings and preferences",
+      "position": { "x": 60, "y": 180 },
+      "featured": false
+    },
+    {
+      "id": "calculator",
+      "name": "Calculator", 
+      "icon": "/images/icons/calculator.svg",
+      "type": "external",
+      "url": "https://calculator.net",
+      "description": "Simple calculator application",
+      "position": { "x": 180, "y": 180 },
+      "featured": false
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "icon": "/images/icons/github.svg",
+      "type": "external",
+      "url": "https://github.com/abdulmeLINK",
+      "openInNewTab": true,
+      "description": "Visit my GitHub profile",
+      "position": { "x": 300, "y": 180 },
+      "featured": false
+    },
+    {
+      "id": "linkedin",
+      "name": "LinkedIn", 
+      "icon": "/images/icons/linkedin.ico",
+      "type": "external",
+      "openInNewTab": true,
+      "url": "https://linkedin.com/in/abdulmelink",
+      "description": "Connect with me on LinkedIn",
+      "position": { "x": 420, "y": 180 },
+      "featured": false
+    },
+      {
+      "id": "pdf-reader",
+      "name": "FLOPY-NET Report",
+      "icon": "/images/icons/pdf.svg",
+      "type": "document",
+      "filePath": "/documents/FLOPY-NET_Comprehensive_Report.pdf",
+      "fileType": "pdf",
+      "description": "FLOPY-NET Comprehensive Report",
+      "position": { "x": 540, "y": 180 },
+      "featured": false
+    }
+  ],
+  "grid": {
+    "size": 80,
+    "padding": 20,
+    "snapThreshold": 15
+  },
+  "animation": {
+    "hoverScale": 1.1,
+    "hoverTilt": 5,
+    "dragOpacity": 0.8,
+    "transitionDuration": 200
+  }
+}

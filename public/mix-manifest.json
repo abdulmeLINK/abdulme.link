@@ -1,9 +1,16 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/components/BootScreen.js": "/js/components/BootScreen.js",
+    "/js/LandingPage.js": "/js/LandingPage.js",
+    "/css/landing.css": "/css/landing.css",
+    "/css/boot-screen.css": "/css/boot-screen.css",
+    "/css/components/preferences.css": "/css/components/preferences.css",
     "/css/app.css": "/css/app.css",
-    "/js/xterm.js": "/js/xterm.js",
-    "/js/xterm-addon-fit.js": "/js/xterm-addon-fit.js",
-    "/js/xterm-addon-web-links.js": "/js/xterm-addon-web-links.js",
-    "/css/vendor.css": "/css/vendor.css",
-    "/js/terminal.js": "/js/terminal.js"
+    "/js/vendor/xterm.js": "/js/vendor/xterm.js",
+    "/css/vendor/xterm.css": "/css/vendor/xterm.css",
+    "/js/vendor/xterm-addon-fit.js": "/js/vendor/xterm-addon-fit.js",
+    "/js/vendor/xterm-addon-web-links.js": "/js/vendor/xterm-addon-web-links.js",
+    "/data/desktop-apps.json": "/data/desktop-apps.json",
+    "/data/loading-messages.json": "/data/loading-messages.json",
+    "/data/preferences-defaults.json": "/data/preferences-defaults.json"
 }
