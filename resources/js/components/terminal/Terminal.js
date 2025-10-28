@@ -516,23 +516,57 @@ class Terminal {
     /**
      * Show welcome message
      */
+    /**
+     * Show welcome message with adaptive width and contextual session info
+     */
     showWelcome() {
-        const welcome = [
-            '╭─────────────────────────────────────────────────────╮',
-            '│              \x1b[32m✨ AbdulmeLink Terminal ✨\x1b[0m              │',
-            '│                                                     │',
-            '│  Welcome to the authentic LinkOS terminal experience │',
-            '│                                                     │',
-            '│  Type \x1b[33mhelp\x1b[0m to see available commands                │',
-            '│  Type \x1b[33mgames\x1b[0m to see available games                  │',
-            '│                                                     │',
-            '╰─────────────────────────────────────────────────────╯',
-            ''
-        ];
-        
-        welcome.forEach(line => {
-            this.terminal.writeln(line);
-        });
+        try {
+            const cols = (this.terminal && this.terminal.cols) ? this.terminal.cols : 80;
+            const maxInnerWidth = Math.min(53, Math.max(40, cols - 8));
+            const pad = (s = '') => {
+                const len = s.replace(/\x1b\[[0-9;]*m/g, '').length;
+                const totalPad = Math.max(0, maxInnerWidth - len);
+                const left = Math.floor(totalPad / 2);
+                const right = totalPad - left;
+                return ' '.repeat(left) + s + ' '.repeat(right);
+            };
+
+            // Dynamic greeting based on local time
+            const hour = new Date().getHours();
+            const timeGreeting = hour < 12 ? 'Good morning' : (hour < 18 ? 'Good afternoon' : 'Good evening');
+
+            // Session context (if available)
+            const lastCommands = (this.sessionData && Array.isArray(this.sessionData.commandHistory))
+                ? this.sessionData.commandHistory.length
+                : 0;
+            const lastDir = (this.sessionData && this.sessionData.currentDirectory) ? this.sessionData.currentDirectory : this.currentDirectory;
+
+            const boxTop = '╭' + '─'.repeat(maxInnerWidth) + '╮';
+            const boxBottom = '╰' + '─'.repeat(maxInnerWidth) + '╯';
+
+            const content = [
+                boxTop,
+                '│' + pad(`\x1b[32m✨ AbdulmeLink Terminal ✨\x1b[0m`) + '│',
+                '│' + pad('') + '│',
+                '│' + pad(`${timeGreeting}, welcome to LinkOS`) + '│',
+                '│' + pad('An authentic macOS-inspired terminal experience') + '│',
+                '│' + pad('') + '│',
+                '│' + pad(`Type \x1b[33mhelp\x1b[0m to list commands — Type \x1b[33mgames\x1b[0m for games`) + '│',
+                '│' + pad('') + '│',
+                '│' + pad(`Session: ${lastCommands} commands | CWD: ${lastDir}`) + '│',
+                boxBottom,
+                ''
+            ];
+
+            content.forEach(line => this.terminal.writeln(line));
+        } catch (e) {
+            // Fail gracefully — fallback to a minimal welcome
+            try {
+                this.terminal.writeln('Welcome to AbdulmeLink Terminal — type help for commands.');
+            } catch (err) {
+                // ignore
+            }
+        }
     }
 
     /**
