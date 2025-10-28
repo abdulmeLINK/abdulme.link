@@ -1,0 +1,526 @@
+/* Terminal Component Styles */
+
+.terminal-container {
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    font-family: 'Menlo', 'Monaco', 'Lucida Console', monospace;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Xterm.js overrides for Matrix theme */
+.xterm {
+    background-color: #000000 !important;
+    color: #00ff41 !important;
+    font-family: 'Menlo', 'Monaco', 'Lucida Console', monospace !important;
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+}
+
+.xterm .xterm-viewport {
+    background-color: #000000 !important;
+}
+
+.xterm .xterm-screen {
+    background-color: #000000 !important;
+}
+
+.xterm .xterm-cursor {
+    background-color: #00ff41 !important;
+    color: #000000 !important;
+    animation: cursor-blink 1s infinite;
+}
+
+@keyframes cursor-blink {
+    0%, 50% { 
+        opacity: 1; 
+        background-color: #00ff41 !important;
+    }
+    51%, 100% { 
+        opacity: 0.3; 
+        background-color: transparent !important;
+    }
+}
+
+.xterm .xterm-selection {
+    background-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Scrollbar styling */
+.xterm .xterm-viewport::-webkit-scrollbar {
+    width: 8px;
+}
+
+.xterm .xterm-viewport::-webkit-scrollbar-track {
+    background: rgba(0, 255, 65, 0.1);
+}
+
+.xterm .xterm-viewport::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 65, 0.3);
+    border-radius: 4px;
+}
+
+.xterm .xterm-viewport::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 65, 0.5);
+}
+
+/* Terminal window wrapper */
+.terminal-window {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #000000;
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+}
+
+/* Terminal content area */
+.terminal-content {
+    flex: 1;
+    padding: 12px;
+    overflow: hidden;
+}
+
+/* Scanline effect for CRT simulation */
+.terminal-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        transparent 50%, 
+        rgba(0, 255, 65, 0.03) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 10;
+    animation: scanlines 0.1s linear infinite;
+}
+
+@keyframes scanlines {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 4px; }
+}
+
+/* Glow effect */
+.terminal-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(0, 255, 65, 0.1) 0%,
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Text glow */
+.xterm .xterm-rows {
+    text-shadow: 
+        0 0 5px #00ff41,
+        0 0 10px #00ff4150,
+        0 0 15px #00ff4125;
+}
+
+/* Alternative themes */
+.terminal-amber {
+    --terminal-bg: #1a0f00;
+    --terminal-fg: #ffb000;
+    --terminal-cursor: #ffb000;
+    --terminal-selection: rgba(255, 176, 0, 0.3);
+}
+
+.terminal-amber .xterm {
+    background-color: var(--terminal-bg) !important;
+    color: var(--terminal-fg) !important;
+}
+
+.terminal-amber .xterm .xterm-cursor {
+    background-color: var(--terminal-cursor) !important;
+    color: var(--terminal-bg) !important;
+}
+
+.terminal-amber .xterm .xterm-selection {
+    background-color: var(--terminal-selection) !important;
+}
+
+.terminal-amber::before {
+    background: linear-gradient(
+        transparent 50%, 
+        rgba(255, 176, 0, 0.03) 50%
+    );
+}
+
+.terminal-amber::after {
+    background: radial-gradient(
+        ellipse at center,
+        rgba(255, 176, 0, 0.1) 0%,
+        transparent 70%
+    );
+}
+
+.terminal-classic {
+    --terminal-bg: #000000;
+    --terminal-fg: #ffffff;
+    --terminal-cursor: #ffffff;
+    --terminal-selection: rgba(255, 255, 255, 0.3);
+}
+
+.terminal-classic .xterm {
+    background-color: var(--terminal-bg) !important;
+    color: var(--terminal-fg) !important;
+}
+
+.terminal-classic .xterm .xterm-cursor {
+    background-color: var(--terminal-cursor) !important;
+    color: var(--terminal-bg) !important;
+}
+
+.terminal-classic .xterm .xterm-selection {
+    background-color: var(--terminal-selection) !important;
+}
+
+.terminal-classic::before {
+    display: none;
+}
+
+.terminal-classic::after {
+    display: none;
+}
+
+/* Terminal loading state */
+.terminal-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    color: #00ff41;
+    font-family: 'Menlo', 'Monaco', 'Lucida Console', monospace;
+}
+
+.terminal-loading-text {
+    font-size: 14px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Terminal error state */
+.terminal-error {
+    padding: 2rem;
+    text-align: center;
+    color: #ff073a;
+    font-family: 'Menlo', 'Monaco', 'Lucida Console', monospace;
+    background: #000;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.terminal-error h3 {
+    margin: 0 0 1rem 0;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.terminal-error p {
+    margin: 0 0 1rem 0;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.terminal-error button {
+    background: #00ff41;
+    color: #000;
+    border: none;
+    padding: 8px 16px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 150ms ease;
+}
+
+.terminal-error button:hover {
+    background: #00ff41cc;
+    transform: translateY(-1px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .terminal-container {
+        font-size: 12px;
+    }
+    
+    .xterm {
+        font-size: 12px !important;
+    }
+    
+    .terminal-content {
+        padding: 8px;
+    }
+    
+    /* Disable visual effects on mobile for performance */
+    .terminal-container::before,
+    .terminal-container::after {
+        display: none;
+    }
+    
+    .xterm .xterm-rows {
+        text-shadow: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .terminal-container {
+        font-size: 11px;
+    }
+    
+    .xterm {
+        font-size: 11px !important;
+        line-height: 1.1 !important;
+    }
+    
+    .terminal-content {
+        padding: 6px;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .xterm {
+        color: #ffffff !important;
+        background-color: #000000 !important;
+    }
+    
+    .xterm .xterm-cursor {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        animation: cursor-blink-high-contrast 1s infinite;
+    }
+    
+    @keyframes cursor-blink-high-contrast {
+        0%, 50% { 
+            opacity: 1; 
+            background-color: #ffffff !important;
+        }
+        51%, 100% { 
+            opacity: 0.3; 
+            background-color: transparent !important;
+        }
+    }
+    
+    .terminal-container::before,
+    .terminal-container::after {
+        display: none;
+    }
+    
+    .xterm .xterm-rows {
+        text-shadow: none;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .terminal-container::before {
+        animation: none;
+    }
+    
+    .terminal-loading-text {
+        animation: none;
+    }
+    
+    .xterm .xterm-cursor {
+        animation: none !important;
+        opacity: 1 !important;
+        background-color: #00ff41 !important;
+    }
+    
+    .xterm .xterm-rows {
+        text-shadow: none;
+    }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+    /* Terminal already dark by default */
+}
+
+/* Print styles */
+@media print {
+    .terminal-container {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .xterm {
+        background-color: white !important;
+        color: black !important;
+    }
+    
+    .terminal-container::before,
+    .terminal-container::after {
+        display: none;
+    }
+    
+    .xterm .xterm-rows {
+        text-shadow: none;
+    }
+}
+
+/* CRT Monitor Bezel for Alien Fullscreen Mode */
+.alien-fullscreen {
+    background: #1a1a1a !important;
+    position: relative;
+}
+
+/* CRT Monitor Bezel Border */
+.alien-fullscreen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 40px solid #2a2a2a;
+    box-shadow: 
+        inset 0 0 20px rgba(0,0,0,0.8),
+        inset 0 0 40px rgba(0,0,0,0.5),
+        inset -10px -10px 30px rgba(0,0,0,0.3),
+        inset 10px 10px 30px rgba(255,255,255,0.05);
+    pointer-events: none;
+    z-index: 10000;
+}
+
+/* Glass Reflection Effect */
+.alien-fullscreen::after {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.05) 0%,
+        rgba(255,255,255,0.02) 30%,
+        transparent 50%,
+        transparent 100%
+    );
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* Terminal Content fills entire window (bezel overlays on top) */
+.alien-fullscreen .window-content {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: #000000;
+    padding: 40px !important;
+    box-sizing: border-box !important;
+}
+
+/* Terminal container fills window-content */
+.alien-fullscreen .terminal-container {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: #000000;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* CRT Scanlines Effect - overlays on top of content */
+.alien-fullscreen .scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(0,0,0,0.3) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 9998;
+    animation: scan 8s linear infinite;
+}
+
+@keyframes scan {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100%; }
+}
+
+/* CRT Vignette Effect - overlays on top of content */
+.alien-fullscreen .vignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 40%,
+        rgba(0,0,0,0.3) 70%,
+        rgba(0,0,0,0.7) 100%
+    );
+    pointer-events: none;
+    z-index: 9997;
+}
+
+/* CRT Pixel Grid Effect - overlays on top of content */
+.alien-fullscreen .crt-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(to bottom, transparent 1px, rgba(0,0,0,0.1) 1px),
+        linear-gradient(to right, transparent 1px, rgba(0,0,0,0.1) 1px);
+    background-size: 100% 2px, 2px 100%;
+    pointer-events: none;
+    z-index: 9996;
+    opacity: 0.3;
+}
+
+/* Phosphor Glow for Terminal Text */
+.alien-fullscreen .xterm-rows {
+    text-shadow: 
+        0 0 2px currentColor,
+        0 0 4px currentColor,
+        0 0 8px rgba(57, 255, 20, 0.5) !important;
+}
+
+/* CRT Flicker Animation */
+.alien-fullscreen .xterm-screen {
+    animation: flicker 0.15s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.98; }
+    50% { opacity: 1; }
+    100% { opacity: 0.98; }
+}

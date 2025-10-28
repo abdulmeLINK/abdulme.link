@@ -1,0 +1,1 @@
+Use this to contribute to the repository using AI.

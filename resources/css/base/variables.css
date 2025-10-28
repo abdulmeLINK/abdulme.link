@@ -1,0 +1,157 @@
+/* ========================================
+   CSS Custom Properties (Variables)
+   LinkOS-authentic color system and measurements
+   ======================================== */
+
+:root {
+  /* LinkOS System Colors */
+  --system-blue: #007AFF;
+  --system-blue-hover: #0056CC;
+  --system-green: #30D158;
+  --system-indigo: #5856D6;
+  --system-orange: #FF9500;
+  --system-pink: #FF2D92;
+  --system-purple: #AF52DE;
+  --system-red: #FF3B30;
+  --system-teal: #00C7BE;
+  --system-yellow: #FFD60A;
+
+  /* Background Colors (Dark Mode Defaults) */
+  --background-primary: #000000;
+  --background-secondary: #1C1C1E;
+  --background-tertiary: #2C2C2E;
+  --background-elevated: #3A3A3C;
+  
+  /* Text Colors - MANAGED BY themes.css - DO NOT DEFINE HERE */
+  /* --text-primary, --text-secondary, --text-tertiary are in themes.css */
+  --text-tertiary: rgba(255, 255, 255, 0.3);
+  --text-quaternary: rgba(255, 255, 255, 0.18);
+
+  /* Glass & Blur Effects */
+  --glass-background: rgba(40, 40, 40, 0.9);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --blur-amount: 20px;
+  
+  /* Shadows */
+  --shadow-small: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-large: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --shadow-context: 0 10px 30px rgba(0, 0, 0, 0.6);
+
+  /* Border Radius */
+  --radius-small: 4px;
+  --radius-medium: 8px;
+  --radius-large: 12px;
+  --radius-icon: 12px;
+
+  /* Spacing Scale */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+
+  /* Typography */
+  --font-family-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-family-mono: 'SF Mono', Menlo, Monaco, 'Cascadia Code', monospace;
+  
+  --font-size-xs: 10px;
+  --font-size-sm: 11px;
+  --font-size-base: 13px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+
+  /* Animation Easing */
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-apple: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Animation Durations */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+
+  /* Z-Index Scale */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 9999;
+  --z-debug: 99999;
+
+  /* Performance */
+  --gpu-acceleration: translateZ(0);
+  --will-change-transform: transform;
+  --will-change-opacity: opacity;
+
+  /* Responsive Breakpoints */
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* User Preference Overrides */
+  --accent-color: var(--system-blue);
+  --transparency: 0.8;
+  --animation-speed: 1.0;
+  --desktop-icon-size: 64px;
+}
+
+/* Light Mode Variables - MANAGED BY themes.css */
+/* DO NOT define --text-primary, --text-secondary here */
+/* themes.css is the single source of truth for theme colors */
+[data-theme="light"] {
+  --background-primary: #FFFFFF;
+  --background-secondary: #F2F2F7;
+  --background-tertiary: #FFFFFF;
+  --background-elevated: #FFFFFF;
+  
+  /* Text colors are defined in themes.css */
+  
+  --glass-background: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(0, 0, 0, 0.1);
+}
+
+/* Reduced Motion Variables */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-normal: 0ms;
+    --duration-slow: 0ms;
+    --duration-slower: 0ms;
+  }
+}
+
+/* User-Set Reduced Motion Class */
+body.reduce-motion,
+body.animations-off {
+  --duration-fast: 0ms !important;
+  --duration-normal: 0ms !important;
+  --duration-slow: 0ms !important;
+  --duration-slower: 0ms !important;
+}
+
+body.animations-off * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* High Contrast Variables */
+@media (prefers-contrast: high) {
+  :root {
+    --glass-background: rgba(0, 0, 0, 1);
+    --glass-border: rgba(255, 255, 255, 0.8);
+    --text-secondary: rgba(255, 255, 255, 0.9);
+    --text-tertiary: rgba(255, 255, 255, 0.7);
+  }
+}

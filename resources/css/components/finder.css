@@ -1,0 +1,390 @@
+/**
+ * Finder Component Styles
+ * LinkOS Big Sur/Ventura authentic file browser - Theme Aware
+ */
+
+/* Container wrapper */
+.finder-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Finder window */
+.finder-window {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    position: relative;
+    transition: var(--theme-transition);
+}
+
+/* Toolbar */
+.finder-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 52px;
+    padding: 0 12px;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-light);
+    flex-shrink: 0;
+    transition: var(--theme-transition);
+}
+
+.finder-nav-buttons {
+    display: flex;
+    gap: 4px;
+}
+
+.finder-btn {
+    width: 28px;
+    height: 24px;
+    border: 1px solid var(--border-medium);
+    border-radius: 5px;
+    background: var(--bg-primary);
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+}
+
+.finder-btn:hover:not(:disabled) {
+    background: var(--bg-tertiary);
+    border-color: var(--accent-color, #007AFF);
+}
+
+.finder-btn:active:not(:disabled) {
+    background: var(--bg-tertiary);
+}
+
+.finder-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.finder-btn.active {
+    background: var(--accent-color, #007AFF);
+    color: var(--text-inverse);
+    border-color: var(--accent-color, #007AFF);
+}
+
+/* Breadcrumb */
+.finder-breadcrumb {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--text-primary);
+    overflow-x: auto;
+    white-space: nowrap;
+    transition: var(--theme-transition);
+}
+
+.breadcrumb-item {
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 3px;
+    transition: background 0.15s;
+}
+
+.breadcrumb-item:hover {
+    background: var(--bg-tertiary);
+}
+
+.breadcrumb-sep {
+    color: var(--text-tertiary);
+    user-select: none;
+}
+
+/* View Controls */
+.finder-view-controls {
+    display: flex;
+    gap: 4px;
+}
+
+/* Search */
+.finder-search {
+    width: 180px;
+}
+
+.finder-search-input {
+    width: 100%;
+    height: 24px;
+    padding: 0 8px;
+    border: 1px solid var(--border-medium);
+    border-radius: 5px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 12px;
+    font-family: inherit;
+    transition: var(--theme-transition);
+}
+
+.finder-search-input:focus {
+    outline: none;
+    border-color: var(--accent-color, #007AFF);
+}
+
+.finder-search-input::placeholder {
+    color: var(--text-tertiary);
+}
+
+/* Body Layout */
+.finder-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Sidebar */
+.finder-sidebar {
+    width: 180px;
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border-light);
+    overflow-y: auto;
+    flex-shrink: 0;
+    transition: width 0.3s, var(--theme-transition);
+}
+
+.finder-sidebar.collapsed {
+    width: 40px;
+}
+
+.sidebar-section {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.sidebar-header {
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: none;
+}
+
+.sidebar-item:hover {
+    background: var(--bg-tertiary);
+}
+
+.sidebar-item.active {
+    background: var(--accent-color, #007AFF);
+    color: var(--text-inverse);
+}
+
+.sidebar-icon {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-label {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Content Area */
+.finder-content {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    background: var(--bg-primary);
+    transition: var(--theme-transition);
+}
+
+/* Grid View */
+.finder-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 16px;
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: none;
+}
+
+.grid-item:hover {
+    background: var(--bg-secondary);
+}
+
+.grid-item.directory {
+    font-weight: 500;
+}
+
+.grid-icon {
+    font-size: 48px;
+    line-height: 1;
+}
+
+.grid-label {
+    font-size: 12px;
+    text-align: center;
+    word-break: break-word;
+    max-width: 100%;
+    color: var(--text-primary);
+}
+
+/* List View */
+.finder-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.list-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 100px 100px;
+    gap: 12px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    border-bottom: 1px solid var(--border-light);
+    position: sticky;
+    top: 0;
+    background: var(--bg-primary);
+    z-index: 1;
+    transition: var(--theme-transition);
+}
+
+.list-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 100px 100px;
+    gap: 12px;
+    padding: 4px 12px;
+    font-size: 13px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.15s;
+    align-items: center;
+    color: var(--text-primary);
+}
+
+.list-item:hover {
+    background: var(--bg-secondary);
+}
+
+.list-item.directory {
+    font-weight: 500;
+}
+
+.list-col-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+}
+
+.list-col-name span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.list-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.list-col-modified,
+.list-col-size,
+.list-col-kind {
+    color: var(--text-tertiary);
+    font-size: 12px;
+}
+
+/* Empty/Error States */
+.finder-empty,
+.finder-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: var(--text-tertiary);
+    font-size: 14px;
+}
+
+.finder-error {
+    flex-direction: column;
+    gap: 8px;
+    color: #ff3b30;
+}
+
+.finder-error h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.finder-error p {
+    margin: 0;
+    font-size: 13px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .finder-sidebar {
+        width: 40px;
+    }
+    
+    .sidebar-label {
+        display: none;
+    }
+    
+    .finder-search {
+        width: 120px;
+    }
+    
+    .finder-grid {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+        gap: 12px;
+    }
+    
+    .list-header,
+    .list-item {
+        grid-template-columns: 1fr 80px;
+    }
+    
+    .list-col-modified,
+    .list-col-kind {
+        display: none;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    /* Theme variables handle all dark mode styling automatically */
+    /* No hardcoded overrides needed - the theme system manages everything */
+}

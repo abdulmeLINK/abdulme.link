@@ -1,0 +1,123 @@
+{
+  "appearance": {
+    "theme": "auto",
+    "accent_color": "#007AFF",
+    "transparency": 0.8,
+    "custom_colors": {
+      "primary": "#007AFF",
+      "secondary": "#5856D6",
+      "success": "#34C759",
+      "warning": "#FF9500",
+      "danger": "#FF3B30"
+    }
+  },
+  "desktop": {
+    "wallpaper": {
+      "current": "big-sur-day",
+      "auto_rotation": true,
+      "rotation_interval": 5000,
+      "time_based_switching": true,
+      "favorites": ["big-sur-night", "ventura-dark", "big-sur-day"]
+    },
+    "icons": {
+      "size": "medium",
+      "grid_spacing": 20,
+      "show_labels": true,
+      "snap_to_grid": true
+    },
+    "context_menu": {
+      "enabled": true,
+      "show_wallpaper_option": true,
+      "show_refresh_option": true,
+      "custom_options": []
+    }
+  },
+  "dock": {
+    "position": "bottom",
+    "size": 64,
+    "auto_hide": false,
+    "magnification": {
+      "enabled": true,
+      "scale": 1.5
+    },
+    "indicator_dots": true,
+    "recent_apps_count": 3,
+    "apps": [
+      "finder",
+      "terminal",
+      "portfolio",
+      "about",
+      "contact",
+      "preferences"
+    ]
+  },
+  "boot": {
+    "animation_enabled": true,
+    "skip_after_session": true,
+    "show_progress_text": true,
+    "show_personal_messages": true,
+    "quick_mode": false,
+    "preload_wallpapers": true
+  },
+  "animations": {
+    "speed": "normal",
+    "effects": {
+      "bounce": true,
+      "fade": true,
+      "slide": true,
+      "scale": true
+    },
+    "reduced_motion": false
+  },
+  "performance": {
+    "cache": {
+      "wallpaper_cache_size": 100,
+      "auto_clear": true,
+      "preload_components": ["terminal", "portfolio"]
+    },
+    "image_quality": "high",
+    "lazy_loading": true
+  },
+  "terminal": {
+    "appearance": {
+      "theme": "matrix",
+      "font_family": "Menlo",
+      "font_size": 14,
+      "line_height": 1.2,
+      "effects": {
+        "scanlines": true,
+        "flicker": false,
+        "crt": true
+      }
+    },
+    "behavior": {
+      "history_size": 1000,
+      "tab_completion": true,
+      "suggestion_count": 5,
+      "clear_on_exit": false,
+      "macos_shortcuts": true
+    },
+    "colors": {
+      "background": "#000000",
+      "foreground": "#00ff41",
+      "cursor": "#ffffff",
+      "selection": "#333333"
+    }
+  },
+  "privacy": {
+    "analytics": false,
+    "anonymous_usage": false,
+    "remember_session": true,
+    "restore_windows": true
+  },
+  "accessibility": {
+    "high_contrast": false,
+    "large_text": false,
+    "focus_indicators": true,
+    "keyboard_navigation": true,
+    "screen_reader_support": false,
+    "cursor_enhancement": false
+  },
+  "version": "1.0.0",
+  "last_updated": null
+}

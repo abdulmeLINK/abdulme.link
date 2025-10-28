@@ -1,0 +1,223 @@
+/**
+ * Global Theme System CSS Variables
+ * Comprehensive color palette for light/dark themes
+ * All components should use these variables for dynamic theming
+ */
+
+:root {
+    /* ========================================
+       LIGHT THEME (Default)
+       ======================================== */
+    
+    /* Window Colors */
+    --window-bg: rgba(246, 246, 246, 0.95);
+    --window-bg-solid: #f6f6f6;
+    --window-titlebar-start: rgba(255, 255, 255, 0.95);
+    --window-titlebar-end: rgba(240, 240, 240, 0.95);
+    --window-border: rgba(255, 255, 255, 0.2);
+    --window-title-text: rgba(0, 0, 0, 0.85);
+    --window-content-bg: rgba(255, 255, 255, 0.95);
+    --window-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    
+    /* Dock Colors */
+    --dock-bg: rgba(255, 255, 255, 0.15);
+    --dock-border: rgba(255, 255, 255, 0.18);
+    --dock-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    --dock-inset-highlight: rgba(255, 255, 255, 0.25);
+    --dock-inset-shadow: rgba(0, 0, 0, 0.1);
+    --dock-icon-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --dock-icon-border: rgba(255, 255, 255, 0.1);
+    --dock-label-bg: rgba(0, 0, 0, 0.8);
+    --dock-label-text: white;
+    --dock-indicator: rgba(255, 255, 255, 0.9);
+    --dock-separator: rgba(0, 0, 0, 0.2);
+    
+    /* Context Menu Colors */
+    --context-menu-bg: rgba(255, 255, 255, 0.9);
+    --context-menu-border: rgba(0, 0, 0, 0.1);
+    --context-menu-text: #333;
+    --context-menu-hover: rgba(0, 122, 255, 0.1);
+    --context-menu-separator: rgba(0, 0, 0, 0.1);
+    --context-menu-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    
+    /* Desktop Colors */
+    --desktop-icon-text: white;
+    --desktop-icon-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    --desktop-overlay: rgba(0, 0, 0, 0);
+    
+    /* Text Colors */
+    --text-primary: #1d1d1f;
+    --text-secondary: #6b7280;
+    --text-tertiary: #86868b;
+    --text-inverse: #ffffff;
+    
+    /* Background Colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f7;
+    --bg-tertiary: #e5e7eb;
+    
+    /* Border Colors */
+    --border-light: rgba(0, 0, 0, 0.1);
+    --border-medium: rgba(0, 0, 0, 0.2);
+    --border-strong: rgba(0, 0, 0, 0.3);
+    
+    /* Shadow Colors */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.5);
+    
+    /* Accent Colors (Always consistent) */
+    --accent-primary: #007AFF;
+    --accent-secondary: #5856D6;
+    --accent-hover: rgba(0, 122, 255, 0.1);
+    --accent-active: rgba(0, 122, 255, 0.3);
+    
+    /* Traffic Light Colors (Always consistent) */
+    --traffic-close: #ff5f57;
+    --traffic-minimize: #ffbd2e;
+    --traffic-maximize: #28ca42;
+    
+    /* Glassmorphism Effects */
+    --glass-backdrop: blur(20px) saturate(180%);
+    --glass-border: rgba(255, 255, 255, 0.18);
+    
+    /* Transition */
+    --theme-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   DARK THEME
+   ======================================== */
+
+[data-theme="dark"] {
+    /* Window Colors */
+    --window-bg: rgba(40, 40, 40, 0.95);
+    --window-bg-solid: #282828;
+    --window-titlebar-start: rgba(60, 60, 60, 0.95);
+    --window-titlebar-end: rgba(50, 50, 50, 0.95);
+    --window-border: rgba(255, 255, 255, 0.1);
+    --window-title-text: rgba(255, 255, 255, 0.85);
+    --window-content-bg: rgba(30, 30, 30, 0.95);
+    --window-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    
+    /* Dock Colors */
+    --dock-bg: rgba(30, 30, 30, 0.3);
+    --dock-border: rgba(0, 0, 0, 0.4);
+    --dock-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+    --dock-inset-highlight: rgba(255, 255, 255, 0.05);
+    --dock-inset-shadow: rgba(0, 0, 0, 0.3);
+    --dock-icon-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --dock-icon-border: rgba(255, 255, 255, 0.05);
+    --dock-label-bg: rgba(30, 30, 30, 0.9);
+    --dock-label-text: white;
+    --dock-indicator: rgba(255, 255, 255, 0.8);
+    --dock-separator: rgba(255, 255, 255, 0.1);
+    
+    /* Context Menu Colors */
+    --context-menu-bg: rgba(30, 30, 30, 0.95);
+    --context-menu-border: rgba(255, 255, 255, 0.1);
+    --context-menu-text: #ffffff;
+    --context-menu-hover: rgba(255, 255, 255, 0.1);
+    --context-menu-separator: rgba(255, 255, 255, 0.1);
+    --context-menu-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+    
+    /* Desktop Colors */
+    --desktop-icon-text: white;
+    --desktop-icon-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+    --desktop-overlay: rgba(0, 0, 0, 0.2);
+    
+    /* Text Colors */
+    --text-primary: #f5f5f7;
+    --text-secondary: #aaaaaa;
+    --text-tertiary: #98989d;
+    --text-inverse: #1d1d1f;
+    
+    /* Background Colors */
+    --bg-primary: #1c1c1e;
+    --bg-secondary: #2c2c2e;
+    --bg-tertiary: #38383a;
+    
+    /* Border Colors */
+    --border-light: rgba(255, 255, 255, 0.1);
+    --border-medium: rgba(255, 255, 255, 0.2);
+    --border-strong: rgba(255, 255, 255, 0.3);
+    
+    /* Shadow Colors */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+/* ========================================
+   DESKTOP WALLPAPER OVERLAY
+   Darkens light wallpapers in dark mode
+   ======================================== */
+
+.wallpaper-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--desktop-overlay);
+    pointer-events: none;
+    transition: var(--theme-transition);
+    z-index: 0;
+}
+
+/* ========================================
+   SMOOTH TRANSITIONS
+   Apply to all theme-aware elements
+   ======================================== */
+
+.LinkOS-window,
+.dock,
+.dock-icon,
+.context-menu,
+.window-titlebar,
+.window-content {
+    transition: var(--theme-transition);
+}
+
+/* ========================================
+   ACCESSIBILITY - Reduced Motion
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    :root,
+    [data-theme="dark"] {
+        --theme-transition: none;
+    }
+    
+    .LinkOS-window,
+    .dock,
+    .dock-icon,
+    .context-menu,
+    .window-titlebar,
+    .window-content {
+        transition: none !important;
+    }
+}
+
+/* ========================================
+   PREFERS COLOR SCHEME
+   Fallback for browsers that don't support data-theme
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        /* Apply dark theme variables */
+        --window-bg: rgba(40, 40, 40, 0.95);
+        --window-titlebar-start: rgba(60, 60, 60, 0.9);
+        --window-titlebar-end: rgba(50, 50, 50, 0.9);
+        --window-title-text: rgba(255, 255, 255, 0.85);
+        --dock-bg: rgba(30, 30, 30, 0.3);
+        --context-menu-bg: rgba(30, 30, 30, 0.95);
+        --context-menu-text: #ffffff;
+        --text-primary: #f5f5f7;
+        --bg-primary: #1c1c1e;
+    }
+}

@@ -1,9 +1,16 @@
 {
-    "/js/app.js": "/js/app.js?id=f5b6d8998aa14b16805fa141a7831a57",
-    "/css/app.css": "/css/app.css?id=474063e653e78fe7b6b79ab6a220700d",
-    "/js/xterm.js": "/js/xterm.js?id=e162d1d3f7e6bb7cae82b2d08d992edb",
-    "/js/xterm-addon-fit.js": "/js/xterm-addon-fit.js?id=253758ef31dfdb61a493569749a6c252",
-    "/js/xterm-addon-web-links.js": "/js/xterm-addon-web-links.js?id=6c95d34ad7659c2788762557f1fcd7fc",
-    "/css/vendor.css": "/css/vendor.css?id=7fa12bbba4b809e3b3e96f37ecf761bf",
-    "/js/terminal.js": "/js/terminal.js?id=2bb76ff444d57582eaf93f9915336f13"
+    "/js/app.js": "/js/app.js",
+    "/js/components/BootScreen.js": "/js/components/BootScreen.js",
+    "/js/LandingPage.js": "/js/LandingPage.js",
+    "/css/landing.css": "/css/landing.css",
+    "/css/boot-screen.css": "/css/boot-screen.css",
+    "/css/components/preferences.css": "/css/components/preferences.css",
+    "/css/app.css": "/css/app.css",
+    "/js/vendor/xterm.js": "/js/vendor/xterm.js",
+    "/css/vendor/xterm.css": "/css/vendor/xterm.css",
+    "/js/vendor/xterm-addon-fit.js": "/js/vendor/xterm-addon-fit.js",
+    "/js/vendor/xterm-addon-web-links.js": "/js/vendor/xterm-addon-web-links.js",
+    "/data/desktop-apps.json": "/data/desktop-apps.json",
+    "/data/loading-messages.json": "/data/loading-messages.json",
+    "/data/preferences-defaults.json": "/data/preferences-defaults.json"
 }

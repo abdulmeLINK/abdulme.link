@@ -1,0 +1,451 @@
+/* ========================================
+   Boot Screen Component Styles
+   AbdulmeLink Portfolio - LinkOS Style Boot
+   ======================================== */
+
+.boot-overlay {
+    /* Layout & Positioning - Force visibility */
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999999 !important;
+    
+    /* LinkOS Boot Background - Dark with subtle gradient */
+    background: 
+        radial-gradient(circle at center, #1a1a1a 0%, #000000 100%) !important;
+    
+    /* Typography - Official Apple System Font */
+    color: #ffffff !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', system-ui, sans-serif !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    text-rendering: optimizeLegibility !important;
+    
+    /* Layout */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    
+    /* Interaction */
+    pointer-events: all !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    
+    /* Initial state - visible by default */
+    opacity: 1 !important;
+    transform: scale(1) !important;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Boot screen loaded state */
+.boot-overlay.boot-loaded {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Boot screen fade out animation */
+.boot-overlay.boot-fade-out {
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Background overlay for better contrast */
+.boot-background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at center,
+        transparent 0%,
+        rgba(0, 0, 0, 0.3) 50%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+    z-index: -1;
+}
+
+/* Content container */
+.boot-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    animation: bootContentFadeIn 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: 0.3s;
+}
+
+@keyframes bootContentFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateY(10px) scale(0.99);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Apple Logo Section */
+.boot-logo {
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 2;
+}
+
+.boot-logo-container {
+    position: relative;
+    animation: applePulse 6s ease-in-out infinite;
+    animation-delay: 0.5s;
+}
+
+.apple-logo {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Apple logo color - matches LinkOS boot */
+    color: #ffffff;
+    
+    /* Subtle glow effect */
+    filter: drop-shadow(0 4px 20px rgba(255, 255, 255, 0.3));
+    
+    /* GPU acceleration */
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+.apple-logo svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
+}
+
+@keyframes applePulse {
+    0%, 100% { 
+        transform: scale(1);
+        filter: drop-shadow(0 4px 20px rgba(255, 255, 255, 0.3));
+        opacity: 0.9;
+    }
+    50% { 
+        transform: scale(1.02);
+        filter: drop-shadow(0 6px 25px rgba(255, 255, 255, 0.4));
+        opacity: 1;
+    }
+}
+
+/* Portfolio Title */
+.boot-title {
+    margin-bottom: 60px;
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: 300;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    opacity: 0.9;
+    
+    /* Subtle text shadow like LinkOS */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    
+    /* No excessive animations - keep it minimal */
+    transition: opacity 0.3s ease;
+}
+
+/* Progress Section */
+.boot-progress-section {
+    width: min(450px, 90vw);
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Progress Bar - LinkOS Style */
+.boot-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    position: relative;
+    
+    /* Clean LinkOS styling */
+    border: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.boot-progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%
+    );
+    animation: progressShimmer 3s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+@keyframes progressShimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.boot-progress-fill {
+    width: 0%;
+    height: 100%;
+    border-radius: 2px;
+    
+    /* LinkOS System Blue */
+    background: #007AFF;
+    
+    /* Clean, minimal styling */
+    box-shadow: none;
+    
+    /* Smooth, natural transition */
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* GPU acceleration */
+    will-change: width;
+    transform: translateZ(0);
+}
+
+/* Boot Message - LinkOS Style */
+.boot-message {
+    font-size: clamp(14px, 2.5vw, 16px);
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    min-height: 24px;
+    margin-bottom: 20px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    
+    /* Minimal shadow like LinkOS */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    
+    /* Smooth transition for message changes */
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    
+    /* Initial state */
+    opacity: 0;
+    transform: translateY(5px);
+    
+    /* Animation delay for natural appearance */
+    animation: messageAppear 0.6s ease-out forwards;
+    animation-delay: 2s;
+}
+
+@keyframes messageAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    100% {
+        opacity: 0.8;
+        transform: translateY(0);
+    }
+}
+
+.boot-message.boot-message-fade-out {
+    opacity: 0;
+}
+
+.boot-message.boot-message-fade-in {
+    opacity: 1;
+    animation: messageSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes messageSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Percentage Display - LinkOS Style */
+.boot-percentage {
+    font-size: clamp(12px, 2vw, 14px);
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    font-weight: 400;
+    margin-top: 15px;
+    font-variant-numeric: tabular-nums; /* Monospace numbers */
+    
+    /* Minimal shadow */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    
+    /* Smooth transitions */
+    transition: all 0.3s ease;
+}
+
+/* Responsive Design - Maintain LinkOS Look */
+@media (max-width: 768px) {
+    .boot-content {
+        padding: 0 20px;
+    }
+    
+    .boot-logo {
+        margin-bottom: 50px;
+    }
+    
+    .apple-logo {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .boot-title {
+        margin-bottom: 50px;
+        font-size: 24px;
+        letter-spacing: 0.3px;
+    }
+    
+    .boot-progress-section {
+        width: min(320px, 85vw);
+        margin-bottom: 40px;
+    }
+    
+    .boot-progress-bar {
+        height: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .boot-logo {
+        margin-bottom: 40px;
+    }
+    
+    .apple-logo {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .boot-title {
+        font-size: 20px;
+        margin-bottom: 40px;
+        letter-spacing: 0.2px;
+    }
+    
+    .boot-progress-section {
+        width: min(280px, 80vw);
+    }
+    
+    .boot-message {
+        font-size: 13px;
+    }
+    
+    .boot-percentage {
+        font-size: 11px;
+    }
+}
+
+/* High DPI Display Support */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .apple-logo svg {
+        filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.5));
+    }
+    
+    .boot-progress-bar {
+        box-shadow: inset 0 0.5px 1px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .boot-overlay {
+        transition: opacity 0.3s ease;
+    }
+    
+    .boot-content {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+    
+    .boot-logo-container {
+        animation: none;
+    }
+    
+    .boot-progress-fill {
+        transition: width 0.3s ease;
+    }
+    
+    .boot-message.boot-message-fade-in {
+        animation: none;
+    }
+}
+
+/* Dark mode adjustments (if needed) */
+@media (prefers-color-scheme: light) {
+    .boot-overlay {
+        background: 
+            linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
+            url('/images/profile.jpg');
+    }
+}
+
+/* Force visibility and prevent conflicts */
+.boot-overlay * {
+    box-sizing: border-box !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.boot-overlay *:not(.boot-background-overlay) {
+    display: block !important;
+}
+
+.boot-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.boot-progress-bar {
+    display: block !important;
+}
+
+.boot-progress-fill {
+    display: block !important;
+}
+
+/* Disable right-click during boot */
+.boot-overlay {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.boot-overlay * {
+    pointer-events: none;
+}

@@ -1,0 +1,248 @@
+/* LinkOS Window Component Styles - Theme Aware */
+
+.LinkOS-window {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    will-change: transform, opacity;
+    contain: layout style paint;
+    transition: var(--theme-transition);
+}
+
+.LinkOS-window.focused {
+    box-shadow: var(--window-shadow) !important;
+}
+
+.LinkOS-window.focused .window-titlebar {
+    background: linear-gradient(to bottom, var(--window-titlebar-start), var(--window-titlebar-end)) !important;
+}
+
+.LinkOS-window:not(.focused) {
+    box-shadow: var(--shadow-lg) !important;
+    opacity: 0.95;
+}
+
+.LinkOS-window:not(.focused) .window-titlebar {
+    filter: brightness(0.95);
+}
+
+.LinkOS-window:not(.focused) .window-title {
+    opacity: 0.6;
+}
+
+.LinkOS-window:not(.focused) .traffic-light {
+    opacity: 0.4 !important;
+}
+
+/* Window Titlebar */
+.window-titlebar {
+    -webkit-app-region: drag;
+    app-region: drag;
+}
+
+/* Window Title - Theme Aware */
+.window-title {
+    color: var(--window-title-text);
+    transition: var(--theme-transition);
+}
+
+.window-titlebar * {
+    -webkit-app-region: no-drag;
+    app-region: no-drag;
+}
+
+/* Traffic Lights */
+.traffic-lights {
+    z-index: 10;
+}
+
+.traffic-light {
+    border: 0.5px solid var(--border-light);
+    box-shadow: inset 0 1px 0 var(--glass-border);
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.traffic-light:hover {
+    transform: scale(1.1);
+    box-shadow: inset 0 1px 0 var(--glass-border), var(--shadow-sm);
+}
+
+.traffic-light:active {
+    transform: scale(0.95);
+}
+
+.traffic-light-close:hover {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%) !important;
+}
+
+.traffic-light-minimize:hover {
+    background: linear-gradient(135deg, #ffd93d 0%, #ffb300 100%) !important;
+}
+
+.traffic-light-maximize:hover {
+    background: linear-gradient(135deg, #6bcf7f 0%, #4caf50 100%) !important;
+}
+
+/* Window Content */
+.window-content {
+    position: relative;
+    background: var(--window-content-bg);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    transition: var(--theme-transition);
+}
+
+.window-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.window-content::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+.window-content::-webkit-scrollbar-thumb {
+    background: var(--border-medium);
+    border-radius: 4px;
+}
+
+.window-content::-webkit-scrollbar-thumb:hover {
+    background: var(--border-strong);
+}
+
+/* Resize Handles */
+.resize-handle {
+    z-index: 10;
+    transition: background-color 150ms ease;
+}
+
+.resize-handle:hover {
+    background-color: var(--accent-hover) !important;
+}
+
+/* Window States */
+.LinkOS-window.maximized {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.LinkOS-window.maximized .window-titlebar {
+    border-radius: 0 !important;
+}
+
+.LinkOS-window.maximized .window-content {
+    border-radius: 0 !important;
+}
+
+.LinkOS-window.minimizing {
+    pointer-events: none;
+}
+
+.LinkOS-window.resizing {
+    transition: none !important;
+}
+
+.LinkOS-window.dragging {
+    transition: none !important;
+    z-index: 9999 !important;
+}
+
+/* Dark Mode Support - Now handled by ThemeService */
+@media (prefers-color-scheme: dark) {
+    /* These styles are now managed by the theme system via CSS variables */
+    /* The [data-theme="dark"] selector in themes.css controls all dark mode colors */
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .LinkOS-window {
+        transition: none !important;
+    }
+    
+    .traffic-light {
+        transition: none !important;
+    }
+    
+    .traffic-light:hover {
+        transform: none !important;
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    .LinkOS-window {
+        border: 2px solid currentColor !important;
+    }
+    
+    .window-titlebar {
+        border-bottom: 2px solid currentColor !important;
+    }
+    
+    .traffic-light {
+        border: 1px solid currentColor !important;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .LinkOS-window {
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+    
+    .resize-handle {
+        display: none !important;
+    }
+    
+    .traffic-lights {
+        gap: 12px !important;
+    }
+    
+    .traffic-light {
+        width: 16px !important;
+        height: 16px !important;
+    }
+}
+
+/* Animation Classes */
+.window-enter {
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+}
+
+.window-enter-active {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.window-exit {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.window-exit-active {
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.window-minimize {
+    transform-origin: center bottom;
+    animation: minimizeToDoc 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes minimizeToDoc {
+    to {
+        transform: scale(0.1) translateY(200px);
+        opacity: 0;
+    }
+}
+
+.window-maximize {
+    animation: maximizeWindow 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes maximizeWindow {
+    to {
+        transform: scale(1);
+        border-radius: 0;
+    }
+}

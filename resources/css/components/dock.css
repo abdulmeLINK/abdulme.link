@@ -1,0 +1,417 @@
+/* ========================================
+   Dock Component Styles
+   LinkOS-authentic dock interface
+   ======================================== */
+
+/* CSS Custom Properties */
+:root {
+    --dock-icon-size-small: 48px;
+    --dock-icon-size-medium: 64px;
+    --dock-icon-size-large: 80px;
+    --dock-icon-size: var(--dock-icon-size-medium); /* Default */
+}
+
+/* Dock Container */
+.dock-container {
+    position: fixed !important;
+    z-index: 1000 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: auto !important;
+}
+
+.dock-container .dock {
+    pointer-events: auto !important;
+}
+
+/* Position variants */
+.dock-container.bottom {
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dock-container.left {
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.dock-container.right {
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Auto-hide states */
+.dock-container.auto-hide {
+    transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dock-container.auto-hide.hidden.bottom {
+    transform: translateX(-50%) translateY(100%);
+}
+
+.dock-container.auto-hide.hidden.left {
+    transform: translateY(-50%) translateX(-100%);
+}
+
+.dock-container.auto-hide.hidden.right {
+    transform: translateY(-50%) translateX(100%);
+}
+
+/* Dock Background */
+.dock {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: var(--dock-bg) !important;
+    backdrop-filter: var(--glass-backdrop) !important;
+    -webkit-backdrop-filter: var(--glass-backdrop) !important;
+    border: 1px solid var(--dock-border) !important;
+    border-radius: 16px !important;
+    padding: 8px 12px !important;
+    box-shadow: 
+        var(--dock-shadow),
+        inset 0 1px 0 var(--dock-inset-highlight),
+        inset 0 -1px 0 var(--dock-inset-shadow) !important;
+    transition: var(--theme-transition);
+}
+
+/* Dock Icons Container */
+.dock-icons {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Vertical dock (left/right) */
+.dock-container.left .dock-icons,
+.dock-container.right .dock-icons {
+    flex-direction: column;
+}
+
+/* ========================================
+   Dock Icon Styles
+   ======================================== */
+
+.dock-icon-container {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    transform-origin: bottom center;
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dock-icon {
+    width: var(--dock-icon-size) !important;
+    height: var(--dock-icon-size) !important;
+    border-radius: 16px;
+    box-shadow: 
+        var(--dock-icon-shadow),
+        var(--shadow-sm),
+        inset 0 0 0 1px var(--dock-icon-border);
+    transition: var(--theme-transition);
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    display: block;
+    flex-shrink: 0;
+}
+
+/* Liquid glass effect for icons */
+.dock-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        var(--dock-inset-highlight) 0%,
+        var(--glass-border) 50%,
+        var(--dock-inset-shadow) 100%
+    );
+    border-radius: 16px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* App name fallback text */
+.dock-icon::after {
+    content: attr(data-app-name);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-inverse);
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: var(--desktop-icon-shadow);
+    opacity: var(--icon-fallback-opacity, 0);
+    transition: opacity 200ms ease;
+    pointer-events: none;
+    max-width: 90%;
+    word-wrap: break-word;
+    line-height: 1.1;
+    z-index: 2;
+}
+
+/* Running indicator dot */
+.running-indicator {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    background: var(--dock-indicator);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 200ms ease;
+    box-shadow: 
+        0 0 4px var(--dock-indicator),
+        var(--shadow-sm);
+}
+
+.running-indicator.active {
+    opacity: 1;
+}
+
+/* App labels */
+.dock-label {
+    position: absolute;
+    bottom: calc(100% + 20px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--dock-label-bg);
+    color: var(--dock-label-text);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease;
+    z-index: 1001;
+}
+
+.dock-label::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid var(--dock-label-bg);
+}
+
+/* Hover states */
+.dock-icon-container:hover .dock-label {
+    opacity: 1;
+}
+
+/* ========================================
+   Context Menu Styles
+   ======================================== */
+
+.dock-context-menu {
+    position: fixed;
+    background: var(--context-menu-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--context-menu-border);
+    border-radius: 8px;
+    padding: 4px 0;
+    min-width: 140px;
+    box-shadow: var(--context-menu-shadow);
+    z-index: 10000;
+    display: none;
+    opacity: 0;
+    transition: opacity 200ms ease, var(--theme-transition);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.context-menu-item {
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--context-menu-text);
+    transition: background-color 150ms ease;
+}
+
+.context-menu-item:hover {
+    background-color: var(--context-menu-hover);
+}
+
+.context-menu-separator {
+    height: 1px;
+    background: var(--context-menu-separator);
+    margin: 4px 0;
+}
+
+/* ========================================
+   Dock Animations
+   ======================================== */
+
+/* Bounce animation for app launch */
+@keyframes dockBounce {
+    0% { transform: scale(1) translateY(0); }
+    25% { transform: scale(1.1) translateY(-8px); }
+    50% { transform: scale(1.05) translateY(-4px); }
+    75% { transform: scale(1.02) translateY(-2px); }
+    100% { transform: scale(1) translateY(0); }
+}
+
+/* Icon load animation */
+@keyframes dockIconFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.dock-icon-container {
+    animation: dockIconFadeIn 400ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* Stagger animation delays */
+.dock-icon-container:nth-child(1) { animation-delay: 50ms; }
+.dock-icon-container:nth-child(2) { animation-delay: 100ms; }
+.dock-icon-container:nth-child(3) { animation-delay: 150ms; }
+.dock-icon-container:nth-child(4) { animation-delay: 200ms; }
+.dock-icon-container:nth-child(5) { animation-delay: 250ms; }
+.dock-icon-container:nth-child(6) { animation-delay: 300ms; }
+.dock-icon-container:nth-child(7) { animation-delay: 350ms; }
+
+/* Drag states */
+.dock-icon-container.dragging {
+    opacity: 0.5;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.dock-icon-container.dragging .dock-icon {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: var(--shadow-lg);
+}
+
+.dock-icon-container.dragging .dock-label {
+    opacity: 0;
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+
+/* Tablet adjustments */
+@media (max-width: 1024px) {
+    .dock {
+        padding: 6px 10px;
+    }
+    
+    .dock-icons {
+        gap: 6px;
+    }
+    
+    .dock-label {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .dock-container {
+        bottom: 12px;
+    }
+    
+    .dock {
+        padding: 4px 8px;
+        border-radius: 10px;
+    }
+    
+    .dock-icons {
+        gap: 4px;
+    }
+    
+    .dock-label {
+        display: none; /* Hide labels on mobile */
+    }
+    
+    .running-indicator {
+        bottom: -6px;
+        width: 3px;
+        height: 3px;
+    }
+}
+
+/* ========================================
+   Accessibility Support
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .dock-container,
+    .dock,
+    .dock-icons,
+    .dock-icon-container,
+    .dock-icon,
+    .dock-label,
+    .running-indicator {
+        transition-duration: 0ms;
+        animation-duration: 0ms;
+    }
+    
+    .dock-icon-container {
+        animation: none;
+    }
+}
+
+/* High contrast support */
+@media (prefers-contrast: high) {
+    .dock {
+        background: var(--dock-bg);
+        border: 2px solid var(--dock-border);
+    }
+    
+    .dock-label {
+        background: var(--dock-label-bg);
+        border: 1px solid var(--border-light);
+    }
+    
+    .context-menu-item:hover {
+        background-color: var(--accent-active);
+    }
+}
+
+/* Focus indicators for keyboard navigation */
+.dock-icon-container:focus {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Dark mode adjustments - Now handled by ThemeService */
+@media (prefers-color-scheme: dark) {
+    /* These are handled by the theme system automatically */
+}

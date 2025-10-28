@@ -1,0 +1,37 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="terminalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1D1D1D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- App icon background -->
+  <rect x="32" y="32" width="448" height="448" rx="88" ry="88" fill="url(#terminalGradient)" filter="url(#shadow)"/>
+  
+  <!-- Terminal window -->
+  <rect x="80" y="120" width="352" height="280" rx="8" fill="#000000" stroke="#333333" stroke-width="2"/>
+  
+  <!-- Title bar -->
+  <rect x="80" y="120" width="352" height="32" rx="8" fill="#2D2D2D"/>
+  <rect x="80" y="144" width="352" height="8" fill="#2D2D2D"/>
+  
+  <!-- Window controls -->
+  <circle cx="104" cy="136" r="6" fill="#FF5F57"/>
+  <circle cx="128" cy="136" r="6" fill="#FFBD2E"/>
+  <circle cx="152" cy="136" r="6" fill="#28CA42"/>
+  
+  <!-- Terminal prompt -->
+  <text x="104" y="188" font-family="SF Mono, Monaco, monospace" font-size="16" fill="#00FF41">$</text>
+  <rect x="120" y="176" width="8" height="16" fill="#00FF41"/>
+  
+  <!-- Command lines -->
+  <text x="104" y="220" font-family="SF Mono, Monaco, monospace" font-size="14" fill="#FFFFFF" opacity="0.8">abdulme@portfolio:~$</text>
+  <text x="104" y="250" font-family="SF Mono, Monaco, monospace" font-size="14" fill="#00FF41" opacity="0.9">ls -la projects/</text>
+  <text x="104" y="280" font-family="SF Mono, Monaco, monospace" font-size="14" fill="#FFFFFF" opacity="0.7">drwxr-xr-x react-app</text>
+  <text x="104" y="310" font-family="SF Mono, Monaco, monospace" font-size="14" fill="#FFFFFF" opacity="0.7">drwxr-xr-x laravel-api</text>
+  <text x="104" y="340" font-family="SF Mono, Monaco, monospace" font-size="14" fill="#FFFFFF" opacity="0.7">drwxr-xr-x macos-portfolio</text>
+</svg>

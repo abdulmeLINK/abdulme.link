@@ -1,0 +1,193 @@
+/* ========================================
+   Utility Classes
+   Common LinkOS-style utility classes
+   ======================================== */
+
+/* Display Utilities */
+.hidden { display: none !important; }
+.block { display: block !important; }
+.inline-block { display: inline-block !important; }
+.flex { display: flex !important; }
+.inline-flex { display: inline-flex !important; }
+.grid { display: grid !important; }
+
+/* Flex Utilities */
+.flex-row { flex-direction: row !important; }
+.flex-col { flex-direction: column !important; }
+.flex-wrap { flex-wrap: wrap !important; }
+.flex-nowrap { flex-wrap: nowrap !important; }
+
+.justify-start { justify-content: flex-start !important; }
+.justify-center { justify-content: center !important; }
+.justify-end { justify-content: flex-end !important; }
+.justify-between { justify-content: space-between !important; }
+.justify-around { justify-content: space-around !important; }
+
+.items-start { align-items: flex-start !important; }
+.items-center { align-items: center !important; }
+.items-end { align-items: flex-end !important; }
+.items-stretch { align-items: stretch !important; }
+
+/* Position Utilities */
+.relative { position: relative !important; }
+.absolute { position: absolute !important; }
+.fixed { position: fixed !important; }
+.sticky { position: sticky !important; }
+
+/* Z-Index Utilities */
+.z-dropdown { z-index: var(--z-dropdown) !important; }
+.z-modal { z-index: var(--z-modal) !important; }
+.z-tooltip { z-index: var(--z-tooltip) !important; }
+.z-toast { z-index: var(--z-toast) !important; }
+
+/* Spacing Utilities */
+.m-0 { margin: 0 !important; }
+.mt-0 { margin-top: 0 !important; }
+.mr-0 { margin-right: 0 !important; }
+.mb-0 { margin-bottom: 0 !important; }
+.ml-0 { margin-left: 0 !important; }
+
+.m-xs { margin: var(--spacing-xs) !important; }
+.m-sm { margin: var(--spacing-sm) !important; }
+.m-md { margin: var(--spacing-md) !important; }
+.m-lg { margin: var(--spacing-lg) !important; }
+.m-xl { margin: var(--spacing-xl) !important; }
+
+.p-0 { padding: 0 !important; }
+.p-xs { padding: var(--spacing-xs) !important; }
+.p-sm { padding: var(--spacing-sm) !important; }
+.p-md { padding: var(--spacing-md) !important; }
+.p-lg { padding: var(--spacing-lg) !important; }
+.p-xl { padding: var(--spacing-xl) !important; }
+
+/* Text Utilities */
+.text-xs { font-size: var(--font-size-xs) !important; }
+.text-sm { font-size: var(--font-size-sm) !important; }
+.text-base { font-size: var(--font-size-base) !important; }
+.text-md { font-size: var(--font-size-md) !important; }
+.text-lg { font-size: var(--font-size-lg) !important; }
+.text-xl { font-size: var(--font-size-xl) !important; }
+
+.text-left { text-align: left !important; }
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
+
+.text-primary { color: var(--text-primary) !important; }
+.text-secondary { color: var(--text-secondary) !important; }
+.text-tertiary { color: var(--text-tertiary) !important; }
+
+.font-normal { font-weight: 400 !important; }
+.font-medium { font-weight: 500 !important; }
+.font-semibold { font-weight: 600 !important; }
+.font-bold { font-weight: 700 !important; }
+
+/* Border Utilities */
+.border { border: 1px solid var(--glass-border) !important; }
+.border-0 { border: 0 !important; }
+.border-t { border-top: 1px solid var(--glass-border) !important; }
+.border-r { border-right: 1px solid var(--glass-border) !important; }
+.border-b { border-bottom: 1px solid var(--glass-border) !important; }
+.border-l { border-left: 1px solid var(--glass-border) !important; }
+
+.rounded-none { border-radius: 0 !important; }
+.rounded-sm { border-radius: var(--radius-small) !important; }
+.rounded { border-radius: var(--radius-medium) !important; }
+.rounded-lg { border-radius: var(--radius-large) !important; }
+.rounded-full { border-radius: 50% !important; }
+
+/* Background Utilities */
+.bg-primary { background-color: var(--background-primary) !important; }
+.bg-secondary { background-color: var(--background-secondary) !important; }
+.bg-tertiary { background-color: var(--background-tertiary) !important; }
+.bg-glass { background: var(--glass-background) !important; }
+
+/* Shadow Utilities */
+.shadow-none { box-shadow: none !important; }
+.shadow-sm { box-shadow: var(--shadow-small) !important; }
+.shadow { box-shadow: var(--shadow-medium) !important; }
+.shadow-lg { box-shadow: var(--shadow-large) !important; }
+
+/* Transition Utilities */
+.transition-none { transition: none !important; }
+.transition-fast { transition: all var(--duration-fast) var(--ease-apple) !important; }
+.transition-normal { transition: all var(--duration-normal) var(--ease-apple) !important; }
+.transition-slow { transition: all var(--duration-slow) var(--ease-apple) !important; }
+
+/* Transform Utilities */
+.transform-gpu { transform: var(--gpu-acceleration) !important; }
+.scale-105 { transform: scale(1.05) !important; }
+.scale-110 { transform: scale(1.1) !important; }
+.rotate-1 { transform: rotate(1deg) !important; }
+.rotate-2 { transform: rotate(2deg) !important; }
+.rotate-5 { transform: rotate(5deg) !important; }
+
+/* Blur Utilities */
+.backdrop-blur { backdrop-filter: blur(var(--blur-amount)) !important; }
+.backdrop-blur-sm { backdrop-filter: blur(8px) !important; }
+.backdrop-blur-lg { backdrop-filter: blur(32px) !important; }
+
+/* Cursor Utilities */
+.cursor-default { cursor: default !important; }
+.cursor-pointer { cursor: pointer !important; }
+.cursor-grab { cursor: grab !important; }
+.cursor-grabbing { cursor: grabbing !important; }
+.cursor-not-allowed { cursor: not-allowed !important; }
+
+/* User Select Utilities */
+.select-none { user-select: none !important; }
+.select-text { user-select: text !important; }
+.select-all { user-select: all !important; }
+
+/* Performance Utilities */
+.will-change-transform { will-change: var(--will-change-transform) !important; }
+.will-change-opacity { will-change: var(--will-change-opacity) !important; }
+.will-change-auto { will-change: auto !important; }
+
+/* LinkOS Button Styles */
+.btn-primary {
+  background: var(--system-blue);
+  color: white;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-medium);
+  font-weight: 500;
+  transition: background-color var(--duration-fast) var(--ease-apple);
+}
+
+.btn-primary:hover {
+  background: var(--system-blue-hover);
+}
+
+.btn-secondary {
+  background: var(--background-tertiary);
+  color: var(--text-primary);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-medium);
+  font-weight: 500;
+  border: 1px solid var(--glass-border);
+  transition: all var(--duration-fast) var(--ease-apple);
+}
+
+.btn-secondary:hover {
+  background: var(--background-elevated);
+}
+
+/* Glass Effect Utility */
+.glass {
+  background: var(--glass-background);
+  backdrop-filter: blur(var(--blur-amount));
+  -webkit-backdrop-filter: blur(var(--blur-amount));
+  border: 1px solid var(--glass-border);
+}
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  .md\:hidden { display: none !important; }
+  .md\:block { display: block !important; }
+  .md\:flex { display: flex !important; }
+}
+
+@media (min-width: 769px) {
+  .lg\:hidden { display: none !important; }
+  .lg\:block { display: block !important; }
+  .lg\:flex { display: flex !important; }
+}

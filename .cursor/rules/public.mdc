@@ -1,0 +1,6 @@
+---
+description: 
+globs: public/js/*, public/css/*
+alwaysApply: false
+---
+- Do not create js and css files here directly, instead use resources folder and [webpack.mix.js](mdc:webpack.mix.js) file.

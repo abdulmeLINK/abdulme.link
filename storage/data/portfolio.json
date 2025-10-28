@@ -1,0 +1,425 @@
+{
+  "_metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-10-21T10:00:00Z",
+    "totalProjects": 13,
+    "featuredProjects": 4
+  },
+  "categories": {
+    "research": {
+      "id": "research",
+      "name": "Research & Academic",
+      "description": "Research projects and academic work",
+      "color": "#8B5CF6",
+      "icon": "academic-cap"
+    },
+    "saas": {
+      "id": "saas",
+      "name": "SaaS & Enterprise",
+      "description": "Software as a Service platforms",
+      "color": "#3B82F6",
+      "icon": "cloud"
+    },
+    "iot": {
+      "id": "iot",
+      "name": "IoT & Hardware",
+      "description": "Internet of Things and embedded systems",
+      "color": "#F59E0B",
+      "icon": "cpu-chip"
+    },
+    "mobile": {
+      "id": "mobile",
+      "name": "Mobile Development",
+      "description": "iOS and Android applications",
+      "color": "#10B981",
+      "icon": "device-phone-mobile"
+    },
+    "web": {
+      "id": "web",
+      "name": "Web Development",
+      "description": "Full-stack web applications",
+      "color": "#EF4444",
+      "icon": "globe"
+    },
+    "certification": {
+      "id": "certification",
+      "name": "Certifications",
+      "description": "Professional certifications and credentials",
+      "color": "#06B6D4",
+      "icon": "academic-cap"
+    }
+  },
+  "projects": [
+    {
+      "id": "flopynet",
+      "title": "FLOPY-NET: Federated Learning + SDN Platform",
+      "description": "Open-source research platform integrating federated machine learning training with Software Defined Networking control. Senior capstone project with full-stack architecture using Docker, PyTorch, FastAPI, and Ryu SDN controller.",
+      "category": "research",
+      "technologies": ["Docker", "PyTorch", "FastAPI", "Ryu", "Flower", "React", "TypeScript", "Python"],
+      "tags": ["SDN", "Federated Learning", "Research", "ML", "Networking"],
+      "images": {
+        "thumbnail": null,
+        "gallery": []
+      },
+      "links": {
+        "demo": "https://flopynet.abdulme.link",
+        "github": "https://github.com/abdulmeLINK/flopynet",
+        "documentation": "https://flopynet.abdulme.link/docs"
+      },
+      "featured": true,
+      "publishedAt": "2025-07-15T10:00:00Z",
+      "status": "live",
+      "highlights": [
+        "140+ page technical documentation authored",
+        "Distributed ML experiments with reproducible architecture",
+        "Full-stack implementation with modern technologies",
+        "Presented to department staff and students",
+        "Open-source research contribution"
+      ]
+    },
+    {
+      "id": "quakerate",
+      "title": "QuakeRate: Earthquake Risk Prediction Platform",
+      "description": "MVP earthquake risk prediction platform with geospatial analysis, real-time notifications, and ML-powered messaging. Scaled to handle 50k+ API calls/day with 40% cost optimization. Presented to Istanbul Municipality for public safety review.",
+      "category": "saas",
+      "technologies": ["Python", "Dart", "Flutter", "JavaScript", "Firebase", "Supabase", "PostgreSQL", "Docker", "TensorFlow", "Node.js"],
+      "tags": ["Serverless", "Geospatial", "MVP", "Scaling", "Cost Optimization"],
+      "images": {
+        "thumbnail": "/images/projects/quakerate-screenshot.jpg",
+        "gallery": [
+          "/images/projects/quakerate-screenshot.jpg",
+          "/images/projects/quakerate-screenshot-login.jpg",
+          "/images/projects/quakerate-screenshot-map-me.jpg",
+          "/images/projects/quakerate-screenshot-rank.jpg",
+          "/images/projects/quakerate-screenshot-search.jpg",
+          "/images/projects/quakerate-screenshot-building.jpg",
+          "/images/projects/quakerate-screenshot-search2.jpg",
+          "/images/projects/quakerate-screenshot-search3.jpg"
+        ],
+        "videos": [
+          "https://www.youtube.com/embed/raGcENGf3wc",
+          "https://www.youtube.com/embed/WHVuoWeBx90"
+        ]
+      },
+      "links": {
+        "youtube": "https://youtube.com/@quakerate",
+        "github": null
+      },
+      "featured": true,
+      "publishedAt": "2023-10-01T10:00:00Z",
+      "status": "live",
+      "highlights": [
+        "Handled 50k+ API calls/day with optimized architecture",
+        "40% cost savings through migration to serverless",
+        "Geospatial analysis with real-time notifications",
+        "ML messaging and analytics integration",
+        "Presented to Istanbul Municipality stakeholders",
+        "Complete technical documentation and migration guides"
+      ]
+    },
+    {
+      "id": "zero-waste",
+      "title": "Zero Waste Project (University NDA)",
+      "description": "Backend and real-time metrics dashboard for Google-award-winning sustainability initiative. Developed for university's 30th anniversary event, handling QR workflows, database schema, and Flutter/Grafana visualizations.",
+      "category": "web",
+      "technologies": ["PHP", "Laravel", "Scalability: dokku PaaS", "MySQL", "Flutter", "Dart", "Grafana", "Linux", "Git"],
+      "tags": ["Team Member", "Agile", "Real-time", "NDA"],
+      "images": {
+        "thumbnail": "/images/projects/zero-waste-presentation.jpeg",
+        "gallery": [
+          "/images/projects/zero-waste-login.jpg",
+          "/images/projects/zero-waste-bins.jpeg",
+          "/images/projects/zero-waste-grafana-input.jpeg",
+          "/images/projects/zero-waste-grafana-stats-white.jpeg",
+          "/images/projects/zero-waste-grafana-stats.jpeg",
+          "/images/projects/zero-waste-presentation.jpeg",
+          "/images/projects/zero-waste-qr-code.jpeg",
+          "/images/projects/zero-waste-qr-template.jpeg",
+          "/images/projects/zero-waste-server-dokku.jpeg"
+        ]
+      },
+      "links": {
+        "website": "https://mu.edu.tr/en/news-google-sustainability-award-to-mugla-sitki-kocman-university_3529",
+        "github": null
+      },
+      "featured": true,
+      "publishedAt": "2022-11-01T10:00:00Z",
+      "status": "completed",
+      "highlights": [
+        "Google-award-winning sustainability project",
+        "Real-time metrics dashboard with Grafana",
+        "QR workflow automation system",
+        "Database schema design and implementation",
+        "Delivered for university 30th anniversary event"
+      ]
+    },
+    {
+      "id": "tubitak-drone",
+      "title": "TUBITAK Autonomous Drone (National Finalist)",
+      "description": "Led 3-member team to deliver national finalist autonomous drone with 4G cellular connectivity. Built circuit design, 3D physics modeling, and Linux-based 4G telemetry bridge. Presented to BAYKAR, world-leading drone exporter. First 4G cellular drone in competition.",
+      "category": "iot",
+      "technologies": ["Python", "Bash", "Linux/UNIX","Technical Documentation", "Mission Planner", "QGroundControl", "Raspberry Pi", "Emlid Navio2"],
+      "tags": ["4G IoT", "Team Lead", "IPAM", "Circuit Design", "Autonomous"],
+      "images": {
+        "thumbnail": "/images/projects/drone.jpg",
+        "gallery": [
+          "/images/projects/drone.gif",
+          "/images/projects/drone.jpg",
+          "/images/projects/drone-panel.png",
+          "/images/projects/drone-leg.png"
+        ]
+      },
+      "links": {
+        "demo": null,
+        "github": null
+      },
+      "featured": true,
+      "publishedAt": "2020-09-15T10:00:00Z",
+      "status": "completed",
+      "highlights": [
+        "National finalist in TUBITAK competition",
+        "First 4G cellular drone in competition history",
+        "Circuit design and 3D physics modeling",
+        "Linux bridge for 4G connectivity and IPAM",
+        "The design confirmed by BAYKAR (world-leading drone exporter)",
+        "Complete documentation and technical analysis"
+      ]
+    },
+    {
+      "id": "2fa-vault",
+      "title": "2FA Security Vault (Patent: 2021/003227)",
+      "description": "Embedded hardware-based 2FA vault with custom UART protocol, encryption, and Android companion app. Patent filed with Turkish Patent Office. Demoed to 300+ officials at national events.",
+      "category": "iot",
+      "technologies": ["C", "Arduino", "NodeMCU", "GPS", "Java", "XML", "Firebase", "Blynk"],
+      "tags": ["Cryptography", "Patent", "Security", "Embedded", "UART"],
+      "images": {
+        "thumbnail": "/images/projects/safebox-thumbnail.png",
+        "gallery": [
+          "/images/projects/safebox-thumbnail.png",
+          "/images/projects/safebox-circuit.jpg",
+          "/images/projects/safebox-plan.png",
+          "/images/projects/safebox-prototype.jpg"
+        ]
+      },
+      "links": {
+        "demo": null,
+        "github": null
+      },
+      "featured": false,
+      "publishedAt": "2021-03-15T10:00:00Z",
+      "status": "completed",
+      "highlights": [
+        "Patent filed with Turkish Patent Office (2021/003227)",
+        "Custom UART protocol with encryption",
+        "Hardware-based 2FA security device",
+        "Android companion app with Firebase",
+        "Demoed to 300+ officials at national events"
+      ]
+    },
+    {
+      "id": "abdulme-portfolio",
+      "title": "AbdulmeLink - LinkOS Portfolio",
+      "description": "A mix of reinterpretation and imagination of macOS desktop experience built with Laravel and vanilla JavaScript. Features authentic animations, terminal emulation, 27 dynamic wallpapers, and progressive enhancement with 60fps performance.",
+      "category": "web",
+      "technologies": ["Laravel", "JavaScript", "CSS", "HTML", "PHP", "GSAP"],
+      "tags": ["Design System", "Performance", "Progressive Enhancement", "UI/UX"],
+      "images": {
+        "thumbnail": null,
+        "gallery": []
+      },
+      "links": {
+        "demo": "https://abdulme.link",
+        "github": "https://github.com/abdulmeLINK/abdulme.link"
+      },
+      "featured": false,
+      "publishedAt": "2025-10-21T10:00:00Z",
+      "status": "live",
+      "highlights": [
+        "Wallpapers with time-based switching",
+        "Authentic macOS dock with physics-based animations",
+        "xterm.js terminal with custom command system",
+        "Progressive loading with 60fps performance",
+        "Modular architecture with EventBus communication"
+      ]
+    },
+    {
+      "id": "freelance-grocery-delivery",
+      "title": "Freelance - Grocery Delivery Application",
+      "description": "Cross-platform mobile application for grocery delivery services, featuring real-time order tracking, payment integration, and user-friendly interface. Developed as a freelance project with focus on scalability and seamless user experience.",
+      "category": "mobile",
+      "technologies": ["Flutter", "PHP", "SQL", "Stripe", "Firebase", "RESTful APIs", "Security Best Practices"],
+      "tags": ["Freelance", "Mobile", "Delivery", "Real-time", "Payment Integration"],
+      "images": {
+        "thumbnail": "/images/projects/grocery-delivery-thumbnail.png",
+        "gallery": [
+          "/images/projects/grocery-delivery-thumbnail.png",
+          "/images/projects/grocery-delivery-notifications.JPG",
+          "/images/projects/grocery-delivery-panel.jpg",
+          "/images/projects/grocery-delivery-app-2.jpg",
+          "/images/projects/grocery-delivery-payment.JPG",
+          "/images/projects/grocery-delivery-app.png"
+        ]
+      },
+      "links": {
+        "demo": null,
+        "github": null
+      },
+      "featured": false,
+      "publishedAt": "2024-05-10T10:00:00Z",
+      "status": "completed",
+      "highlights": [
+        "Integrated external payment gateways to existing system",
+        "Fixed UI/UX issues for payment processing improved user experience",
+        "Streamlined real-time order tracking and notifications",
+        "Linux Databse and Server deployment and maintenance",
+        "DNS configuration and SSL setup for secure transactions",
+        "App Signing",
+        "Google Play Store deployment",
+        "Delivered on time with client satisfaction"
+      ]
+    },
+    {
+      "id": "cert-redis-javascript",
+      "title": "Redis for JavaScript Developers Certification",
+      "description": "Professional certification demonstrating expertise in Redis database integration with JavaScript applications. Covers Redis data structures, client libraries, and best practices for high-performance caching and data management.",
+      "category": "certification",
+      "technologies": ["JavaScript", "Redis", "Database", "Caching"],
+      "tags": ["Certification", "Database", "JavaScript", "Redis"],
+      "images": {
+        "thumbnail": "/images/projects/cert-redis.png",
+        "gallery": [
+          "/images/projects/cert-redis.png"
+        ]
+      },
+      "links": {
+        "demo": "https://university.redis.io/certificate/nbheo8nc1as3cd",
+        "github": null
+      },
+      "featured": false,
+      "publishedAt": "2023-06-15T10:00:00Z",
+      "status": "completed",
+      "highlights": [
+        "Comprehensive Redis JavaScript integration knowledge",
+        "Data structures and caching strategies",
+        "High-performance database operations",
+        "Credential ID: nbheo8nc1as3cd"
+      ]
+    },
+    {
+      "id": "cert-python-advanced",
+      "title": "Advanced Level Python Programming Certification",
+      "description": "Comprehensive Python programming certification from Turkey's Information and Communication Technologies Authority (BTK). Covers advanced Python concepts, best practices, and real-world application development.",
+      "category": "certification",
+      "technologies": ["Python", "Programming", "Software Development"],
+      "tags": ["Certification", "Python", "Programming", "Advanced"],
+      "images": {
+        "thumbnail": "/images/projects/cert-python.png",
+        "gallery": [
+         "/images/projects/cert-python.png"
+        ]
+      },
+      "links": {
+        "demo": "https://www.btkakademi.gov.tr/portal/certificate/validate?certificateId=epYwpoLm",
+        "github": null
+      },
+      "featured": false,
+      "publishedAt": "2020-11-01T10:00:00Z",
+      "status": "completed",
+      "highlights": [
+        "Advanced Python programming expertise",
+        "Official BTK certification",
+        "Comprehensive software development skills",
+        "Credential ID: epYwpoLm"
+      ]
+    },
+    {
+      "id": "cert-kubernetes-intro",
+      "title": "Introduction to Kubernetes Certification",
+      "description": "Professional certification from The Linux Foundation covering Kubernetes fundamentals, container orchestration, and cloud-native application deployment. Includes hands-on experience with Kubernetes clusters and microservices architecture.",
+      "category": "certification",
+      "technologies": ["Kubernetes", "Docker", "Container Orchestration", "Microservices"],
+      "tags": ["Certification", "Kubernetes", "DevOps", "Cloud"],
+      "images": {
+        "thumbnail": "/images/projects/cert-kubernetes.jpg",
+        "gallery": [
+          "/images/projects/cert-kubernetes.jpg"
+        ]
+      },
+      "links": {
+        "demo": "https://www.credly.com/badges/b7cd6860-4830-4383-be7c-63c192362d0e/public_url",
+        "github": null
+      },
+      "featured": false,
+      "publishedAt": "2023-01-01T10:00:00Z",
+      "status": "completed",
+      "highlights": [
+        "Kubernetes container orchestration expertise",
+        "Linux Foundation certification",
+        "Cloud-native application deployment",
+        "Microservices and container management"
+      ]
+    },
+    {
+      "id": "cert-teknofest-drone",
+      "title": "TEKNOFEST Unmanned Aerial Vehicle Competition - National Finalist",
+      "description": "National finalist certification from TEKNOFEST, Turkey's premier technology festival. Demonstrates expertise in autonomous drone systems, software project management, networking, and IP address management in competitive technology development.",
+      "category": "certification",
+      "technologies": ["Python", "Networking", "Bash", "IPAM", "Software Project Management"],
+      "tags": ["Certification", "Competition", "Drone", "IoT", "Networking"],
+      "images": {
+        "thumbnail": "/images/projects/cert-teknofest.png",
+        "gallery": [
+          "/images/projects/cert-teknofest.png"
+        ]
+      },
+      "links": {
+        "demo": "https://drdogrulama.sanayi.gov.tr/en/verify/59926911571399",
+        "github": null
+      },
+      "featured": false,
+      "publishedAt": "2020-09-01T10:00:00Z",
+      "status": "completed",
+      "highlights": [
+        "National finalist in TEKNOFEST competition",
+        "Autonomous drone systems expertise",
+        "Software project management skills",
+        "Advanced networking and IPAM knowledge",
+        "Competitive technology development"
+      ]
+    },
+    {
+      "id": "charm-open-beta",
+      "title": "Charm - Free Games & Promotions Platform (Open Beta)",
+      "description": "Open beta mobile platform providing free video games and promotional content to users without access to premium gaming products. Full-stack mobile application with remotely updatable localization system, sponsorship framework, and ad-supported revenue model.",
+      "category": "mobile",
+      "technologies": ["Dart", "Flutter", "AWS", "AdMob", "Firebase", "Google Services", "PHP", "Laravel", "HTML", "JavaScript", "Bootstrap", "Git"],
+      "tags": ["Mobile", "Open Beta", "Ad-Supported", "Localization", "Sponsorship"],
+      "images": {
+        "thumbnail": "/images/projects/charm-screenshot.jpg",
+        "gallery": [
+          "/images/projects/charm-screenshot.jpg",
+          "/images/projects/charm-screenshot-home.jpg",
+          "/images/projects/charm-screenshot-news.jpg",
+          "/images/projects/charm-profile.jpg",
+          "/images/projects/charm-screenshot-home-1.jpg"
+        ]
+      },
+      "links": {
+        "demo": "https://abdulme.link",
+        "github": null
+      },
+      "featured": false,
+      "publishedAt": "2024-03-01T10:00:00Z",
+      "status": "completed",
+      "highlights": [
+        "Launched open beta with free games and promotions concept",
+        "Created remotely updatable localization system",
+        "Designed and built comprehensive sponsorship framework",
+        "Full-stack implementation from frontend to backend",
+        "AWS cloud infrastructure with Firebase integration",
+        "AdMob monetization strategy implementation",
+        "Currently migrating to private edge cloud infrastructure"
+      ]
+    }
+  ]
+}

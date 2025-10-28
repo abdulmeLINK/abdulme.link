@@ -1,0 +1,619 @@
+/* ========================================
+   Desktop Component Styles
+   LinkOS-authentic desktop experience
+   ======================================== */
+
+/* Desktop Container */
+.desktop-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* ========================================
+   Boot Overlay Animation
+   ======================================== */
+
+.boot-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+}
+
+.boot-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.boot-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    text-align: center;
+    max-width: 400px;
+    padding: 2rem;
+}
+
+/* Boot Logo */
+.boot-logo {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent-color, #007AFF);
+    box-shadow: 0 0 30px rgba(0, 122, 255, 0.3);
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.logo-glow {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 122, 255, 0.2) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 0.4; }
+}
+
+/* Boot Progress */
+.boot-progress {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.progress-bar {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-color, #007AFF) 0%, #00C7FF 100%);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
+    animation: progress-shine 2s infinite;
+}
+
+@keyframes progress-shine {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.progress-text {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    opacity: 0.9;
+}
+
+.progress-percentage {
+    color: var(--accent-color, #007AFF);
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'SF Mono', Menlo, Monaco, monospace;
+    text-align: right;
+}
+
+/* Boot Messages */
+.boot-messages {
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-text {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    font-weight: 400;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* ========================================
+   Wallpaper System
+   ======================================== */
+
+.wallpaper-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.wallpaper-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wallpaper-image.loading {
+    opacity: 0;
+}
+
+.wallpaper-image.active {
+    opacity: 1;
+}
+
+.wallpaper-image.transitioning {
+    opacity: 0;
+}
+
+/* ========================================
+   Desktop Icons
+   ======================================== */
+
+.desktop-icons {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 120px; /* Space for dock */
+    z-index: 10;
+    pointer-events: none;
+}
+
+.desktop-icon {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    pointer-events: auto;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.desktop-icon:hover {
+    transform: scale(1.05) rotateZ(2deg);
+}
+
+.desktop-icon.dragging {
+    z-index: 1000;
+    pointer-events: none;
+    transform: scale(1.1) rotateZ(5deg);
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+}
+
+.icon-image {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    object-fit: cover;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+    transition: filter 0.2s ease;
+}
+
+.desktop-icon:hover .icon-image {
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4)) 
+            drop-shadow(0 0 0 1px rgba(255, 255, 255, 0.1));
+}
+
+.icon-label {
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    line-height: 1.2;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.icon-label.hidden {
+    display: none;
+}
+
+/* Icon Grid Snap */
+.icon-snap-guide {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border: 2px dashed rgba(0, 122, 255, 0.5);
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.icon-snap-guide.active {
+    opacity: 1;
+}
+
+/* ========================================
+   Context Menu
+   ======================================== */
+
+.context-menu {
+    position: absolute;
+    min-width: 200px;
+    background: var(--context-menu-bg);
+    backdrop-filter: var(--glass-backdrop);
+    -webkit-backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--context-menu-border);
+    border-radius: 8px;
+    padding: 8px 0;
+    box-shadow: var(--context-menu-shadow);
+    z-index: 10000;
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+    transition: var(--theme-transition), opacity 0.15s ease, transform 0.15s ease;
+    pointer-events: none;
+}
+
+.context-menu:not(.hidden) {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+}
+
+.context-menu.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    color: var(--context-menu-text);
+    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    cursor: pointer;
+    transition: var(--theme-transition);
+}
+
+.menu-item:hover {
+    background: var(--context-menu-hover);
+}
+
+.menu-item:active {
+    background: var(--accent-active);
+}
+
+.menu-icon {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.menu-separator {
+    height: 1px;
+    background: var(--context-menu-separator);
+    margin: 4px 0;
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .desktop-icons {
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        bottom: 100px;
+    }
+    
+    .desktop-icon {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .icon-image {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .boot-content {
+        padding: 1rem;
+        gap: 1.5rem;
+    }
+    
+    .profile-image {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .progress-bar {
+        width: 250px;
+    }
+    
+    /* Disable hover effects on mobile */
+    .desktop-icon:hover {
+        transform: none;
+    }
+    
+    .desktop-icon:hover .icon-image {
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .boot-overlay,
+    .wallpaper-image,
+    .desktop-icon,
+    .context-menu,
+    .progress-fill {
+        transition: none !important;
+        animation: none !important;
+    }
+    
+    .logo-glow {
+        animation: none !important;
+    }
+    
+    .progress-fill::after {
+        animation: none !important;
+        opacity: 0 !important;
+    }
+}
+
+/* High Contrast Support */
+@media (prefers-contrast: high) {
+    .boot-overlay {
+        background: #000;
+    }
+    
+    .progress-bar {
+        background: #333;
+        border: 1px solid #666;
+    }
+    
+    .context-menu {
+        background: var(--context-menu-bg);
+        border: 1px solid var(--context-menu-border);
+    }
+    
+    .menu-item:hover {
+        background: var(--context-menu-hover);
+    }
+}
+
+/* Desktop-specific Variables (DO NOT override theme colors) */
+:root {
+    --desktop-bg: #000000;
+    /* --text-primary and --text-secondary are defined in themes.css */
+    /* --accent-color is defined in base/variables.css and can be overridden by user preferences */
+    --accent-hover: #0056CC;
+    --glass-bg: rgba(40, 40, 40, 0.9);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Performance Optimizations */
+.wallpaper-container,
+.desktop-icons,
+.boot-overlay {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+.desktop-icon {
+    will-change: transform;
+}
+
+.context-menu {
+    will-change: opacity, transform;
+}
+
+/* ========================================
+   Desktop Icons Styles
+   ======================================== */
+
+.desktop-icons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none; /* Allow clicks through container */
+}
+
+.desktop-icon {
+    pointer-events: auto; /* Re-enable clicks on icons */
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+}
+
+.desktop-icon:hover {
+    transform: translateZ(0); /* Ensure hardware acceleration */
+}
+
+.icon-image {
+    width: 64px;
+    height: 64px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.desktop-icon:hover .icon-image {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Icon reflection effect */
+.icon-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.icon-label {
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    max-width: 80px;
+    line-height: 1.2;
+    word-wrap: break-word;
+    transition: opacity 200ms ease;
+}
+
+/* Dragging states */
+.desktop-icon.dragging {
+    opacity: 0.8;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.desktop-icon.dragging .icon-image {
+    transform: scale(1.1) rotate(8deg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.desktop-icon.dragging .icon-label {
+    opacity: 0.7;
+}
+
+/* Icon animation on load */
+@keyframes iconFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.desktop-icon {
+    animation: iconFadeIn 400ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* Stagger animation delays */
+.desktop-icon:nth-child(1) { animation-delay: 100ms; }
+.desktop-icon:nth-child(2) { animation-delay: 150ms; }
+.desktop-icon:nth-child(3) { animation-delay: 200ms; }
+.desktop-icon:nth-child(4) { animation-delay: 250ms; }
+.desktop-icon:nth-child(5) { animation-delay: 300ms; }
+.desktop-icon:nth-child(6) { animation-delay: 350ms; }
+.desktop-icon:nth-child(7) { animation-delay: 400ms; }
+.desktop-icon:nth-child(8) { animation-delay: 450ms; }
+
+/* Accessibility and reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .desktop-icon {
+        animation: none;
+        transition-duration: 0ms;
+    }
+    
+    .icon-image {
+        transition-duration: 0ms;
+    }
+    
+    .desktop-icon:hover .icon-image {
+        transform: scale(1.05); /* Reduced hover effect */
+    }
+    
+    .desktop-icon.dragging .icon-image {
+        transform: scale(1.05) rotate(3deg); /* Reduced drag effect */
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .desktop-icon {
+        gap: 4px;
+    }
+    
+    .icon-image {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .icon-label {
+        font-size: 10px;
+        max-width: 70px;
+    }
+    
+    .desktop-icon:hover .icon-image {
+        transform: scale(1.08) rotate(3deg); /* Reduced mobile hover */
+    }
+}

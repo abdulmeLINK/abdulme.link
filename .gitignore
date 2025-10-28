@@ -3,6 +3,8 @@
 /public/build
 /public/hot
 /public/storage
+/public/images/wallpapers/
+/public/images/projects/
 /storage/*.key
 /vendor
 .env
@@ -17,3 +19,4 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+abulme.link.yml

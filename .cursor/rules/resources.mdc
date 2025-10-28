@@ -1,0 +1,9 @@
+---
+description: 
+globs: resources/*
+alwaysApply: false
+---
+
+# Laravel Resources Folder
+
+- Always update [webpack.mix.js](mdc:webpack.mix.js) at the end of your modifications

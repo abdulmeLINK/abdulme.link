@@ -1,160 +1,38 @@
-:root {
-    --color-bg: #121212;
-    --color-fg: #f5f5f5;
-    --color-nav: #121212;
-    --color-nav-item: #f5f5f5;
-    --color-nav-item-hover: #f96d00;
-    --color-btn: #f96d00;
-    --dropdown-bg-color:#121212;
-}
+/* ========================================
+   Main Application Stylesheet
+   Imports all component styles and base utilities
+   ======================================== */
 
-[data-theme="light"] {
-    --color-bg: #f5f5f5;
-    --color-fg: #121212;
-    --color-nav: #f5f5f5;
-    --color-nav-item: #121212;
-    --color-nav-item-hover: #ff833a;
-    --color-btn: #ff833a;
-    --dropdown-bg-color : #f5f5f5;
-}
+/* Theme System (Must be first for CSS variable cascading) */
+@import 'themes.css';
 
-.roadmap {
-    position: relative;
-    height:  10rem; /* Adjust as needed */
-}
+/* Base Styles & Variables */
+@import 'base/variables.css';
+@import 'base/reset.css';
+@import 'base/utilities.css';
 
-.roadmap-point {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    opacity: 0;
-    transition: opacity 1s;
-}
+/* Component Styles */
+@import 'components/desktop.css';
+@import 'components/dock.css';
+@import 'components/window.css';
+@import 'components/terminal.css';
+@import 'components/portfolio.css';
+@import 'components/about.css';
+@import 'components/contact.css';
+@import 'components/preferences.css';
+@import 'components/finder.css';
+@import 'components/browser.css';
+@import 'components/notifications.css';
+@import 'components/bootscreen.css';
+@import 'components/alien-boot.css';
+@import 'boot.css';
 
-.roadmap-point[data-anim="show"] {
-    opacity: 1;
-}
+/* Third-party Dependencies */
+@import 'vendor/xterm.css';
 
-.roadmap-point {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    opacity: 0;
-    transition: opacity 1s;
-}
-
-.roadmap-point:nth-child(1) {
-    top: 0;
-}
-
-.roadmap-point:nth-child(2) {
-    top: 30%; /* Adjust as needed */
-}
-
-.roadmap-point:nth-child(3) {
-    top: 60%; /* Adjust as needed */
-}
-
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--color-bg);
-    color: var(--color-fg);
-    cursor: url('../images/cursor.png'), auto;
-    transition: background-color 0.5s ease, color 0.5s ease;
-    
-}
-
-.navbar {
-    background-color: rgba(0, 0, 0, 0.8); /* semi-transparent black */
-    position: fixed; /* make it stick to the top */
-    top: 0;
-    left: 0;
-    width: 100%; /* full width */
-    height: 35px; /* macOS top toolbar height */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* macOS-like fonts */
-    font-size: 12px; /* macOS top toolbar font size */
-    color: #fff; /* white text */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* subtle shadow for depth */
-    z-index: 1000; /* high z-index to ensure it's on top */
-   
-    display: flex;
-
-    justify-content: flex-start; /* align to the left */
-    align-items: center;
-}
-
-@media (max-width: 768px) {
-    .navbar .navbar-nav {
-        flex-direction: row;
-        justify-content: flex-start; /* align to the left */
-        align-items: center;
-    }
-}
-
-/* Adjust the color of the navbar text to increase contrast */
-.navbar
-.navbar .nav-link {
-    /* existing styles... */
-    font-size: 10px;
-    /* adjust as needed */
-}
-
-/* Adjust the font size of the navbar brand (logo) */
-.navbar .navbar-brand {
-   font-size: 12px; /* Adjust this to the desired font size */
-  
-}
-.navbar .dropdown-menu {
-    background-color: var(--dropdown-bg-color);
-    font-size: inherit; /* Inherit the font size from the navbar */
-}
-.navbar .dropdown-menu .nav-item {
-    padding: 10px; /* Adjust this to the desired padding */
-}
-
-.navbar .dropdown-menu .nav-link {
-    color: #000000; /* Adjust this to the desired color for light theme */
-}
-
-.navbar-dark .dropdown-menu .nav-link {
-    color: #ffffff; /* Adjust this to the desired color for dark theme */
-}
-.masthead {
-    height: 100vh;
-    min-height: 500px;
-    background: url('https://unblast.com/wp-content/uploads/2021/01/Space-Background-Image-7.jpg') no-repeat center center;
-    background-size: cover;
-    padding: 20px;
-}
-
-.profile-image {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid #fff;
-    margin: 0 auto;
-}
-
-.profile-image img {
-    width: 100%;
-    height: auto;
-}
-
-section {
-    padding: 60px 0;
-    background-color: var(--color-bg);
-    color: var(--color-fg);
-}
-
-.btn {
-    background-color: var(--color-btn);
-    color: var(--color-bg);
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-
-
+/* Future component imports will be added here:
+@import 'components/dock.css';
+@import 'components/window.css';
+@import 'components/terminal.css';
+@import 'components/portfolio.css';
+*/
