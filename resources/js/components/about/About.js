@@ -138,7 +138,7 @@ export default class About {
                             </div>
                             <div class="stat-card">
                                 <div class="stat-value">${stats.githubCommits || 0}</div>
-                                <div class="stat-label">GitHub Commits</div>
+                                <div class="stat-label">Git Commits</div>
                             </div>
                             <div class="stat-card">
                                 <div class="stat-value">${stats.certifications || 0}</div>

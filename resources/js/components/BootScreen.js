@@ -357,10 +357,6 @@ class LinkOSBootScreen {
             this.progressFill.style.width = '100%';
         }
         
-        // Show a random personal touch message instead of generic "Boot complete"
-        const personalTouch = this.getRandomPersonalTouch();
-        this.updateMessage(personalTouch);
-        
         // Mark session as visited
         sessionStorage.setItem('portfolio_visited', 'true');
         
@@ -370,6 +366,8 @@ class LinkOSBootScreen {
         // Wait a moment then show the Enter Desktop button
         setTimeout(() => {
             this.showEnterDesktopButton();
+            const personalTouch = this.getRandomPersonalTouch();
+            this.updateMessage(personalTouch);
         }, 1500);
     }
     

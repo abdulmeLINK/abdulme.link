@@ -1,7 +1,7 @@
 version: '3'
 services:
   app:
-    image: me
+    image: abdulmelink/me:latest
     container_name: me
     restart: unless-stopped
     tty: true

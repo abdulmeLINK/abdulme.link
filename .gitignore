@@ -6,6 +6,7 @@
 /public/images/wallpapers/
 /public/images/projects/
 /storage/*.key
+/storage/data/backups
 /vendor
 .env
 .env.backup

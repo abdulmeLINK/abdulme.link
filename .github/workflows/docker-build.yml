@@ -26,13 +26,30 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
+    - name: Prepare tags (sanitize branch name, short SHA)
+      id: tags
+      run: |
+        # Derive branch ref and sanitize to a safe Docker tag (lowercase, '/' -> '-', remove unsafe chars)
+        ref=${GITHUB_REF#refs/heads/}
+        safe_ref=$(echo "$ref" | tr '/' '-' | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9._-]/-/g')
+        short_sha=${GITHUB_SHA::7}
+        echo "safe_ref=$safe_ref" >> $GITHUB_OUTPUT
+        echo "short_sha=$short_sha" >> $GITHUB_OUTPUT
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v4
       with:
         context: .
-        file: Dockerfile.dockerfile
+        file: ./Dockerfile
         push: true
-        tags: abdulmelink/me:latest
+        # Build for common platforms (multi-arch). Remove or adjust if not required.
+        platforms: linux/amd64,linux/arm64
+        tags: |
+          abdulmelink/me:latest
+          abdulmelink/me:${{ steps.tags.outputs.safe_ref }}
+          abdulmelink/me:${{ steps.tags.outputs.short_sha }}
+          abdulmelink/me:${{ github.sha }}
+          abdulmelink/me:run-${{ github.run_number }}
 
     - name: Verify Docker image
       run: docker images
