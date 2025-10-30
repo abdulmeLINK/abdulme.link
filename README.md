@@ -85,22 +85,11 @@ An immersive web-based portfolio that recreates the authentic macOS desktop expe
 
 6. **Serve the application**
    ```bash
-   php artisan serve
+   php artisan serve --port=8000
    ```
 
 7. **Open in browser**
    Navigate to `http://localhost:8000`
-
-## 🎮 Usage
-
-- **Boot Up**: Experience the authentic macOS boot sequence
-- **Navigate**: Use the dock to launch applications and access features
-- **Terminal**: Type `help` for available commands
-- **Preferences**: Access system settings via the Apple menu
-- **Keyboard Shortcuts**: 
-  - `Command+M`: Minimize window
-  - `Control+A`: Go to line start
-  - `Control+Shift`: Dock magnification
 
 ## 📁 Project Structure
 
