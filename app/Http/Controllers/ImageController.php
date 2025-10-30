@@ -40,7 +40,7 @@ class ImageController extends Controller
                 'portfolio-assets',
                 true // Generate thumbnail
             );
-            
+
             return response()->json([
                 'success' => true,
                 'data' => $imageData
@@ -173,13 +173,17 @@ class ImageController extends Controller
     {
         try {
             $wallpapersData = $this->storageService->getWallpapers();
-            
+
             return response()->json([
                 'success' => true,
                 'data' => $wallpapersData
+            ]);        } catch (\Exception $e) {
+            Log::error('ImageController::wallpapers() - Failed to load wallpapers', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'supabase_available' => $this->storageService->isAvailable()
             ]);
-            
-        } catch (\Exception $e) {
+
             return response()->json([
                 'success' => false,
                 'error' => 'Failed to load wallpapers',

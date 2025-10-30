@@ -98,52 +98,118 @@ class DataService implements DataServiceInterface
         try {
             $supabaseUrl = env('SUPABASE_URL');
             $bucketName = env('SUPABASE_STORAGE_BUCKET', 'portfolio-data');
-            
+            $useSupabase = env('USE_SUPABASE_STORAGE', false);
+
+            if (!$useSupabase) {
+                return null;
+            }
+
             if (!$supabaseUrl) {
                 return null;
             }
 
             $url = "{$supabaseUrl}/storage/v1/object/public/{$bucketName}/{$filename}.json";
-            
+
             // Try with cache first
             $cacheKey = "supabase:storage:{$filename}";
             $cached = \Illuminate\Support\Facades\Cache::get($cacheKey);
-            
+
             if ($cached !== null) {
-                // Add cached indicator to metadata
-                if (is_array($cached)) {
+                if (!is_array($cached)) {
+                    Log::warning("DataService: Cached data is not an array, clearing cache", [
+                        'filename' => $filename,
+                        'cached_type' => gettype($cached),
+                        'cached_value_preview' => is_string($cached) ? substr($cached, 0, 100) : $cached
+                    ]);
+                    \Illuminate\Support\Facades\Cache::forget($cacheKey);
+                    $cached = null;
+                } else {
+                    // Add cached indicator to metadata
+                    if (!isset($cached['_metadata'])) {
+                        $cached['_metadata'] = [];
+                    }
                     $cached['_metadata']['cached'] = true;
+                    return $cached;
                 }
-                return $cached;
             }
 
             // Fetch from Supabase with timeout
+            $startTime = microtime(true);
             $response = \Illuminate\Support\Facades\Http::timeout(5)
                 ->retry(2, 100)
                 ->get($url);
+            $endTime = microtime(true);
+            $duration = round(($endTime - $startTime) * 1000, 2);
 
             if ($response->successful()) {
                 // Get response body and decode manually to ensure array
                 $body = $response->body();
                 $data = json_decode($body, true);
-                
+
+                // Handle double-encoded JSON from Supabase
+                if (is_string($data)) {
+                    $data = json_decode($data, true);
+                }
+
                 if (!is_array($data)) {
-                    Log::error("Supabase Storage returned non-array data for {$filename}");
+                    Log::error("DataService: Supabase Storage returned non-array data after double decoding", [
+                        'filename' => $filename,
+                        'data_type' => gettype($data),
+                        'body_preview' => substr($body, 0, 200),
+                        'first_decode_result' => substr(is_string(json_decode($body, true)) ? json_decode($body, true) : 'not string', 0, 100)
+                    ]);
                     return null;
                 }
-                
+
                 // Cache for 1 hour
                 \Illuminate\Support\Facades\Cache::put($cacheKey, $data, 3600);
-                
-                Log::info("Successfully read {$filename} from Supabase Storage");
+
+                Log::info("DataService: Successfully read {$filename} from Supabase Storage", [
+                    'data_size' => count($data),
+                    'cached_for' => '3600s'
+                ]);
                 return $data;
             }
 
-            Log::warning("Supabase Storage returned {$response->status()} for {$filename}");
+            Log::warning("DataService: Supabase Storage request failed", [
+                'filename' => $filename,
+                'status_code' => $response->status(),
+                'reason_phrase' => $response->reason(),
+                'body_preview' => substr($response->body(), 0, 200)
+            ]);
             return null;
-            
+
+        } catch (\Illuminate\Http\Client\RequestException $e) {
+            Log::error("DataService: HTTP request failed", [
+                'filename' => $filename,
+                'exception_type' => 'RequestException',
+                'message' => $e->getMessage(),
+                'url' => $url ?? 'unknown'
+            ]);
+            return null;
+        } catch (\Illuminate\Http\Client\ConnectionException $e) {
+            Log::error("DataService: Connection failed", [
+                'filename' => $filename,
+                'exception_type' => 'ConnectionException',
+                'message' => $e->getMessage()
+            ]);
+            return null;
+        } catch (\JsonException $e) {
+            Log::error("DataService: JSON parsing failed", [
+                'filename' => $filename,
+                'exception_type' => 'JsonException',
+                'message' => $e->getMessage(),
+                'body_preview' => isset($body) ? substr($body, 0, 200) : 'no body'
+            ]);
+            return null;
         } catch (Exception $e) {
-            Log::warning("Failed to read from Supabase Storage: {$e->getMessage()}");
+            Log::error("DataService: Unexpected error reading from Supabase", [
+                'filename' => $filename,
+                'exception_type' => get_class($e),
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine()
+            ]);
             return null;
         }
     }

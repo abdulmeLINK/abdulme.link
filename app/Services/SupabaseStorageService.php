@@ -36,18 +36,36 @@ class SupabaseStorageService
     {
         $this->supabaseUrl = env('SUPABASE_URL');
         $this->supabaseKey = env('SUPABASE_SERVICE_KEY');
-        
+
+        Log::debug('SupabaseStorageService: Initializing', [
+            'url_configured' => !empty($this->supabaseUrl),
+            'key_configured' => !empty($this->supabaseKey),
+            'bucket' => $this->bucketName
+        ]);
+
         if (!$this->supabaseUrl || !$this->supabaseKey) {
-            Log::warning('Supabase Storage credentials not configured, will use local files only');
+            Log::warning('SupabaseStorageService: Credentials not configured', [
+                'missing_url' => empty($this->supabaseUrl),
+                'missing_key' => empty($this->supabaseKey),
+                'will_use_local_fallback' => true
+            ]);
+        } else {
+            Log::info('SupabaseStorageService: Credentials configured, Supabase Storage available');
         }
     }
-    
+
     /**
      * Check if Supabase Storage is available
      */
     public function isAvailable(): bool
     {
-        return !empty($this->supabaseUrl) && !empty($this->supabaseKey);
+        $available = !empty($this->supabaseUrl) && !empty($this->supabaseKey);
+
+        Log::debug('SupabaseStorageService: Availability check', [
+            'available' => $this->available
+        ]);
+
+        return $available;
     }
     
     /**
@@ -61,7 +79,15 @@ class SupabaseStorageService
     public function getImageUrl(string $path, string $bucket = self::BUCKET_WALLPAPERS, bool $generateThumbnail = false): array
     {
         $cacheKey = "supabase:image:{$bucket}:{$path}";
-        
+
+        Log::debug('SupabaseStorageService: Getting image URL', [
+            'path' => $path,
+            'bucket' => $bucket,
+            'generate_thumbnail' => $generateThumbnail,
+            'cache_key' => $cacheKey,
+            'supabase_available' => $this->isAvailable()
+        ]);
+
         return Cache::remember($cacheKey, $this->cacheTime, function () use ($path, $bucket, $generateThumbnail) {
             $result = [
                 'url' => null,
@@ -75,35 +101,49 @@ class SupabaseStorageService
                     'path' => $path
                 ]
             ];
-            
+
             // Try Supabase first
             if ($this->isAvailable()) {
                 $supabaseUrl = $this->getSupabasePublicUrl($bucket, $path);
-                
+
+                Log::debug('SupabaseStorageService: Checking Supabase URL', [
+                    'supabase_url' => $supabaseUrl,
+                    'bucket' => $bucket,
+                    'path' => $path
+                ]);
+
                 if ($this->checkUrlExists($supabaseUrl)) {
                     $result['url'] = $supabaseUrl;
                     $result['source'] = 'supabase';
                     $result['exists'] = true;
-                    
+
                     // Generate thumbnail URL if requested
                     if ($generateThumbnail) {
                         $thumbnailPath = $this->getThumbnailPath($path);
                         $result['thumbnail'] = $this->getSupabasePublicUrl($bucket, $thumbnailPath);
                     }
-                    
-                    Log::info("Serving image from Supabase: {$path}");
+
+                    Log::info("SupabaseStorageService: Serving image from Supabase", [
+                        'path' => $path,
+                        'bucket' => $bucket,
+                        'url' => $supabaseUrl
+                    ]);
                     return $result;
+                } else {
+                    // Supabase URL check failed, fall back to local
                 }
+            } else {
+                // Supabase not available, use local fallback
             }
-            
+
             // Fallback to local filesystem
             $localPath = $this->getLocalPath($bucket, $path);
-            
+
             if (file_exists(public_path($localPath))) {
                 $result['url'] = asset($localPath);
                 $result['source'] = 'local';
                 $result['exists'] = true;
-                
+
                 // Local thumbnail
                 if ($generateThumbnail) {
                     $localThumbnailPath = $this->getLocalThumbnailPath($localPath);
@@ -111,12 +151,21 @@ class SupabaseStorageService
                         $result['thumbnail'] = asset($localThumbnailPath);
                     }
                 }
-                
-                Log::info("Serving image from local: {$path}");
+
+                Log::info("SupabaseStorageService: Serving image from local filesystem", [
+                    'path' => $path,
+                    'local_path' => $localPath,
+                    'url' => $result['url']
+                ]);
                 return $result;
             }
-            
-            Log::warning("Image not found in Supabase or local: {$path}");
+
+            Log::warning("SupabaseStorageService: Image not found in Supabase or local filesystem", [
+                'path' => $path,
+                'bucket' => $bucket,
+                'supabase_url' => $supabaseUrl ?? 'not checked',
+                'local_path' => $localPath
+            ]);
             return $result;
         });
     }
@@ -299,10 +348,19 @@ class SupabaseStorageService
     private function checkUrlExists(string $url): bool
     {
         try {
+            $startTime = microtime(true);
             $response = Http::timeout(3)->head($url);
-            return $response->successful();
+            $endTime = microtime(true);
+            $duration = round(($endTime - $startTime) * 1000, 2);
+
+            $exists = $response->successful();
+
+            return $exists;
+        } catch (\Illuminate\Http\Client\RequestException $e) {
+            return false;
+        } catch (\Illuminate\Http\Client\ConnectionException $e) {
+            return false;
         } catch (\Exception $e) {
-            Log::debug("URL check failed for {$url}: " . $e->getMessage());
             return false;
         }
     }

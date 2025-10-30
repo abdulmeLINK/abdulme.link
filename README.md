@@ -59,7 +59,7 @@ An immersive web-based portfolio that recreates the authentic macOS desktop expe
    php artisan key:generate
    ```
 
-5. **Supabase Setup** (Optional - for contact forms and data sync)
+5. **Supabase Setup** (Loosely-Coupled/Optional - for contact forms and data sync)
    - Create a Supabase project at [supabase.com](https://supabase.com)
    - Create the following storage buckets:
      - `portfolio-data` (public)

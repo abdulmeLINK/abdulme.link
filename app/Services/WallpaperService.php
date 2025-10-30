@@ -36,15 +36,24 @@ class WallpaperService
             // Use Supabase Storage Service if available
             if ($this->storageService && $this->storageService->isAvailable()) {
                 $wallpapersData = $this->storageService->getWallpapers();
-                
+
                 if (!empty($wallpapersData['wallpapers'])) {
+                    Log::info('WallpaperService::getAllWallpapers() - Successfully retrieved wallpapers from Supabase', [
+                        'count' => count($wallpapersData['wallpapers']),
+                        'source' => 'supabase'
+                    ]);
                     return $wallpapersData;
                 }
-                
-                Log::info('Supabase Storage returned empty, falling back to local');
-            }
-            
-            // Fallback to local manifest
+
+                Log::warning('WallpaperService::getAllWallpapers() - Supabase returned empty wallpapers array, falling back to local', [
+                    'supabase_response' => $wallpapersData
+                ]);
+            } else {
+                Log::info('WallpaperService::getAllWallpapers() - Supabase not available, using local fallback', [
+                    'service_injected' => $this->storageService !== null,
+                    'service_available' => $this->storageService ? $this->storageService->isAvailable() : false
+                ]);
+            }            // Fallback to local manifest
             $manifest = $this->getManifest();
             $wallpapers = [];
             
@@ -64,7 +73,7 @@ class WallpaperService
                 ];
             }
             
-            return [
+            $result = [
                 'wallpapers' => $wallpapers,
                 '_metadata' => [
                     'version' => $manifest['_metadata']['version'] ?? '1.0.0',
@@ -74,9 +83,20 @@ class WallpaperService
                     'supabaseAvailable' => false
                 ]
             ];
+
+            Log::info('WallpaperService::getAllWallpapers() - Successfully loaded wallpapers from local manifest', [
+                'count' => count($wallpapers),
+                'source' => 'local-manifest'
+            ]);
+            
+            return $result;
             
         } catch (Exception $e) {
-            Log::error("Failed to get wallpapers: " . $e->getMessage());
+            Log::error('WallpaperService::getAllWallpapers() - Failed to get wallpapers, returning defaults', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'supabase_available' => $this->storageService ? $this->storageService->isAvailable() : false
+            ]);
             return $this->getDefaultWallpapers();
         }
     }
