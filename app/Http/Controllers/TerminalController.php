@@ -21,38 +21,6 @@ class TerminalController extends Controller
     }
     
     /**
-     * Execute terminal command
-     * 
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function execute(Request $request): JsonResponse
-    {
-        try {
-            $request->validate([
-                'command' => 'required|string|max:1000',
-                'context' => 'array'
-            ]);
-            
-            $command = $request->input('command');
-            $context = $request->input('context', []);
-            
-            $result = $this->terminalService->executeCommand($command, $context);
-            
-            return response()->json([
-                'success' => true,
-                'data' => $result
-            ]);
-            
-        } catch (Exception $e) {
-            return response()->json([
-                'success' => false,
-                'error' => $e->getMessage()
-            ], 400);
-        }
-    }
-    
-    /**
      * Get current terminal state
      * 
      * @return JsonResponse

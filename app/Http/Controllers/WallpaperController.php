@@ -194,44 +194,6 @@ class WallpaperController extends Controller
     }
     
     /**
-     * Set current wallpaper
-     */
-    public function setCurrent(Request $request): JsonResponse
-    {
-        try {
-            $request->validate([
-                'id' => 'required|string',
-                'name' => 'string',
-                'thumbnail' => 'string',
-                'fullImage' => 'string'
-            ]);
-            
-            $wallpaperData = $request->only(['id', 'name', 'thumbnail', 'fullImage', 'category', 'colors']);
-            
-            $success = $this->wallpaperService->setCurrentWallpaper($wallpaperData);
-            
-            if ($success) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Wallpaper set successfully',
-                    'data' => $wallpaperData
-                ]);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'error' => 'Failed to set wallpaper'
-                ], 500);
-            }
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'error' => 'Failed to set wallpaper',
-                'message' => config('app.debug') ? $e->getMessage() : null
-            ], 500);
-        }
-    }
-    
-    /**
      * Get random wallpaper
      */
     public function random(): JsonResponse

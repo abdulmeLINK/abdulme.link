@@ -85,16 +85,16 @@
       "technologies": ["Python", "Dart", "Flutter", "JavaScript", "Firebase", "Supabase", "PostgreSQL", "Docker", "TensorFlow", "Node.js"],
       "tags": ["Serverless", "Geospatial", "MVP", "Scaling", "Cost Optimization"],
       "images": {
-        "thumbnail": "/images/projects/quakerate-screenshot.jpg",
+        "thumbnail": "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/quakerate-screenshot.jpg",
         "gallery": [
-          "/images/projects/quakerate-screenshot.jpg",
-          "/images/projects/quakerate-screenshot-login.jpg",
-          "/images/projects/quakerate-screenshot-map-me.jpg",
-          "/images/projects/quakerate-screenshot-rank.jpg",
-          "/images/projects/quakerate-screenshot-search.jpg",
-          "/images/projects/quakerate-screenshot-building.jpg",
-          "/images/projects/quakerate-screenshot-search2.jpg",
-          "/images/projects/quakerate-screenshot-search3.jpg"
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/quakerate-screenshot.jpg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/quakerate-screenshot-login.jpg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/quakerate-screenshot-map-me.jpg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/quakerate-screenshot-rank.jpg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/quakerate-screenshot-search.jpg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/quakerate-screenshot-building.jpg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/quakerate-screenshot-search2.jpg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/quakerate-screenshot-search3.jpg"
         ],
         "videos": [
           "https://www.youtube.com/embed/raGcENGf3wc",
@@ -125,17 +125,17 @@
       "technologies": ["PHP", "Laravel", "Scalability: dokku PaaS", "MySQL", "Flutter", "Dart", "Grafana", "Linux", "Git"],
       "tags": ["Team Member", "Agile", "Real-time", "NDA"],
       "images": {
-        "thumbnail": "/images/projects/zero-waste-presentation.jpeg",
+        "thumbnail": "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/zero-waste-presentation.jpeg",
         "gallery": [
-          "/images/projects/zero-waste-login.jpg",
-          "/images/projects/zero-waste-bins.jpeg",
-          "/images/projects/zero-waste-grafana-input.jpeg",
-          "/images/projects/zero-waste-grafana-stats-white.jpeg",
-          "/images/projects/zero-waste-grafana-stats.jpeg",
-          "/images/projects/zero-waste-presentation.jpeg",
-          "/images/projects/zero-waste-qr-code.jpeg",
-          "/images/projects/zero-waste-qr-template.jpeg",
-          "/images/projects/zero-waste-server-dokku.jpeg"
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/zero-waste-login.jpg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/zero-waste-bins.jpeg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/zero-waste-grafana-input.jpeg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/zero-waste-grafana-stats-white.jpeg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/zero-waste-grafana-stats.jpeg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/zero-waste-presentation.jpeg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/zero-waste-qr-code.jpeg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/zero-waste-qr-template.jpeg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/zero-waste-server-dokku.jpeg"
         ]
       },
       "links": {
@@ -161,12 +161,12 @@
       "technologies": ["Python", "Bash", "Linux/UNIX","Technical Documentation", "Mission Planner", "QGroundControl", "Raspberry Pi", "Emlid Navio2"],
       "tags": ["4G IoT", "Team Lead", "IPAM", "Circuit Design", "Autonomous"],
       "images": {
-        "thumbnail": "/images/projects/drone.jpg",
+        "thumbnail": "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/drone.jpg",
         "gallery": [
-          "/images/projects/drone.gif",
-          "/images/projects/drone.jpg",
-          "/images/projects/drone-panel.png",
-          "/images/projects/drone-leg.png"
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/drone.gif",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/drone.jpg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/drone-panel.png",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/drone-leg.png"
         ]
       },
       "links": {
@@ -193,12 +193,12 @@
       "technologies": ["C", "Arduino", "NodeMCU", "GPS", "Java", "XML", "Firebase", "Blynk"],
       "tags": ["Cryptography", "Patent", "Security", "Embedded", "UART"],
       "images": {
-        "thumbnail": "/images/projects/safebox-thumbnail.png",
+        "thumbnail": "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/safebox-thumbnail.png",
         "gallery": [
-          "/images/projects/safebox-thumbnail.png",
-          "/images/projects/safebox-circuit.jpg",
-          "/images/projects/safebox-plan.png",
-          "/images/projects/safebox-prototype.jpg"
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/safebox-thumbnail.png",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/safebox-circuit.jpg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/safebox-plan.png",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/safebox-prototype.jpg"
         ]
       },
       "links": {
@@ -250,14 +250,14 @@
       "technologies": ["Flutter", "PHP", "SQL", "Stripe", "Firebase", "RESTful APIs", "Security Best Practices"],
       "tags": ["Freelance", "Mobile", "Delivery", "Real-time", "Payment Integration"],
       "images": {
-        "thumbnail": "/images/projects/grocery-delivery-thumbnail.png",
+        "thumbnail": "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/grocery-delivery-thumbnail.png",
         "gallery": [
-          "/images/projects/grocery-delivery-thumbnail.png",
-          "/images/projects/grocery-delivery-notifications.JPG",
-          "/images/projects/grocery-delivery-panel.jpg",
-          "/images/projects/grocery-delivery-app-2.jpg",
-          "/images/projects/grocery-delivery-payment.JPG",
-          "/images/projects/grocery-delivery-app.png"
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/grocery-delivery-thumbnail.png",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/grocery-delivery-notifications.JPG",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/grocery-delivery-panel.jpg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/grocery-delivery-app-2.jpg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/grocery-delivery-payment.JPG",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/grocery-delivery-app.png"
         ]
       },
       "links": {
@@ -286,9 +286,9 @@
       "technologies": ["JavaScript", "Redis", "Database", "Caching"],
       "tags": ["Certification", "Database", "JavaScript", "Redis"],
       "images": {
-        "thumbnail": "/images/projects/cert-redis.png",
+        "thumbnail": "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/cert-redis.png",
         "gallery": [
-          "/images/projects/cert-redis.png"
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/cert-redis.png"
         ]
       },
       "links": {
@@ -313,9 +313,9 @@
       "technologies": ["Python", "Programming", "Software Development"],
       "tags": ["Certification", "Python", "Programming", "Advanced"],
       "images": {
-        "thumbnail": "/images/projects/cert-python.png",
+        "thumbnail": "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/cert-python.png",
         "gallery": [
-         "/images/projects/cert-python.png"
+         "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/cert-python.png"
         ]
       },
       "links": {
@@ -340,9 +340,9 @@
       "technologies": ["Kubernetes", "Docker", "Container Orchestration", "Microservices"],
       "tags": ["Certification", "Kubernetes", "DevOps", "Cloud"],
       "images": {
-        "thumbnail": "/images/projects/cert-kubernetes.jpg",
+        "thumbnail": "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/cert-kubernetes.jpg",
         "gallery": [
-          "/images/projects/cert-kubernetes.jpg"
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/cert-kubernetes.jpg"
         ]
       },
       "links": {
@@ -367,9 +367,9 @@
       "technologies": ["Python", "Networking", "Bash", "IPAM", "Software Project Management"],
       "tags": ["Certification", "Competition", "Drone", "IoT", "Networking"],
       "images": {
-        "thumbnail": "/images/projects/cert-teknofest.png",
+        "thumbnail": "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/cert-teknofest.png",
         "gallery": [
-          "/images/projects/cert-teknofest.png"
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/cert-teknofest.png"
         ]
       },
       "links": {
@@ -395,13 +395,13 @@
       "technologies": ["Dart", "Flutter", "AWS", "AdMob", "Firebase", "Google Services", "PHP", "Laravel", "HTML", "JavaScript", "Bootstrap", "Git"],
       "tags": ["Mobile", "Open Beta", "Ad-Supported", "Localization", "Sponsorship"],
       "images": {
-        "thumbnail": "/images/projects/charm-screenshot.jpg",
+        "thumbnail": "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/charm-screenshot.jpg",
         "gallery": [
-          "/images/projects/charm-screenshot.jpg",
-          "/images/projects/charm-screenshot-home.jpg",
-          "/images/projects/charm-screenshot-news.jpg",
-          "/images/projects/charm-profile.jpg",
-          "/images/projects/charm-screenshot-home-1.jpg"
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/charm-screenshot.jpg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/charm-screenshot-home.jpg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/charm-screenshot-news.jpg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/charm-profile.jpg",
+          "https://xddhvwgtsdmsviofzara.supabase.co/storage/v1/object/public/portfolio-projects/charm-screenshot-home-1.jpg"
         ]
       },
       "links": {

@@ -45,23 +45,17 @@ Route::prefix('wallpapers')->group(function () {
     Route::get('/by-type', [WallpaperController::class, 'byType']);
     Route::get('/stats', [WallpaperController::class, 'stats']);
     Route::get('/category/{category}', [WallpaperController::class, 'category']);
-    Route::post('/set-current', [WallpaperController::class, 'setCurrent']);
     Route::get('/{id}', [WallpaperController::class, 'show']);
 });
 
 // Preferences API endpoints
 Route::prefix('preferences')->group(function () {
     Route::get('/', [PreferencesController::class, 'show']);
-    Route::post('/', [PreferencesController::class, 'update']);
     Route::get('/category/{category}', [PreferencesController::class, 'category']);
-    Route::post('/category/{category}', [PreferencesController::class, 'updateCategory']);
-    Route::post('/reset', [PreferencesController::class, 'reset']);
-    Route::post('/reset/{category}', [PreferencesController::class, 'resetCategory']);
 });
 
 // Terminal API endpoints
 Route::prefix('terminal')->group(function () {
-    Route::post('/execute', [TerminalController::class, 'execute']);
     Route::get('/state', [TerminalController::class, 'getState']);
 });
 

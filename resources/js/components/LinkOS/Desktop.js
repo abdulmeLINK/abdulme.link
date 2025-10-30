@@ -795,11 +795,6 @@ class Desktop {
                 console.log('✅ Marked first visit complete');
             }
             
-            // Save to backend for sync (non-blocking)
-            this.saveToBackend(wallpaperData).catch(error => {
-                console.warn('⚠️ Backend save failed (non-critical):', error.message);
-            });
-            
             // Update session data
             this.saveCurrentState();
             
@@ -808,26 +803,6 @@ class Desktop {
         }
     }
 
-    /**
-     * Save wallpaper to backend (async, non-blocking)
-     */
-    async saveToBackend(wallpaperData) {
-        const response = await fetch('/api/wallpapers/set-current', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
-            },
-            body: JSON.stringify(wallpaperData)
-        });
-        
-        if (response.ok) {
-            console.log('✅ Wallpaper saved to backend');
-        } else {
-            throw new Error(`Backend save failed: ${response.status}`);
-        }
-    }
-    
     /**
      * Apply wallpaper with smooth transition
      */
