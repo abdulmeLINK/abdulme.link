@@ -149,6 +149,7 @@ class Dock {
         }
     }
 
+
     /**
      * Update configuration from preferences
      */
@@ -214,6 +215,8 @@ class Dock {
         
         console.log('Dock config updated from preferences:', this.config);
     }
+
+
 
     /**
      * Load dock applications

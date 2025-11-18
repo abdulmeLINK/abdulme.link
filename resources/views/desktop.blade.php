@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{ asset('css/boot-screen.css') }}">
 <!-- Preferences Component CSS -->
 <link rel="stylesheet" href="{{ asset('css/components/preferences.css') }}">
+
 @endpush
 
 @section('content')

@@ -26,6 +26,7 @@ class SupabaseStorageService
     private string $supabaseUrl;
     private string $supabaseKey;
     private int $cacheTime = 3600; // 1 hour
+    private ?string $bucketName = null;
     
     // Bucket names - wallpapers now in assets bucket
     private const BUCKET_WALLPAPERS = 'portfolio-assets';
