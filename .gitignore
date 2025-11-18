@@ -24,3 +24,11 @@ abdulme.link.yml
 
 # Issue investigations (internal development notes)
 .github/issue-investigations/
+
+# Compiled assets
+/public/js
+/public/css
+/public/mix-manifest.json
+/public/data/desktop-apps.json
+/public/data/loading-messages.json
+/public/data/preferences-defaults.json
